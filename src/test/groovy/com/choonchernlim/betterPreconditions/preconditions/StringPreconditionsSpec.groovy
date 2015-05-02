@@ -4,7 +4,7 @@ import com.choonchernlim.betterPreconditions.exception.StringBlankPreconditionEx
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class StringBetterPreconditionsSpec extends Specification {
+class StringPreconditionsSpec extends Specification {
 
     @Unroll
     def "mustNotBeBlank - invalid label - #name"() {
