@@ -3,9 +3,9 @@ package com.choonchernlim.betterPreconditions.preconditions;
 import com.choonchernlim.betterPreconditions.exception.BooleanFalsePreconditionException;
 import com.choonchernlim.betterPreconditions.exception.BooleanTruePreconditionException;
 
-public class BooleanBetterPreconditions extends BetterPreconditions {
+public class BooleanPreconditions extends BetterPreconditions {
 
-    public static void checkTrue(final Boolean value, final String variableName) {
+    public static void mustBeTrue(final Boolean value, final String variableName) {
         checkVariableNameNotBlank(variableName);
 
         if (!value) {
@@ -13,7 +13,7 @@ public class BooleanBetterPreconditions extends BetterPreconditions {
         }
     }
 
-    public static void checkFalse(final Boolean value, final String variableName) {
+    public static void mustBeFalse(final Boolean value, final String variableName) {
         checkVariableNameNotBlank(variableName);
 
         if (value) {

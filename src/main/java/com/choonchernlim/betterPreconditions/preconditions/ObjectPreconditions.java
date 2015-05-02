@@ -3,9 +3,9 @@ package com.choonchernlim.betterPreconditions.preconditions;
 import com.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException;
 import com.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException;
 
-public class ObjectBetterPreconditions extends BetterPreconditions {
+public class ObjectPreconditions extends BetterPreconditions {
 
-    public static <T> T checkNotNull(final T reference, final String variableName) {
+    public static <T> T mustNotBeNull(final T reference, final String variableName) {
         checkVariableNameNotBlank(variableName);
 
         if (reference == null) {
@@ -15,7 +15,7 @@ public class ObjectBetterPreconditions extends BetterPreconditions {
         return reference;
     }
 
-    public static <T> T checkNull(final T reference, final String variableName) {
+    public static <T> T mustBeNull(final T reference, final String variableName) {
         checkVariableNameNotBlank(variableName);
 
         if (reference != null) {

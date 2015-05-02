@@ -5,9 +5,9 @@ import com.choonchernlim.betterPreconditions.exception.StringNotBlankPreconditio
 import static com.choonchernlim.betterPreconditions.preconditions.BetterPreconditions.checkVariableNameNotBlank;
 import static com.google.common.base.Strings.nullToEmpty;
 
-public class StringBetterPreconditions {
+public class StringPreconditions {
 
-    public static void checkNotBlank(final String value, final String variableName) {
+    public static void mustNotBeBlank(final String value, final String variableName) {
         checkVariableNameNotBlank(variableName);
 
         if (nullToEmpty(value).trim().isEmpty()) {
@@ -15,7 +15,7 @@ public class StringBetterPreconditions {
         }
     }
 
-    public static void checkBlank(final String value, final String variableName) {
+    public static void mustBeBlank(final String value, final String variableName) {
         checkVariableNameNotBlank(variableName);
 
         if (!nullToEmpty(value).trim().isEmpty()) {

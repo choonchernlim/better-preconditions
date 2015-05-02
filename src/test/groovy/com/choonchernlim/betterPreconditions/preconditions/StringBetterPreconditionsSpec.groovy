@@ -7,9 +7,9 @@ import spock.lang.Unroll
 class StringBetterPreconditionsSpec extends Specification {
 
     @Unroll
-    def "checkNotBlank - invalid label - #name"() {
+    def "mustNotBeBlank - invalid label - #name"() {
         when:
-        StringBetterPreconditions.checkNotBlank("Hello", name)
+        StringPreconditions.mustNotBeBlank("Hello", name)
 
         then:
         thrown(StringBlankPreconditionException.class)
@@ -19,9 +19,9 @@ class StringBetterPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "checkNotBlank - invalid value - #val"() {
+    def "mustNotBeBlank - invalid value - #val"() {
         when:
-        StringBetterPreconditions.checkNotBlank(null, "Variable")
+        StringPreconditions.mustNotBeBlank(null, "Variable")
 
         then:
         thrown(StringBlankPreconditionException.class)
@@ -30,9 +30,9 @@ class StringBetterPreconditionsSpec extends Specification {
         val << [null, "", " "]
     }
 
-    def "checkNotBlank - valid value"() {
+    def "mustNotBeBlank - valid value"() {
         when:
-        StringBetterPreconditions.checkNotBlank("Hello", "Variable")
+        StringPreconditions.mustNotBeBlank("Hello", "Variable")
 
         then:
         notThrown(StringBlankPreconditionException.class)
