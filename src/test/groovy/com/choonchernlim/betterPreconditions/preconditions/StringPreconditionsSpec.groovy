@@ -18,12 +18,12 @@ class StringPreconditionsSpec extends Specification {
         notThrown(StringBlankPreconditionException.class)
 
         where:
-        value << [null, "", " "]
+        value << [null, '', ' ']
     }
 
     def "toBeBlank - invalid"() {
         when:
-        expectString("Hello").toBeBlank().check()
+        expectString('Hello').toBeBlank().check()
 
         then:
         def error = thrown(StringNotBlankPreconditionException.class)
@@ -32,7 +32,7 @@ class StringPreconditionsSpec extends Specification {
 
     def "toBeBlank - invalid - with label"() {
         when:
-        expectString("Hello", "Greeting").toBeBlank().check()
+        expectString('Hello', 'Greeting').toBeBlank().check()
 
         then:
         def error = thrown(StringNotBlankPreconditionException.class)
@@ -42,7 +42,7 @@ class StringPreconditionsSpec extends Specification {
 
     def "not.toBeBlank - valid"() {
         when:
-        expectString("Hello").not().toBeBlank().check()
+        expectString('Hello').not().toBeBlank().check()
 
         then:
         notThrown(StringBlankPreconditionException.class)
@@ -58,20 +58,20 @@ class StringPreconditionsSpec extends Specification {
         error.message == "String [ ${value} ] must not be blank" as String
 
         where:
-        value << [null, "", " "]
+        value << [null, '', ' ']
     }
 
     @Unroll
     def "not.toBeBlank - invalid - with label - #value"() {
         when:
-        expectString(value, "Greeting").not().toBeBlank().check()
+        expectString(value, 'Greeting').not().toBeBlank().check()
 
         then:
         def error = thrown(StringBlankPreconditionException.class)
         error.message == "Greeting [ ${value} ] must not be blank" as String
 
         where:
-        value << [null, "", " "]
+        value << [null, '', ' ']
     }
 
 }
