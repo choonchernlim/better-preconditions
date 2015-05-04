@@ -1,8 +1,8 @@
 package com.choonchernlim.betterPreconditions.exception;
 
-public class StringBlankPreconditionException extends RuntimeException {
+public class StringBlankPreconditionException extends PreconditionException {
 
-    public StringBlankPreconditionException(String s) {
-        super(s);
+    public StringBlankPreconditionException(final String value, final String label) {
+        super(String.format("%s [ %s ] must not be blank", label, value));
     }
 }

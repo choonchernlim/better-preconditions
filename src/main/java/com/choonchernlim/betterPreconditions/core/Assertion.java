@@ -1,5 +1,7 @@
 package com.choonchernlim.betterPreconditions.core;
 
+import com.choonchernlim.betterPreconditions.exception.PreconditionException;
+
 public abstract class Assertion {
     private final boolean isNegated;
 
@@ -13,7 +15,7 @@ public abstract class Assertion {
         return this.isNegated;
     }
 
-    protected abstract RuntimeException getException();
+    protected abstract PreconditionException getException();
 
-    protected abstract RuntimeException getNegatedException();
+    protected abstract PreconditionException getNegatedException();
 }

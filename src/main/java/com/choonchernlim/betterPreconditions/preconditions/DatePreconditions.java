@@ -2,14 +2,12 @@ package com.choonchernlim.betterPreconditions.preconditions;
 
 import org.joda.time.LocalDate;
 
-public class DatePreconditions extends BetterPreconditions {
+public class DatePreconditions {
 
     public static void mustBeEqual(final LocalDate startDate,
                                    final LocalDate endDate,
                                    final String startDateVariableName,
                                    final String endDateVariableName) {
-        validate(startDate, endDate, startDateVariableName, endDateVariableName);
-
         // TODO
     }
 
@@ -17,8 +15,6 @@ public class DatePreconditions extends BetterPreconditions {
                                           final LocalDate endDate,
                                           final String startDateVariableName,
                                           final String endDateVariableName) {
-        validate(startDate, endDate, startDateVariableName, endDateVariableName);
-
         // TODO
     }
 
@@ -26,8 +22,6 @@ public class DatePreconditions extends BetterPreconditions {
                                    final LocalDate endDate,
                                    final String startDateVariableName,
                                    final String endDateVariableName) {
-        validate(startDate, endDate, startDateVariableName, endDateVariableName);
-
         // TODO
     }
 
@@ -35,8 +29,6 @@ public class DatePreconditions extends BetterPreconditions {
                                            final LocalDate endDate,
                                            final String startDateVariableName,
                                            final String endDateVariableName) {
-        validate(startDate, endDate, startDateVariableName, endDateVariableName);
-
         // TODO
     }
 
@@ -44,8 +36,6 @@ public class DatePreconditions extends BetterPreconditions {
                                     final LocalDate endDate,
                                     final String startDateVariableName,
                                     final String endDateVariableName) {
-        validate(startDate, endDate, startDateVariableName, endDateVariableName);
-
         // TODO
     }
 }

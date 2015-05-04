@@ -1,13 +1,11 @@
 package com.choonchernlim.betterPreconditions.preconditions;
 
-public class IntegerPreconditions extends BetterPreconditions {
+public class IntegerPreconditions {
 
     public static void mustBeEqual(final Integer firstNumber,
                                    final Integer secondNumber,
                                    final String firstNumberVariableName,
                                    final String secondNumberVariableName) {
-        validate(firstNumber, secondNumber, firstNumberVariableName, secondNumberVariableName);
-
         // TODO
     }
 
@@ -15,7 +13,6 @@ public class IntegerPreconditions extends BetterPreconditions {
                                                 final Integer secondNumber,
                                                 final String firstNumberVariableName,
                                                 final String secondNumberVariableName) {
-        validate(firstNumber, secondNumber, firstNumberVariableName, secondNumberVariableName);
         // TODO
     }
 
@@ -23,8 +20,6 @@ public class IntegerPreconditions extends BetterPreconditions {
                                      final Integer secondNumber,
                                      final String firstNumberVariableName,
                                      final String secondNumberVariableName) {
-        validate(firstNumber, secondNumber, firstNumberVariableName, secondNumberVariableName);
-
         // TODO
     }
 
@@ -32,8 +27,6 @@ public class IntegerPreconditions extends BetterPreconditions {
                                              final Integer secondNumber,
                                              final String firstNumberVariableName,
                                              final String secondNumberVariableName) {
-        validate(firstNumber, secondNumber, firstNumberVariableName, secondNumberVariableName);
-
         // TODO
     }
 
@@ -41,8 +34,6 @@ public class IntegerPreconditions extends BetterPreconditions {
                                       final Integer secondNumber,
                                       final String firstNumberVariableName,
                                       final String secondNumberVariableName) {
-        validate(firstNumber, secondNumber, firstNumberVariableName, secondNumberVariableName);
-
         // TODO
     }
 
