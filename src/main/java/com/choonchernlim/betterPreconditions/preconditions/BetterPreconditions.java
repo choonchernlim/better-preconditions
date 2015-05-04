@@ -7,11 +7,29 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
+/**
+ * Abstract class for all preconditions.
+ */
 public abstract class BetterPreconditions {
 
+    /**
+     * Value to be checked.
+     */
     protected final String value;
+
+    /**
+     * Label for the value.
+     */
     protected final String label;
+
+    /**
+     * All assertions to be executed.
+     */
     private final List<Assertion> assertions;
+
+    /**
+     * Mutable field to indicate whether the upcoming assertion is negated.
+     */
     private boolean isNegated;
 
     public BetterPreconditions(final String value, final String label) {
@@ -19,17 +37,31 @@ public abstract class BetterPreconditions {
         this.label = label;
         this.assertions = Lists.newArrayList();
 
+        // disable negation by default
         disableNegation();
     }
 
+    /**
+     * Set flag to enable negation.
+     */
     protected final void enableNegation() {
         this.isNegated = true;
     }
 
+    /**
+     * Set flag to disable negation.
+     */
     protected final void disableNegation() {
         this.isNegated = false;
     }
 
+    /**
+     * Add new assertion.
+     *
+     * @param evaluation       What to be evaluated
+     * @param exception        Exception for non-negated assertion
+     * @param negatedException Exception for negated assertion
+     */
     protected final void addNewAssertion(final Evaluation evaluation,
                                          final PreconditionException exception,
                                          final PreconditionException negatedException) {
@@ -60,10 +92,13 @@ public abstract class BetterPreconditions {
 
         );
 
+        // after creating a new assertion, reset the negation
         disableNegation();
-
     }
 
+    /**
+     * Execute each assertion.
+     */
     protected final void check() {
         for (Assertion assertion : assertions) {
             assertion.run();
