@@ -1,5 +1,6 @@
 package com.choonchernlim.betterPreconditions.preconditions
 
+import com.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException
 import com.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException
 import com.choonchernlim.betterPreconditions.exception.StringNotBlankPreconditionException
 import spock.lang.Specification
@@ -9,13 +10,30 @@ import static com.choonchernlim.betterPreconditions.preconditions.StringPrecondi
 
 class StringPreconditionsSpec extends Specification {
 
+    def "toBeNull - invalid"() {
+        when:
+        expect('Hello').toBeNull().check()
+
+        then:
+        def error = thrown(ObjectNotNullPreconditionException.class)
+        error.message == 'String [ Hello ] must be null'
+    }
+
+    def "toBeNull - valid"() {
+        when:
+        def actualValue = expect('Hello').not().toBeNull().check()
+
+        then:
+        actualValue == 'Hello'
+    }
+
     @Unroll
     def "toBeBlank - valid - #value"() {
         when:
-        expect(value).toBeBlank().check()
+        def actualValue = expect(value).toBeBlank().check()
 
         then:
-        notThrown(StringNotBlankPreconditionException.class)
+        actualValue == value
 
         where:
         value << [null, '', ' ']
@@ -42,10 +60,10 @@ class StringPreconditionsSpec extends Specification {
 
     def "not.toBeBlank - valid"() {
         when:
-        expect('Hello').not().toBeBlank().check()
+        def actualValue = expect('Hello').not().toBeBlank().check()
 
         then:
-        notThrown(StringBlankPreconditionException.class)
+        actualValue == 'Hello'
     }
 
     @Unroll

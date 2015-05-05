@@ -11,10 +11,10 @@ class ObjectPreconditionsSpec extends Specification {
 
     def "toBeNull - valid"() {
         when:
-        expect(null).toBeNull().check()
+        def actualValue = expect(null).toBeNull().check()
 
         then:
-        notThrown(ObjectNotNullPreconditionException.class)
+        actualValue == null
     }
 
     def "toBeNull - invalid"() {
@@ -35,13 +35,12 @@ class ObjectPreconditionsSpec extends Specification {
         error.message == 'Surgery date [ 2015-01-01 ] must be null'
     }
 
-
     def "not.toBeNull - valid"() {
         when:
-        expect(new LocalDate(2015, 1, 1)).not().toBeNull().check()
+        def actualValue = expect(new LocalDate(2015, 1, 1)).not().toBeNull().check()
 
         then:
-        notThrown(ObjectNullPreconditionException.class)
+        actualValue == new LocalDate(2015, 1, 1)
     }
 
     def "not.toBeNull - invalid"() {
