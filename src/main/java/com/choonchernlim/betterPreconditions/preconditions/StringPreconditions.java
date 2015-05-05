@@ -21,7 +21,7 @@ public class StringPreconditions extends BetterPreconditions<StringPreconditions
     }
 
     /**
-     * Return new instance with default label.
+     * Returns new instance with default label.
      *
      * @param value Value
      * @return New instance
@@ -31,7 +31,7 @@ public class StringPreconditions extends BetterPreconditions<StringPreconditions
     }
 
     /**
-     * Return new instance.
+     * Returns new instance.
      *
      * @param value Value
      * @param label Label
@@ -42,7 +42,20 @@ public class StringPreconditions extends BetterPreconditions<StringPreconditions
     }
 
     /**
-     * Ensure the string is blank.
+     * Ensures the string is blank.
+     * <pre>
+     * {@code
+     * expect(null).toBeBlank().check();          // ok
+     * expect("").toBeBlank().check();            // ok
+     * expect("   ").toBeBlank().check();         // ok
+     * expect("Hello").toBeBlank().check();       // throws StringNotBlankPreconditionException
+     *
+     * expect(null).not().toBeBlank().check();    // throws StringBlankPreconditionException
+     * expect("").not().toBeBlank().check();      // throws StringBlankPreconditionException
+     * expect("   ").not().toBeBlank().check();   // throws StringBlankPreconditionException
+     * expect("Hello").not().toBeBlank().check(); // ok
+     * }
+     * </pre>
      *
      * @return Current instance
      */

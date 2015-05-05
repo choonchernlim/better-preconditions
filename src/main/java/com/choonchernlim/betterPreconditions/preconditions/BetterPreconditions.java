@@ -34,6 +34,12 @@ public abstract class BetterPreconditions<C, V> {
      */
     private boolean isNegated;
 
+    /**
+     * Creates a new instance.
+     *
+     * @param value Value
+     * @param label Label
+     */
     protected BetterPreconditions(final V value, final String label) {
         this.value = value;
         this.label = label;
@@ -42,7 +48,7 @@ public abstract class BetterPreconditions<C, V> {
     }
 
     /**
-     * Enable negation.
+     * Enables negation.
      *
      * @return Current instance
      */
@@ -53,7 +59,16 @@ public abstract class BetterPreconditions<C, V> {
     }
 
     /**
-     * Ensure the object is null.
+     * Ensures the object is null.
+     * <pre>
+     * {@code
+     * expect(null).toBeNull().check();          // ok
+     * expect("Hello").toBeNull().check();       // throws ObjectNotNullPreconditionException
+     *
+     * expect(null).not().toBeNull().check();    // throws ObjectNullPreconditionException
+     * expect("Hello").not().toBeNull().check(); // ok
+     * }
+     * </pre>
      *
      * @return Current instance
      */
@@ -80,7 +95,7 @@ public abstract class BetterPreconditions<C, V> {
     }
 
     /**
-     * Add new assertion.
+     * Adds new assertion.
      *
      * @param matcher Matcher
      * @return Current instance
@@ -96,7 +111,7 @@ public abstract class BetterPreconditions<C, V> {
     }
 
     /**
-     * Return value if all assertions pass.
+     * Returns value if all assertions pass.
      */
     protected final V check() {
         for (Assertion assertion : assertions) {

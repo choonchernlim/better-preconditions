@@ -1,8 +1,16 @@
 package com.choonchernlim.betterPreconditions.exception;
 
-public class PreconditionException extends RuntimeException {
+/**
+ * Abstract class for all precondition exceptions.
+ */
+public abstract class PreconditionException extends RuntimeException {
 
-    public PreconditionException(String s) {
-        super(s);
+    /**
+     * Constructs a new exception with an error message.
+     *
+     * @param error Error message
+     */
+    protected PreconditionException(String error) {
+        super(error);
     }
 }

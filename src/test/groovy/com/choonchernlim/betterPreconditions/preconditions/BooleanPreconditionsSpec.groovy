@@ -4,27 +4,35 @@ import com.choonchernlim.betterPreconditions.exception.BooleanFalsePreconditionE
 import com.choonchernlim.betterPreconditions.exception.BooleanTruePreconditionException
 import com.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import static com.choonchernlim.betterPreconditions.preconditions.BooleanPreconditions.expect
 
 class BooleanPreconditionsSpec extends Specification {
 
-    def "toBeTrue - invalid - false"() {
+    @Unroll
+    def "toBeTrue - invalid - #value"() {
         when:
-        expect(false).toBeTrue().check()
+        expect(value).toBeTrue().check()
 
         then:
         def error = thrown(BooleanFalsePreconditionException.class)
-        error.message == 'Boolean [ false ] must be true'
+        error.message == "Boolean [ ${value} ] must be true" as String
+
+        where:
+        value << [false, null]
     }
 
-    def "toBeTrue - invalid - null"() {
+    @Unroll
+    def "not.toBeTrue - valid - #value"() {
         when:
-        expect(null).toBeTrue().check()
+        def actualValue = expect(value).not().toBeTrue().check()
 
         then:
-        def error = thrown(BooleanFalsePreconditionException.class)
-        error.message == 'Boolean [ null ] must be true'
+        actualValue == value
+
+        where:
+        value << [false, null]
     }
 
     def "toBeTrue - valid"() {
@@ -42,15 +50,6 @@ class BooleanPreconditionsSpec extends Specification {
         then:
         def error = thrown(BooleanTruePreconditionException.class)
         error.message == 'Flag [ true ] must not be true'
-    }
-
-
-    def "not.toBeTrue - valid"() {
-        when:
-        def actualValue = expect(false).not().toBeTrue().check()
-
-        then:
-        !actualValue
     }
 
     def "not.toBeNull should throw exception and short circuit the assertions"() {

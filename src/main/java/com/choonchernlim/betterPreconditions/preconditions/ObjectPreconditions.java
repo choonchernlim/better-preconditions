@@ -15,7 +15,7 @@ public class ObjectPreconditions extends BetterPreconditions<ObjectPreconditions
     }
 
     /**
-     * Return new instance with default label.
+     * Returns new instance with default label.
      *
      * @param value Value
      * @return New instance
@@ -25,7 +25,7 @@ public class ObjectPreconditions extends BetterPreconditions<ObjectPreconditions
     }
 
     /**
-     * Return new instance.
+     * Returns new instance.
      *
      * @param value Value
      * @param label Label

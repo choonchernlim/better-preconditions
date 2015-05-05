@@ -20,7 +20,7 @@ public class BooleanPreconditions extends BetterPreconditions<BooleanPreconditio
     }
 
     /**
-     * Return new instance with default label.
+     * Returns new instance with default label.
      *
      * @param value Value
      * @return New instance
@@ -30,7 +30,7 @@ public class BooleanPreconditions extends BetterPreconditions<BooleanPreconditio
     }
 
     /**
-     * Return new instance.
+     * Returns new instance.
      *
      * @param value Value
      * @param label Label
@@ -41,7 +41,18 @@ public class BooleanPreconditions extends BetterPreconditions<BooleanPreconditio
     }
 
     /**
-     * Ensure boolean is true.
+     * Ensures boolean is true.
+     * <pre>
+     * {@code
+     * expect(true).toBeTrue().check();        // ok
+     * expect(false).toBeTrue().check();       // throws BooleanFalsePreconditionException
+     * expect(null).toBeTrue().check();        // throws BooleanFalsePreconditionException
+     *
+     * expect(false).not().toBeTrue().check(); // ok
+     * expect(null).not().toBeTrue().check();  // ok
+     * expect(true).not().toBeTrue().check();  // throws BooleanTruePreconditionException
+     * }
+     * </pre>
      *
      * @return Current instance
      */
