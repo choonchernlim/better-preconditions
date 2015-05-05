@@ -1,6 +1,7 @@
 package com.choonchernlim.betterPreconditions.preconditions
 
 import com.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException
+import com.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
 import com.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException
 import com.choonchernlim.betterPreconditions.exception.StringNotBlankPreconditionException
 import spock.lang.Specification
@@ -90,6 +91,17 @@ class StringPreconditionsSpec extends Specification {
 
         where:
         value << [null, '', ' ']
+    }
+
+    def "not.toBeNull should throw exception and short circuit the assertions"() {
+        when:
+        expect(null).
+                not().toBeNull().
+                not().toBeBlank().
+                check()
+
+        then:
+        thrown(ObjectNullPreconditionException.class)
     }
 
 }
