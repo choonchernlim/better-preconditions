@@ -2,37 +2,65 @@ package com.choonchernlim.betterPreconditions.preconditions
 
 import com.choonchernlim.betterPreconditions.exception.BooleanFalsePreconditionException
 import com.choonchernlim.betterPreconditions.exception.BooleanTruePreconditionException
+import com.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException
 import com.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
 import spock.lang.Specification
-import spock.lang.Unroll
 
 import static com.choonchernlim.betterPreconditions.preconditions.BooleanPreconditions.expect
 
 class BooleanPreconditionsSpec extends Specification {
 
-    @Unroll
-    def "toBeTrue - invalid - #value"() {
+    def "toBeNull - invalid"() {
         when:
-        expect(value).toBeTrue().check()
+        expect(false).toBeNull().check()
+
+        then:
+        def error = thrown(ObjectNotNullPreconditionException.class)
+        error.message == 'Boolean [ false ] must be null'
+    }
+
+    def "toBeNull - valid"() {
+        when:
+        def actualValue = expect(null).toBeNull().check()
+
+        then:
+        actualValue == null
+    }
+
+    def "toBeTrue - invalid - false"() {
+        when:
+        expect(false).toBeTrue().check()
 
         then:
         def error = thrown(BooleanFalsePreconditionException.class)
-        error.message == "Boolean [ ${value} ] must be true" as String
-
-        where:
-        value << [false, null]
+        error.message == "Boolean [ false ] must be true" as String
     }
 
-    @Unroll
-    def "not.toBeTrue - valid - #value"() {
+    def "toBeTrue - invalid - null"() {
         when:
-        def actualValue = expect(value).not().toBeTrue().check()
+        expect(null).toBeTrue().check()
 
         then:
-        actualValue == value
+        def error = thrown(ObjectNullPreconditionException.class)
+        error.message == "Boolean [ null ] must not be null" as String
+    }
 
-        where:
-        value << [false, null]
+
+    def "not.toBeTrue - valid - false"() {
+        when:
+        def actualValue = expect(false).not().toBeTrue().check()
+
+        then:
+        !actualValue
+    }
+
+    def "not.toBeTrue - valid"() {
+        when:
+        expect(null).not().toBeTrue().check()
+
+        then:
+        def error = thrown(ObjectNullPreconditionException.class)
+        error.message == "Boolean [ null ] must not be null" as String
     }
 
     def "toBeTrue - valid"() {
