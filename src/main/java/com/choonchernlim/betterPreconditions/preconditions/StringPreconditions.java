@@ -54,12 +54,12 @@ public class StringPreconditions extends BetterPreconditions<StringPreconditions
             }
 
             @Override
-            public PreconditionException getException(String value, String label) {
+            public PreconditionException getException(final String value, final String label) {
                 return new StringNotBlankPreconditionException(value, label);
             }
 
             @Override
-            public PreconditionException getNegatedException(String value, String label) {
+            public PreconditionException getNegatedException(final String value, final String label) {
                 return new StringBlankPreconditionException(value, label);
             }
         });
