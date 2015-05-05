@@ -48,8 +48,8 @@ public class BooleanPreconditions extends BetterPreconditions<BooleanPreconditio
     public BooleanPreconditions toBeTrue() {
         return customMatcher(new Matcher<Boolean>() {
             @Override
-            public boolean match(final Boolean value) {
-                return value;
+            public boolean match(final Boolean value, final String label) {
+                return value == Boolean.TRUE;
             }
 
             @Override

@@ -15,11 +15,11 @@ public class Assertion<V> {
 
     public void run() {
         if (isNegated) {
-            if (matcher.match(value)) {
+            if (matcher.match(value, label)) {
                 throw matcher.getNegatedException(value, label);
             }
         }
-        else if (!matcher.match(value)) {
+        else if (!matcher.match(value, label)) {
             throw matcher.getException(value, label);
         }
     }

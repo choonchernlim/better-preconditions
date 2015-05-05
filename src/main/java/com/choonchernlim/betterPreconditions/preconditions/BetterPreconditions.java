@@ -47,7 +47,7 @@ public abstract class BetterPreconditions<C, V> {
      * @return Current instance
      */
     @SuppressWarnings("unchecked")
-    public C not() {
+    public final C not() {
         this.isNegated = true;
         return (C) this;
     }
@@ -58,10 +58,10 @@ public abstract class BetterPreconditions<C, V> {
      * @return Current instance
      */
     @SuppressWarnings("unchecked")
-    public C toBeNull() {
+    public final C toBeNull() {
         customMatcher(new Matcher<V>() {
             @Override
-            public boolean match(final V value) {
+            public boolean match(final V value, final String label) {
                 return value == null;
             }
 

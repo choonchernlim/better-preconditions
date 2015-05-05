@@ -49,7 +49,7 @@ public class StringPreconditions extends BetterPreconditions<StringPreconditions
     public StringPreconditions toBeBlank() {
         return customMatcher(new Matcher<String>() {
             @Override
-            public boolean match(final String value) {
+            public boolean match(final String value, final String label) {
                 return nullToEmpty(value).trim().isEmpty();
             }
 

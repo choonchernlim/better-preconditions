@@ -101,7 +101,8 @@ class StringPreconditionsSpec extends Specification {
                 check()
 
         then:
-        thrown(ObjectNullPreconditionException.class)
+        def error = thrown(ObjectNullPreconditionException.class)
+        error.message == 'String [ null ] must not be null'
     }
 
 }
