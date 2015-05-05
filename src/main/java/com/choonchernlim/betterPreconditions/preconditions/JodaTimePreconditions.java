@@ -1,19 +1,19 @@
 package com.choonchernlim.betterPreconditions.preconditions;
 
 import com.choonchernlim.betterPreconditions.core.Matcher;
-import com.choonchernlim.betterPreconditions.exception.BaseLocalEqualPreconditionException;
-import com.choonchernlim.betterPreconditions.exception.BaseLocalNotEqualPreconditionException;
+import com.choonchernlim.betterPreconditions.exception.JodaTimeEqualPreconditionException;
+import com.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualPreconditionException;
 import com.choonchernlim.betterPreconditions.exception.PreconditionException;
 import org.joda.time.base.BaseLocal;
 
-public class DatePreconditions extends BetterPreconditions<DatePreconditions, BaseLocal> {
+public class JodaTimePreconditions extends BetterPreconditions<JodaTimePreconditions, BaseLocal> {
     /**
      * Private constructor.
      *
      * @param value Value
      * @param label Label
      */
-    private DatePreconditions(final BaseLocal value, final String label) {
+    private JodaTimePreconditions(final BaseLocal value, final String label) {
         super(value, label);
     }
 
@@ -23,8 +23,8 @@ public class DatePreconditions extends BetterPreconditions<DatePreconditions, Ba
      * @param value Value
      * @return New instance
      */
-    public static DatePreconditions expect(final BaseLocal value) {
-        return expect(value, "BaseLocal");
+    public static JodaTimePreconditions expect(final BaseLocal value) {
+        return expect(value, "Joda Time");
     }
 
     /**
@@ -34,16 +34,21 @@ public class DatePreconditions extends BetterPreconditions<DatePreconditions, Ba
      * @param label Label
      * @return New instance
      */
-    public static DatePreconditions expect(final BaseLocal value, final String label) {
-        return new DatePreconditions(value, label);
-    }
-
-    public DatePreconditions toBeEqual(final BaseLocal secondValue) {
-        return toBeEqual(secondValue, "Second value");
+    public static JodaTimePreconditions expect(final BaseLocal value, final String label) {
+        return new JodaTimePreconditions(value, label);
     }
 
     /**
-     * Ensures collection is empty.
+     * Ensures given base local is equal to expected value.
+     *
+     * @see JodaTimePreconditions#toBeEqual(BaseLocal, String)
+     */
+    public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue) {
+        return toBeEqual(expectedValue, "Expected Joda Time");
+    }
+
+    /**
+     * Ensures given base local is equal to expected value.
      * <pre>
      * {@code
      * TODO TBD!
@@ -57,28 +62,32 @@ public class DatePreconditions extends BetterPreconditions<DatePreconditions, Ba
      * }
      * </pre>
      *
-     * @param secondValue Second value
-     * @param secondLabel Second label
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
      * @return Current instance
      */
-    public DatePreconditions toBeEqual(final BaseLocal secondValue, final String secondLabel) {
+    public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue, final String expectedLabel) {
+        expectValueLabelToExist(expectedValue, expectedLabel, "Expected Joda Time Label");
+
         return customMatcher(new Matcher<BaseLocal>() {
             @Override
-            public boolean match(final BaseLocal firstValue, final String firstLabel) {
-                return expect(firstValue, firstLabel).not().toBeNull().check().isEqual(secondValue);
+            public boolean match(final BaseLocal givenValue, final String givenLabel) {
+                return expect(givenValue, givenLabel).not().toBeNull().check().isEqual(expectedValue);
             }
 
             @Override
-            public PreconditionException getException(final BaseLocal firstValue, final String firstLabel) {
-                return new BaseLocalNotEqualPreconditionException(firstValue, firstLabel, secondValue, secondLabel);
+            public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
+                return new JodaTimeNotEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
             }
 
             @Override
-            public PreconditionException getNegatedException(BaseLocal firstValue, String firstLabel) {
-                return new BaseLocalEqualPreconditionException(firstValue, firstLabel, secondValue, secondLabel);
+            public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
+                return new JodaTimeEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
             }
         });
     }
+
+
 //    public static void mustBeEqual(final LocalDate startDate,
 //                                   final LocalDate endDate,
 //                                   final String startDateVariableName,

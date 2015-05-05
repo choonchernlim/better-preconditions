@@ -5,6 +5,9 @@ import com.choonchernlim.betterPreconditions.core.Matcher;
 import com.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException;
 import com.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException;
 import com.choonchernlim.betterPreconditions.exception.PreconditionException;
+import com.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException;
+import static com.choonchernlim.betterPreconditions.preconditions.StringPreconditions.expect;
+import static com.google.common.base.Strings.nullToEmpty;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -41,6 +44,12 @@ public abstract class BetterPreconditions<C, V> {
      * @param label Label
      */
     protected BetterPreconditions(final V value, final String label) {
+        // label is not empty... cannot use `expect(label).not().toBeBlank().check()` to prevent
+        // infinite recursion calls.
+        if (nullToEmpty(label).trim().isEmpty()) {
+            throw new StringBlankPreconditionException(label, "Label");
+        }
+
         this.value = value;
         this.label = label;
         this.assertions = Lists.newArrayList();
@@ -119,5 +128,17 @@ public abstract class BetterPreconditions<C, V> {
         }
 
         return value;
+    }
+
+    /**
+     * Ensures value not be null and label not be blank.
+     *
+     * @param value        Value
+     * @param label        Label
+     * @param defaultLabel Default label
+     */
+    protected final void expectValueLabelToExist(final Object value, final String label, final String defaultLabel) {
+        expect(label, defaultLabel).not().toBeBlank().check();
+        ObjectPreconditions.expect(value, label).not().toBeNull().check();
     }
 }

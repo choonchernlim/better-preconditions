@@ -3,9 +3,9 @@ package com.choonchernlim.betterPreconditions.exception;
 import org.joda.time.base.BaseLocal;
 
 /**
- * This exception is thrown if the first value is equal to second value.
+ * This exception is thrown if the first value is not equal to second value.
  */
-public class BaseLocalEqualPreconditionException extends PreconditionException {
+public class JodaTimeNotEqualPreconditionException extends PreconditionException {
 
     /**
      * Constructs a new exception with an error message.
@@ -15,11 +15,11 @@ public class BaseLocalEqualPreconditionException extends PreconditionException {
      * @param secondBaseLocalValue Second base local value
      * @param secondBaseLocalLabel Second base local label
      */
-    public BaseLocalEqualPreconditionException(final BaseLocal firstBaseLocalValue,
-                                               final String firstBaseLocalLabel,
-                                               final BaseLocal secondBaseLocalValue,
-                                               final String secondBaseLocalLabel) {
-        super(String.format("%s [ %s ] must not be equal to %s [ %s ]",
+    public JodaTimeNotEqualPreconditionException(final BaseLocal firstBaseLocalValue,
+                                                 final String firstBaseLocalLabel,
+                                                 final BaseLocal secondBaseLocalValue,
+                                                 final String secondBaseLocalLabel) {
+        super(String.format("%s [ %s ] must be equal to %s [ %s ]",
                             firstBaseLocalLabel,
                             firstBaseLocalValue,
                             secondBaseLocalLabel,
