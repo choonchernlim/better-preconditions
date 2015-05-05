@@ -5,17 +5,17 @@ import com.choonchernlim.betterPreconditions.exception.StringNotBlankPreconditio
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static StringPreconditions.expectString
+import static com.choonchernlim.betterPreconditions.preconditions.StringPreconditions.expect
 
 class StringPreconditionsSpec extends Specification {
 
     @Unroll
     def "toBeBlank - valid - #value"() {
         when:
-        expectString(value).toBeBlank().check()
+        expect(value).toBeBlank().check()
 
         then:
-        notThrown(StringBlankPreconditionException.class)
+        notThrown(StringNotBlankPreconditionException.class)
 
         where:
         value << [null, '', ' ']
@@ -23,7 +23,7 @@ class StringPreconditionsSpec extends Specification {
 
     def "toBeBlank - invalid"() {
         when:
-        expectString('Hello').toBeBlank().check()
+        expect('Hello').toBeBlank().check()
 
         then:
         def error = thrown(StringNotBlankPreconditionException.class)
@@ -32,7 +32,7 @@ class StringPreconditionsSpec extends Specification {
 
     def "toBeBlank - invalid - with label"() {
         when:
-        expectString('Hello', 'Greeting').toBeBlank().check()
+        expect('Hello', 'Greeting').toBeBlank().check()
 
         then:
         def error = thrown(StringNotBlankPreconditionException.class)
@@ -42,7 +42,7 @@ class StringPreconditionsSpec extends Specification {
 
     def "not.toBeBlank - valid"() {
         when:
-        expectString('Hello').not().toBeBlank().check()
+        expect('Hello').not().toBeBlank().check()
 
         then:
         notThrown(StringBlankPreconditionException.class)
@@ -51,7 +51,7 @@ class StringPreconditionsSpec extends Specification {
     @Unroll
     def "not.toBeBlank - invalid - #value"() {
         when:
-        expectString(value).not().toBeBlank().check()
+        expect(value).not().toBeBlank().check()
 
         then:
         def error = thrown(StringBlankPreconditionException.class)
@@ -64,7 +64,7 @@ class StringPreconditionsSpec extends Specification {
     @Unroll
     def "not.toBeBlank - invalid - with label - #value"() {
         when:
-        expectString(value, 'Greeting').not().toBeBlank().check()
+        expect(value, 'Greeting').not().toBeBlank().check()
 
         then:
         def error = thrown(StringBlankPreconditionException.class)

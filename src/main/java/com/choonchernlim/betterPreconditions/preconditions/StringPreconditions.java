@@ -8,7 +8,7 @@ import static com.google.common.base.Strings.nullToEmpty;
 /**
  * String related preconditions.
  */
-public class StringPreconditions extends BetterPreconditions {
+public class StringPreconditions extends BetterPreconditions<String> {
     /**
      * Private constructor.
      *
@@ -25,8 +25,8 @@ public class StringPreconditions extends BetterPreconditions {
      * @param value Value
      * @return New instance
      */
-    public static StringPreconditions expectString(final String value) {
-        return expectString(value, "String");
+    public static StringPreconditions expect(final String value) {
+        return expect(value, "String");
     }
 
     /**
@@ -36,7 +36,7 @@ public class StringPreconditions extends BetterPreconditions {
      * @param label Label
      * @return New instance
      */
-    public static StringPreconditions expectString(final String value, final String label) {
+    public static StringPreconditions expect(final String value, final String label) {
         return new StringPreconditions(value, label);
     }
 

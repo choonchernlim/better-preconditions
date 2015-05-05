@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Abstract class for all preconditions.
  */
-public abstract class BetterPreconditions {
+public abstract class BetterPreconditions<T> {
 
     /**
      * Value to be checked.
      */
-    protected final String value;
+    protected final T value;
 
     /**
      * Label for the value.
@@ -32,7 +32,7 @@ public abstract class BetterPreconditions {
      */
     private boolean isNegated;
 
-    public BetterPreconditions(final String value, final String label) {
+    public BetterPreconditions(final T value, final String label) {
         this.value = value;
         this.label = label;
         this.assertions = Lists.newArrayList();
