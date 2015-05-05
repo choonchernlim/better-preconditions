@@ -1,7 +1,7 @@
 package com.choonchernlim.betterPreconditions.preconditions;
 
 import com.choonchernlim.betterPreconditions.core.Assertion;
-import com.choonchernlim.betterPreconditions.core.Evaluation;
+import com.choonchernlim.betterPreconditions.core.Matcher;
 import com.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException;
 import com.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException;
 import com.choonchernlim.betterPreconditions.exception.PreconditionException;
@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * Abstract class for all preconditions.
  */
-public abstract class BetterPreconditions<K, T> {
+public abstract class BetterPreconditions<C, V> {
 
     /**
      * Value to be checked.
      */
-    protected final T value;
+    protected final V value;
 
     /**
      * Label for the value.
@@ -34,97 +34,75 @@ public abstract class BetterPreconditions<K, T> {
      */
     private boolean isNegated;
 
-    public BetterPreconditions(final T value, final String label) {
+    protected BetterPreconditions(final V value, final String label) {
         this.value = value;
         this.label = label;
         this.assertions = Lists.newArrayList();
         this.isNegated = false;
     }
 
-    public abstract K not();
-
-    public abstract K toBeNull();
-
     /**
-     * Set flag to enable negation.
+     * Enable negation.
+     *
+     * @return Current instance
      */
-    protected final K enableNegation(K instance) {
+    @SuppressWarnings("unchecked")
+    public C not() {
         this.isNegated = true;
-        return instance;
+        return (C) this;
     }
 
     /**
-     * Set flag to disable negation.
+     * Ensure the object is null.
+     *
+     * @return Current instance
      */
-    private K disableNegation(K instance) {
-        this.isNegated = false;
-        return instance;
+    @SuppressWarnings("unchecked")
+    public C toBeNull() {
+        customMatcher(new Matcher<V>() {
+            @Override
+            public boolean match(final V value) {
+                return value == null;
+            }
+
+            @Override
+            public PreconditionException getException(final V value, final String label) {
+                return new ObjectNotNullPreconditionException(value, label);
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final V value, final String label) {
+                return new ObjectNullPreconditionException(value, label);
+            }
+        });
+
+        return (C) this;
     }
 
     /**
      * Add new assertion.
      *
-     * @param instance         Current instance
-     * @param evaluation       What to be evaluated
-     * @param exception        Exception for non-negated assertion
-     * @param negatedException Exception for negated assertion
+     * @param matcher Matcher
+     * @return Current instance
      */
-    protected final K addAssertion(final K instance,
-                                   final Evaluation evaluation,
-                                   final PreconditionException exception,
-                                   final PreconditionException negatedException) {
-
-        assertions.add(new Assertion(isNegated) {
-                           @Override
-                           public void run() {
-                               if (isNegated()) {
-                                   if (evaluation.eval()) {
-                                       throw getNegatedException();
-                                   }
-                               }
-                               else if (!evaluation.eval()) {
-                                   throw getException();
-                               }
-                           }
-
-                           @Override
-                           protected PreconditionException getException() {
-                               return exception;
-                           }
-
-                           @Override
-                           protected PreconditionException getNegatedException() {
-                               return negatedException;
-                           }
-                       }
-
-        );
+    @SuppressWarnings("unchecked")
+    protected final C customMatcher(final Matcher<V> matcher) {
+        assertions.add(new Assertion<V>(matcher, isNegated, value, label));
 
         // after creating a new assertion, reset the negation
-        return disableNegation(instance);
+        this.isNegated = false;
+
+        return (C) this;
     }
 
     /**
-     * Execute each assertion.
+     * Return value if all assertions pass.
      */
-    protected final void check() {
+    protected final V check() {
         for (Assertion assertion : assertions) {
             assertion.run();
         }
-    }
 
-    protected final K addToBeNullAssertion(K instance) {
-        addAssertion(instance,
-                     new Evaluation() {
-                         @Override
-                         public boolean eval() {
-                             return value == null;
-                         }
-                     },
-                     new ObjectNotNullPreconditionException(value, label),
-                     new ObjectNullPreconditionException(value, label)
-        );
-
-        return instance;
+        return value;
     }
 }

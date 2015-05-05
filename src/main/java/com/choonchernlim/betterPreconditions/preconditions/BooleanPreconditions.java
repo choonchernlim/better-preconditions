@@ -1,8 +1,9 @@
 package com.choonchernlim.betterPreconditions.preconditions;
 
-import com.choonchernlim.betterPreconditions.core.Evaluation;
+import com.choonchernlim.betterPreconditions.core.Matcher;
 import com.choonchernlim.betterPreconditions.exception.BooleanFalsePreconditionException;
 import com.choonchernlim.betterPreconditions.exception.BooleanTruePreconditionException;
+import com.choonchernlim.betterPreconditions.exception.PreconditionException;
 
 /**
  * Boolean related preconditions.
@@ -40,40 +41,26 @@ public class BooleanPreconditions extends BetterPreconditions<BooleanPreconditio
     }
 
     /**
-     * Enable negation.
-     *
-     * @return Current instance
-     */
-    @Override
-    public BooleanPreconditions not() {
-        return enableNegation(this);
-    }
-
-    /**
-     * Ensure the object is null.
-     *
-     * @return Current instance
-     */
-    @Override
-    public BooleanPreconditions toBeNull() {
-        return addToBeNullAssertion(this);
-    }
-
-    /**
      * Ensure boolean is true.
      *
      * @return Current instance
      */
-    public BooleanPreconditions toBeTrue(final Boolean value, final String label) {
-        return addAssertion(this,
-                            new Evaluation() {
-                                @Override
-                                public boolean eval() {
-                                    return value;
-                                }
-                            },
-                            new BooleanFalsePreconditionException(value, label),
-                            new BooleanTruePreconditionException(value, label)
-        );
+    public BooleanPreconditions toBeTrue() {
+        return customMatcher(new Matcher<Boolean>() {
+            @Override
+            public boolean match(final Boolean value) {
+                return value;
+            }
+
+            @Override
+            public PreconditionException getException(final Boolean value, final String label) {
+                return new BooleanFalsePreconditionException(value, label);
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final Boolean value, final String label) {
+                return new BooleanTruePreconditionException(value, label);
+            }
+        });
     }
 }

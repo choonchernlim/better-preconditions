@@ -1,6 +1,7 @@
 package com.choonchernlim.betterPreconditions.preconditions;
 
-import com.choonchernlim.betterPreconditions.core.Evaluation;
+import com.choonchernlim.betterPreconditions.core.Matcher;
+import com.choonchernlim.betterPreconditions.exception.PreconditionException;
 import com.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException;
 import com.choonchernlim.betterPreconditions.exception.StringNotBlankPreconditionException;
 import static com.google.common.base.Strings.nullToEmpty;
@@ -41,40 +42,26 @@ public class StringPreconditions extends BetterPreconditions<StringPreconditions
     }
 
     /**
-     * Enable negation.
-     *
-     * @return Current instance
-     */
-    @Override
-    public StringPreconditions not() {
-        return enableNegation(this);
-    }
-
-    /**
-     * Ensure the object is null.
-     *
-     * @return Current instance
-     */
-    @Override
-    public StringPreconditions toBeNull() {
-        return addToBeNullAssertion(this);
-    }
-
-    /**
      * Ensure the string is blank.
      *
      * @return Current instance
      */
     public StringPreconditions toBeBlank() {
-        return addAssertion(this,
-                            new Evaluation() {
-                                @Override
-                                public boolean eval() {
-                                    return nullToEmpty(value).trim().isEmpty();
-                                }
-                            },
-                            new StringNotBlankPreconditionException(value, label),
-                            new StringBlankPreconditionException(value, label)
-        );
+        return customMatcher(new Matcher<String>() {
+            @Override
+            public boolean match(final String value) {
+                return nullToEmpty(value).trim().isEmpty();
+            }
+
+            @Override
+            public PreconditionException getException(String value, String label) {
+                return new StringNotBlankPreconditionException(value, label);
+            }
+
+            @Override
+            public PreconditionException getNegatedException(String value, String label) {
+                return new StringBlankPreconditionException(value, label);
+            }
+        });
     }
 }

@@ -34,24 +34,4 @@ public class ObjectPreconditions extends BetterPreconditions<ObjectPreconditions
     public static ObjectPreconditions expect(final Object value, final String label) {
         return new ObjectPreconditions(value, label);
     }
-
-    /**
-     * Enable negation.
-     *
-     * @return Current instance
-     */
-    @Override
-    public ObjectPreconditions not() {
-        return enableNegation(this);
-    }
-
-    /**
-     * Ensure the object is null.
-     *
-     * @return Current instance
-     */
-    @Override
-    public ObjectPreconditions toBeNull() {
-        return addToBeNullAssertion(this);
-    }
 }
