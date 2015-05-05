@@ -61,17 +61,17 @@ public abstract class BetterPreconditions<C, V> {
     public C toBeNull() {
         customMatcher(new Matcher<V>() {
             @Override
-            public boolean match(final V value) {
+            public boolean match(V value) {
                 return value == null;
             }
 
             @Override
-            public PreconditionException getException(final V value, final String label) {
+            public PreconditionException getException(V value, String label) {
                 return new ObjectNotNullPreconditionException(value, label);
             }
 
             @Override
-            public PreconditionException getNegatedException(final V value, final String label) {
+            public PreconditionException getNegatedException(V value, String label) {
                 return new ObjectNullPreconditionException(value, label);
             }
         });
