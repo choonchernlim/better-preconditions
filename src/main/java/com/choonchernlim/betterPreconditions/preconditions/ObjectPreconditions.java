@@ -1,14 +1,9 @@
 package com.choonchernlim.betterPreconditions.preconditions;
 
-import com.choonchernlim.betterPreconditions.core.Evaluation;
-import com.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException;
-import com.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException;
-
 /**
  * Object related preconditions.
  */
-public class ObjectPreconditions extends BetterPreconditions<Object> {
-
+public class ObjectPreconditions extends BetterPreconditions<ObjectPreconditions, Object> {
     /**
      * Private constructor.
      *
@@ -45,9 +40,9 @@ public class ObjectPreconditions extends BetterPreconditions<Object> {
      *
      * @return Current instance
      */
+    @Override
     public ObjectPreconditions not() {
-        enableNegation();
-        return this;
+        return enableNegation(this);
     }
 
     /**
@@ -55,17 +50,8 @@ public class ObjectPreconditions extends BetterPreconditions<Object> {
      *
      * @return Current instance
      */
+    @Override
     public ObjectPreconditions toBeNull() {
-        addNewAssertion(new Evaluation() {
-                            @Override
-                            public boolean eval() {
-                                return value == null;
-                            }
-                        },
-                        new ObjectNotNullPreconditionException(value, label),
-                        new ObjectNullPreconditionException(value, label)
-        );
-
-        return this;
+        return addToBeNullAssertion(this);
     }
 }

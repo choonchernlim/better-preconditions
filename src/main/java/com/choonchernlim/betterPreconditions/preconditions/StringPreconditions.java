@@ -8,7 +8,7 @@ import static com.google.common.base.Strings.nullToEmpty;
 /**
  * String related preconditions.
  */
-public class StringPreconditions extends BetterPreconditions<String> {
+public class StringPreconditions extends BetterPreconditions<StringPreconditions, String> {
     /**
      * Private constructor.
      *
@@ -45,9 +45,19 @@ public class StringPreconditions extends BetterPreconditions<String> {
      *
      * @return Current instance
      */
+    @Override
     public StringPreconditions not() {
-        enableNegation();
-        return this;
+        return enableNegation(this);
+    }
+
+    /**
+     * Ensure the object is null.
+     *
+     * @return Current instance
+     */
+    @Override
+    public StringPreconditions toBeNull() {
+        return addToBeNullAssertion(this);
     }
 
     /**
@@ -56,16 +66,15 @@ public class StringPreconditions extends BetterPreconditions<String> {
      * @return Current instance
      */
     public StringPreconditions toBeBlank() {
-        addNewAssertion(new Evaluation() {
-                            @Override
-                            public boolean eval() {
-                                return nullToEmpty(value).trim().isEmpty();
-                            }
-                        },
-                        new StringNotBlankPreconditionException(value, label),
-                        new StringBlankPreconditionException(value, label)
+        return addAssertion(this,
+                            new Evaluation() {
+                                @Override
+                                public boolean eval() {
+                                    return nullToEmpty(value).trim().isEmpty();
+                                }
+                            },
+                            new StringNotBlankPreconditionException(value, label),
+                            new StringBlankPreconditionException(value, label)
         );
-
-        return this;
     }
 }
