@@ -11,6 +11,14 @@ import static com.choonchernlim.betterPreconditions.preconditions.StringPrecondi
 
 class StringPreconditionsSpec extends Specification {
 
+    def "toBeNull - valid"() {
+        when:
+        def actualValue = expect('Hello').not().toBeNull().check()
+
+        then:
+        actualValue == 'Hello'
+    }
+
     def "toBeNull - invalid"() {
         when:
         expect('Hello').toBeNull().check()
@@ -18,14 +26,6 @@ class StringPreconditionsSpec extends Specification {
         then:
         def error = thrown(ObjectNotNullPreconditionException.class)
         error.message == 'String [ Hello ] must be null'
-    }
-
-    def "toBeNull - valid"() {
-        when:
-        def actualValue = expect('Hello').not().toBeNull().check()
-
-        then:
-        actualValue == 'Hello'
     }
 
     @Unroll
@@ -57,7 +57,6 @@ class StringPreconditionsSpec extends Specification {
         def error = thrown(StringNotBlankPreconditionException.class)
         error.message == 'Greeting [ Hello ] must be blank'
     }
-
 
     def "not.toBeBlank - valid"() {
         when:

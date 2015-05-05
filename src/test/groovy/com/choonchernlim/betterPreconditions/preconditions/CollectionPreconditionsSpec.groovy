@@ -10,6 +10,14 @@ import static com.choonchernlim.betterPreconditions.preconditions.CollectionPrec
 
 class CollectionPreconditionsSpec extends Specification {
 
+    def "toBeNull - valid"() {
+        when:
+        def actualValue = expect(null).toBeNull().check()
+
+        then:
+        actualValue == null
+    }
+
     def "toBeNull - invalid"() {
         when:
         expect([]).toBeNull().check()
@@ -19,12 +27,12 @@ class CollectionPreconditionsSpec extends Specification {
         error.message == 'Collection [ [] ] must be null'
     }
 
-    def "toBeNull - valid"() {
+    def "toBeEmpty - valid"() {
         when:
-        def actualValue = expect(null).toBeNull().check()
+        def actualValue = expect([]).toBeEmpty().check()
 
         then:
-        actualValue == null
+        actualValue == []
     }
 
     def "toBeEmpty - invalid - null"() {
@@ -45,7 +53,7 @@ class CollectionPreconditionsSpec extends Specification {
         error.message == "Collection [ size : 3 ] must be empty" as String
     }
 
-    def "not.toBeEmpty - valid - non empty list"() {
+    def "not.toBeEmpty - valid"() {
         when:
         def actualValue = expect([1, 2, 3,]).not().toBeEmpty().check()
 
@@ -53,33 +61,25 @@ class CollectionPreconditionsSpec extends Specification {
         actualValue == [1, 2, 3]
     }
 
-    def "toBeEmpty - valid"() {
+    def "not.toBeEmpty - invalid"() {
         when:
-        def actualValue = expect([]).toBeEmpty().check()
-
-        then:
-        actualValue == []
-    }
-
-    def "not.toBeEmpty - invalid - with label - empty list"() {
-        when:
-        expect([], 'Cars').not().toBeEmpty().check()
+        expect([]).not().toBeEmpty().check()
 
         then:
         def error = thrown(CollectionEmptyPreconditionException.class)
-        error.message == 'Cars [ size : 0 ] must not be empty'
+        error.message == 'Collection [ size : 0 ] must not be empty'
     }
 
     def "not.toBeNull should throw exception and short circuit the assertions"() {
         when:
-        expect(null).
+        expect(null, 'Cars').
                 not().toBeNull().
                 not().toBeEmpty().
                 check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)
-        error.message == 'Collection [ null ] must not be null'
+        error.message == 'Cars [ null ] must not be null'
     }
 
 }
