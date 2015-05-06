@@ -2,12 +2,22 @@ package com.github.choonchernlim.betterPreconditions.preconditions
 
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException
 import org.joda.time.LocalDate
 import spock.lang.Specification
 
 import static ObjectPreconditions.expect
 
 class ObjectPreconditionsSpec extends Specification {
+
+    def "toBeNull - null label should throw StringBlankPreconditionException"() {
+        when:
+        expect(new LocalDate(2015, 1, 1), null).toBeNull().check()
+
+        then:
+        def error = thrown(StringBlankPreconditionException.class)
+        error.message == 'Label [ null ] must not be blank'
+    }
 
     def "toBeNull - null should be ok"() {
         when:
