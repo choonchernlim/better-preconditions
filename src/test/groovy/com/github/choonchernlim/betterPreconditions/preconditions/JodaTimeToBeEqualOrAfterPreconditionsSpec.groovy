@@ -15,7 +15,7 @@ import static JodaTimePreconditions.expect
 class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
 
     @Unroll
-    def "toBeEqualOrAfter - #type - #firstValue >= #secondValue should be ok"() {
+    def "toBeEqualOrAfter - #firstValue >= #secondValue should be ok"() {
         when:
         def actualValue = expect(firstValue).toBeEqualOrAfter(secondValue).check()
 
@@ -23,14 +23,14 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         actualValue == firstValue
 
         where:
-        type            | firstValue                          | secondValue
-        'LocalDate'     | new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 1)
-        'LocalTime'     | new LocalTime(7, 45)                | new LocalTime(7, 45)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 4)
+        firstValue                          | secondValue
+        new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 1)
+        new LocalTime(7, 45)                | new LocalTime(7, 45)
+        new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 4)
     }
 
     @Unroll
-    def "toBeEqualOrAfter - #type - #firstValue > #secondValue should be ok"() {
+    def "toBeEqualOrAfter - #firstValue > #secondValue should be ok"() {
         when:
         def actualValue = expect(firstValue).toBeEqualOrAfter(secondValue).check()
 
@@ -38,14 +38,14 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         actualValue == firstValue
 
         where:
-        type            | firstValue                          | secondValue
-        'LocalDate'     | new LocalDate(2015, 1, 2)           | new LocalDate(2015, 1, 1)
-        'LocalTime'     | new LocalTime(7, 46)                | new LocalTime(7, 45)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 5) | new LocalDateTime(2015, 1, 2, 3, 4)
+        firstValue                          | secondValue
+        new LocalDate(2015, 1, 2)           | new LocalDate(2015, 1, 1)
+        new LocalTime(7, 46)                | new LocalTime(7, 45)
+        new LocalDateTime(2015, 1, 2, 3, 5) | new LocalDateTime(2015, 1, 2, 3, 4)
     }
 
     @Unroll
-    def "toBeEqualOrAfter - #type - null >= #secondValue should throw ObjectNullPreconditionException"() {
+    def "toBeEqualOrAfter - null >= #secondValue should throw ObjectNullPreconditionException"() {
         when:
         expect(null).toBeEqualOrAfter(secondValue).check()
 
@@ -54,14 +54,13 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         error.message == 'Joda Time [ null ] must not be null'
 
         where:
-        type            | secondValue
-        'LocalDate'     | new LocalDate(2015, 1, 1)
-        'LocalTime'     | new LocalTime(7, 45)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4)
+        secondValue << [new LocalDate(2015, 1, 1),
+                        new LocalTime(7, 45),
+                        new LocalDateTime(2015, 1, 2, 3, 4)]
     }
 
     @Unroll
-    def "toBeEqualOrAfter - #type - #firstValue >= null should throw ObjectNullPreconditionException"() {
+    def "toBeEqualOrAfter - #firstValue >= null should throw ObjectNullPreconditionException"() {
         when:
         expect(firstValue).toBeEqualOrAfter(null).check()
 
@@ -70,14 +69,13 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         error.message == 'Expected Joda Time [ null ] must not be null'
 
         where:
-        type            | firstValue
-        'LocalDate'     | new LocalDate(2015, 1, 1)
-        'LocalTime'     | new LocalTime(7, 45)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4)
+        firstValue << [new LocalDate(2015, 1, 1),
+                       new LocalTime(7, 45),
+                       new LocalDateTime(2015, 1, 2, 3, 4)]
     }
 
     @Unroll
-    def "toBeEqualOrAfter - #type - #firstValue >= #secondValue - null expected label should throw StringBlankPreconditionException"() {
+    def "toBeEqualOrAfter - #firstValue >= #secondValue - null expected label should throw StringBlankPreconditionException"() {
         when:
         expect(firstValue).toBeEqualOrAfter(secondValue, null).check()
 
@@ -86,14 +84,14 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         error.message == 'Expected Joda Time Label [ null ] must not be blank'
 
         where:
-        type            | firstValue                          | secondValue
-        'LocalDate'     | new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 1)
-        'LocalTime'     | new LocalTime(7, 45)                | new LocalTime(7, 45)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 4)
+        firstValue                          | secondValue
+        new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 1)
+        new LocalTime(7, 45)                | new LocalTime(7, 45)
+        new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 4)
     }
 
     @Unroll
-    def "toBeEqualOrAfter - #type - #firstValue >= #secondValue should throw JodaTimeNotEqualOrAfterPreconditionException"() {
+    def "toBeEqualOrAfter - #firstValue >= #secondValue should throw JodaTimeNotEqualOrAfterPreconditionException"() {
         when:
         expect(firstValue).toBeEqualOrAfter(secondValue).check()
 
@@ -102,14 +100,14 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         error.message == "Joda Time [ ${firstValue} ] must be equal to or after Expected Joda Time [ ${secondValue} ]" as String
 
         where:
-        type            | firstValue                          | secondValue
-        'LocalDate'     | new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 2)
-        'LocalTime'     | new LocalTime(7, 45)                | new LocalTime(7, 46)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 5)
+        firstValue                          | secondValue
+        new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 2)
+        new LocalTime(7, 45)                | new LocalTime(7, 46)
+        new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 5)
     }
 
     @Unroll
-    def "toBeEqualOrAfter - #type - #firstValue >= #secondValue should throw JodaTimeNotEqualOrAfterPreconditionException - with label"() {
+    def "toBeEqualOrAfter - #firstValue >= #secondValue should throw JodaTimeNotEqualOrAfterPreconditionException - with label"() {
         when:
         expect(firstValue, 'Start Value').toBeEqualOrAfter(secondValue, 'End Value').check()
 
@@ -118,14 +116,14 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         error.message == "Start Value [ ${firstValue} ] must be equal to or after End Value [ ${secondValue} ]" as String
 
         where:
-        type            | firstValue                          | secondValue
-        'LocalDate'     | new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 2)
-        'LocalTime'     | new LocalTime(7, 45)                | new LocalTime(7, 46)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 5)
+        firstValue                          | secondValue
+        new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 2)
+        new LocalTime(7, 45)                | new LocalTime(7, 46)
+        new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 5)
     }
 
     @Unroll
-    def "not.toBeEqualOrAfter - #type - #firstValue < #secondValue should be ok"() {
+    def "not.toBeEqualOrAfter - #firstValue < #secondValue should be ok"() {
         when:
         def actualValue = expect(firstValue).not().toBeEqualOrAfter(secondValue).check()
 
@@ -133,14 +131,14 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         actualValue == firstValue
 
         where:
-        type            | firstValue                          | secondValue
-        'LocalDate'     | new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 2)
-        'LocalTime'     | new LocalTime(7, 45)                | new LocalTime(7, 46)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 5)
+        firstValue                          | secondValue
+        new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 2)
+        new LocalTime(7, 45)                | new LocalTime(7, 46)
+        new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 5)
     }
 
     @Unroll
-    def "not.toBeEqualOrAfter - #type - #firstValue >= #secondValue should throw JodaTimeEqualOrAfterPreconditionException"() {
+    def "not.toBeEqualOrAfter - #firstValue >= #secondValue should throw JodaTimeEqualOrAfterPreconditionException"() {
         when:
         expect(firstValue).not().toBeEqualOrAfter(secondValue).check()
 
@@ -149,14 +147,14 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         error.message == "Joda Time [ ${firstValue} ] must not be equal to or after Expected Joda Time [ ${secondValue} ]" as String
 
         where:
-        type            | firstValue                          | secondValue
-        'LocalDate'     | new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 1)
-        'LocalTime'     | new LocalTime(7, 45)                | new LocalTime(7, 45)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 4)
+        firstValue                          | secondValue
+        new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 1)
+        new LocalTime(7, 45)                | new LocalTime(7, 45)
+        new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 4)
     }
 
     @Unroll
-    def "not.toBeEqualOrAfter - #type - #firstValue >= #secondValue should throw JodaTimeEqualOrAfterPreconditionException - with label"() {
+    def "not.toBeEqualOrAfter - #firstValue >= #secondValue should throw JodaTimeEqualOrAfterPreconditionException - with label"() {
         when:
         expect(firstValue, 'Start Value').not().toBeEqualOrAfter(secondValue, 'End Value').check()
 
@@ -165,10 +163,10 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
         error.message == "Start Value [ ${firstValue} ] must not be equal to or after End Value [ ${secondValue} ]" as String
 
         where:
-        type            | firstValue                          | secondValue
-        'LocalDate'     | new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 1)
-        'LocalTime'     | new LocalTime(7, 45)                | new LocalTime(7, 45)
-        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 4)
+        firstValue                          | secondValue
+        new LocalDate(2015, 1, 1)           | new LocalDate(2015, 1, 1)
+        new LocalTime(7, 45)                | new LocalTime(7, 45)
+        new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 4)
     }
 
     @Unroll
