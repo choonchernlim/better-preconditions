@@ -27,7 +27,7 @@ class ObjectPreconditionsSpec extends Specification {
         actualValue == null
     }
 
-    def "toBeNull - new LocalDate(2015, 1, 1) should throw ObjectNotNullPreconditionException"() {
+    def "toBeNull - 2015-01-01 should throw ObjectNotNullPreconditionException"() {
         when:
         expect(new LocalDate(2015, 1, 1)).toBeNull().check()
 
@@ -36,7 +36,7 @@ class ObjectPreconditionsSpec extends Specification {
         error.message == 'Object [ 2015-01-01 ] must be null'
     }
 
-    def "toBeNull - new LocalDate(2015, 1, 1) should throw ObjectNotNullPreconditionException with label"() {
+    def "toBeNull - 2015-01-01 should throw ObjectNotNullPreconditionException with label"() {
         when:
         expect(new LocalDate(2015, 1, 1), 'Surgery date').toBeNull().check()
 
@@ -45,7 +45,7 @@ class ObjectPreconditionsSpec extends Specification {
         error.message == 'Surgery date [ 2015-01-01 ] must be null'
     }
 
-    def "not.toBeNull - new LocalDate(2015, 1, 1) should be ok"() {
+    def "not.toBeNull - 2015-01-01 should be ok"() {
         when:
         def actualValue = expect(new LocalDate(2015, 1, 1)).not().toBeNull().check()
 
