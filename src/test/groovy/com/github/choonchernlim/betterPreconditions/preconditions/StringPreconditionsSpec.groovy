@@ -11,7 +11,7 @@ import static StringPreconditions.expect
 
 class StringPreconditionsSpec extends Specification {
 
-    def "toBeNull - valid"() {
+    def "toBeNull - 'Hello' should be ok"() {
         when:
         def actualValue = expect('Hello').not().toBeNull().check()
 
@@ -19,7 +19,7 @@ class StringPreconditionsSpec extends Specification {
         actualValue == 'Hello'
     }
 
-    def "toBeNull - invalid"() {
+    def "toBeNull - 'Hello' should throw ObjectNotNullPreconditionException"() {
         when:
         expect('Hello').toBeNull().check()
 
@@ -29,7 +29,7 @@ class StringPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeBlank - valid - #value"() {
+    def "toBeBlank - '#value' should be ok"() {
         when:
         def actualValue = expect(value).toBeBlank().check()
 
@@ -40,7 +40,7 @@ class StringPreconditionsSpec extends Specification {
         value << [null, '', ' ']
     }
 
-    def "toBeBlank - invalid"() {
+    def "toBeBlank - 'Hello' should throw StringNotBlankPreconditionException"() {
         when:
         expect('Hello').toBeBlank().check()
 
@@ -49,7 +49,7 @@ class StringPreconditionsSpec extends Specification {
         error.message == 'String [ Hello ] must be blank'
     }
 
-    def "toBeBlank - invalid - with label"() {
+    def "toBeBlank - 'Hello' should throw StringNotBlankPreconditionException with label"() {
         when:
         expect('Hello', 'Greeting').toBeBlank().check()
 
@@ -58,7 +58,7 @@ class StringPreconditionsSpec extends Specification {
         error.message == 'Greeting [ Hello ] must be blank'
     }
 
-    def "not.toBeBlank - valid"() {
+    def "not.toBeBlank - 'Hello' should be ok"() {
         when:
         def actualValue = expect('Hello').not().toBeBlank().check()
 
@@ -67,7 +67,7 @@ class StringPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeBlank - invalid - #value"() {
+    def "not.toBeBlank - '#value' should throw StringBlankPreconditionException"() {
         when:
         expect(value).not().toBeBlank().check()
 
@@ -80,7 +80,7 @@ class StringPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeBlank - invalid - with label - #value"() {
+    def "not.toBeBlank - '#value' should throw StringBlankPreconditionException with label"() {
         when:
         expect(value, 'Greeting').not().toBeBlank().check()
 
@@ -92,7 +92,7 @@ class StringPreconditionsSpec extends Specification {
         value << [null, '', ' ']
     }
 
-    def "not.toBeNull should throw exception and short circuit the assertions"() {
+    def "not.toBeNull.not.toBeBlank - null should throw ObjectNullPreconditionException"() {
         when:
         expect(null).
                 not().toBeNull().

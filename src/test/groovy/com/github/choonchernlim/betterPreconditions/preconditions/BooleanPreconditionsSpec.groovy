@@ -10,7 +10,7 @@ import static BooleanPreconditions.expect
 
 class BooleanPreconditionsSpec extends Specification {
 
-    def "toBeNull - valid"() {
+    def "toBeNull - null should be ok"() {
         when:
         def actualValue = expect(null).toBeNull().check()
 
@@ -18,7 +18,7 @@ class BooleanPreconditionsSpec extends Specification {
         actualValue == null
     }
 
-    def "toBeNull - invalid"() {
+    def "toBeNull - false should throw ObjectNotNullPreconditionException"() {
         when:
         expect(false).toBeNull().check()
 
@@ -27,7 +27,7 @@ class BooleanPreconditionsSpec extends Specification {
         error.message == 'Boolean [ false ] must be null'
     }
 
-    def "toBeTrue - valid"() {
+    def "toBeTrue - true should be ok"() {
         when:
         def actualValue = expect(true).toBeTrue().check()
 
@@ -35,7 +35,7 @@ class BooleanPreconditionsSpec extends Specification {
         actualValue
     }
 
-    def "toBeTrue - invalid - false"() {
+    def "toBeTrue - false should throw BooleanFalsePreconditionException"() {
         when:
         expect(false).toBeTrue().check()
 
@@ -44,7 +44,7 @@ class BooleanPreconditionsSpec extends Specification {
         error.message == "Boolean [ false ] must be true" as String
     }
 
-    def "toBeTrue - invalid - null"() {
+    def "toBeTrue - null should throw ObjectNullPreconditionException"() {
         when:
         expect(null).toBeTrue().check()
 
@@ -53,7 +53,7 @@ class BooleanPreconditionsSpec extends Specification {
         error.message == "Boolean [ null ] must not be null" as String
     }
 
-    def "not.toBeTrue - valid"() {
+    def "not.toBeTrue - false should be ok"() {
         when:
         def actualValue = expect(false).not().toBeTrue().check()
 
@@ -61,7 +61,7 @@ class BooleanPreconditionsSpec extends Specification {
         !actualValue
     }
 
-    def "not.toBeTrue - invalid - null"() {
+    def "not.toBeTrue - null should throw ObjectNullPreconditionException"() {
         when:
         expect(null).not().toBeTrue().check()
 
@@ -70,7 +70,7 @@ class BooleanPreconditionsSpec extends Specification {
         error.message == "Boolean [ null ] must not be null" as String
     }
 
-    def "not.toBeTrue - invalid - true"() {
+    def "not.toBeTrue - true should throw BooleanTruePreconditionException"() {
         when:
         expect(true).not().toBeTrue().check()
 
@@ -79,7 +79,7 @@ class BooleanPreconditionsSpec extends Specification {
         error.message == 'Boolean [ true ] must not be true'
     }
 
-    def "not.toBeNull should throw exception and short circuit the assertions"() {
+    def "not.toBeNull.not.toBeTrue - null should throw ObjectNullPreconditionException"() {
         when:
         expect(null, 'Flag').
                 not().toBeNull().

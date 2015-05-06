@@ -10,7 +10,7 @@ import static CollectionPreconditions.expect
 
 class CollectionPreconditionsSpec extends Specification {
 
-    def "toBeNull - valid"() {
+    def "toBeNull - null should be ok"() {
         when:
         def actualValue = expect(null).toBeNull().check()
 
@@ -18,7 +18,7 @@ class CollectionPreconditionsSpec extends Specification {
         actualValue == null
     }
 
-    def "toBeNull - invalid"() {
+    def "toBeNull - [] should throw ObjectNotNullPreconditionException"() {
         when:
         expect([]).toBeNull().check()
 
@@ -27,7 +27,7 @@ class CollectionPreconditionsSpec extends Specification {
         error.message == 'Collection [ [] ] must be null'
     }
 
-    def "toBeEmpty - valid"() {
+    def "toBeEmpty - [] should be ok"() {
         when:
         def actualValue = expect([]).toBeEmpty().check()
 
@@ -35,7 +35,7 @@ class CollectionPreconditionsSpec extends Specification {
         actualValue == []
     }
 
-    def "toBeEmpty - invalid - null"() {
+    def "toBeEmpty - null should throw ObjectNotNullPreconditionException"() {
         when:
         expect(null).toBeEmpty().check()
 
@@ -44,7 +44,7 @@ class CollectionPreconditionsSpec extends Specification {
         error.message == "Collection [ null ] must not be null" as String
     }
 
-    def "toBeEmpty - invalid - non empty list"() {
+    def "toBeEmpty - [1, 2, 3] should throw CollectionNotEmptyPreconditionException"() {
         when:
         expect([1, 2, 3]).toBeEmpty().check()
 
@@ -53,7 +53,7 @@ class CollectionPreconditionsSpec extends Specification {
         error.message == "Collection [ size : 3 ] must be empty" as String
     }
 
-    def "not.toBeEmpty - valid"() {
+    def "not.toBeEmpty - [1, 2, 3,] should be ok"() {
         when:
         def actualValue = expect([1, 2, 3,]).not().toBeEmpty().check()
 
@@ -61,7 +61,7 @@ class CollectionPreconditionsSpec extends Specification {
         actualValue == [1, 2, 3]
     }
 
-    def "not.toBeEmpty - invalid"() {
+    def "not.toBeEmpty - [] should throw CollectionEmptyPreconditionException"() {
         when:
         expect([]).not().toBeEmpty().check()
 
@@ -70,7 +70,7 @@ class CollectionPreconditionsSpec extends Specification {
         error.message == 'Collection [ size : 0 ] must not be empty'
     }
 
-    def "not.toBeNull should throw exception and short circuit the assertions"() {
+    def "not.toBeNull.not.toBeEmpty - null should throw ObjectNullPreconditionException"() {
         when:
         expect(null, 'Cars').
                 not().toBeNull().
