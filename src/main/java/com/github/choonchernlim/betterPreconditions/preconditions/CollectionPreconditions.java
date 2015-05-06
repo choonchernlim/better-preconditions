@@ -44,17 +44,6 @@ public class CollectionPreconditions extends BetterPreconditions<CollectionPreco
 
     /**
      * Ensures collection is empty.
-     * <pre>
-     * {@code
-     * expect(null).toBeEmpty().check();                           // throws ObjectNullPreconditionException
-     * expect(Lists.newArrayList(1, 2)).toBeEmpty().check();       // throws CollectionNotEmptyPreconditionException
-     * expect(Lists.newArrayList()).toBeEmpty().check();           // ok
-     *
-     * expect(null).not().toBeEmpty().check();                     // throws ObjectNullPreconditionException
-     * expect(Lists.newArrayList()).not().toBeEmpty().check();     // throws CollectionEmptyPreconditionException
-     * expect(Lists.newArrayList(1, 2)).not().toBeEmpty().check(); // ok
-     * }
-     * </pre>
      *
      * @return Current instance
      */

@@ -49,18 +49,6 @@ public class JodaTimePreconditions extends BetterPreconditions<JodaTimePrecondit
 
     /**
      * Ensures given base local is equal to expected value.
-     * <pre>
-     * {@code
-     * TODO TBD!
-     * expect(null).toBeEmpty().check();                           // throws ObjectNullPreconditionException
-     * expect(Lists.newArrayList(1, 2)).toBeEmpty().check();       // throws BaseLocalNotEmptyPreconditionException
-     * expect(Lists.newArrayList()).toBeEmpty().check();           // ok
-     *
-     * expect(null).not().toBeEmpty().check();                     // throws ObjectNullPreconditionException
-     * expect(Lists.newArrayList()).not().toBeEmpty().check();     // throws BaseLocalEmptyPreconditionException
-     * expect(Lists.newArrayList(1, 2)).not().toBeEmpty().check(); // ok
-     * }
-     * </pre>
      *
      * @param expectedValue Second value
      * @param expectedLabel Second label

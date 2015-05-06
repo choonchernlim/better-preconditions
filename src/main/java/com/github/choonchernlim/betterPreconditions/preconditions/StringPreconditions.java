@@ -43,19 +43,6 @@ public class StringPreconditions extends BetterPreconditions<StringPreconditions
 
     /**
      * Ensures the string is blank.
-     * <pre>
-     * {@code
-     * expect(null).toBeBlank().check();          // ok
-     * expect("").toBeBlank().check();            // ok
-     * expect("   ").toBeBlank().check();         // ok
-     * expect("Hello").toBeBlank().check();       // throws StringNotBlankPreconditionException
-     *
-     * expect(null).not().toBeBlank().check();    // throws StringBlankPreconditionException
-     * expect("").not().toBeBlank().check();      // throws StringBlankPreconditionException
-     * expect("   ").not().toBeBlank().check();   // throws StringBlankPreconditionException
-     * expect("Hello").not().toBeBlank().check(); // ok
-     * }
-     * </pre>
      *
      * @return Current instance
      */

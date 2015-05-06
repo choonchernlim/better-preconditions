@@ -42,17 +42,6 @@ public class BooleanPreconditions extends BetterPreconditions<BooleanPreconditio
 
     /**
      * Ensures boolean is true.
-     * <pre>
-     * {@code
-     * expect(null).toBeTrue().check();        // throws ObjectNullPreconditionException
-     * expect(false).toBeTrue().check();       // throws BooleanFalsePreconditionException
-     * expect(true).toBeTrue().check();        // ok
-     *
-     * expect(null).not().toBeTrue().check();  // throws ObjectNullPreconditionException
-     * expect(true).not().toBeTrue().check();  // throws BooleanTruePreconditionException
-     * expect(false).not().toBeTrue().check(); // ok
-     * }
-     * </pre>
      *
      * @return Current instance
      */

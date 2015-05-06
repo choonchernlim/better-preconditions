@@ -69,15 +69,6 @@ public abstract class BetterPreconditions<C, V> {
 
     /**
      * Ensures the object is null.
-     * <pre>
-     * {@code
-     * expect(null).toBeNull().check();          // ok
-     * expect("Hello").toBeNull().check();       // throws ObjectNotNullPreconditionException
-     *
-     * expect(null).not().toBeNull().check();    // throws ObjectNullPreconditionException
-     * expect("Hello").not().toBeNull().check(); // ok
-     * }
-     * </pre>
      *
      * @return Current instance
      */
