@@ -9,6 +9,9 @@ import com.github.choonchernlim.betterPreconditions.exception.PreconditionExcept
 import org.joda.time.base.BaseLocal;
 
 public class JodaTimePreconditions extends BetterPreconditions<JodaTimePreconditions, BaseLocal> {
+
+    private static final String DEFAULT_EXPECTED_LABEL = "Expected Joda Time";
+
     /**
      * Private constructor.
      *
@@ -46,7 +49,7 @@ public class JodaTimePreconditions extends BetterPreconditions<JodaTimePrecondit
      * @see JodaTimePreconditions#toBeEqual(BaseLocal, String)
      */
     public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue) {
-        return toBeEqual(expectedValue, "Expected Joda Time");
+        return toBeEqual(expectedValue, DEFAULT_EXPECTED_LABEL);
     }
 
     /**
@@ -78,7 +81,16 @@ public class JodaTimePreconditions extends BetterPreconditions<JodaTimePrecondit
     }
 
     /**
-     * Ensures given base local is equal or after the expected value.
+     * Ensures given base local is equal to or after expected value.
+     *
+     * @see JodaTimePreconditions#toBeEqualOrAfter(BaseLocal, String)
+     */
+    public JodaTimePreconditions toBeEqualOrAfter(final BaseLocal expectedValue) {
+        return toBeEqualOrAfter(expectedValue, "Expected Joda Time");
+    }
+
+    /**
+     * Ensures given base local is equal to or after expected value.
      *
      * @param expectedValue Second value
      * @param expectedLabel Second label

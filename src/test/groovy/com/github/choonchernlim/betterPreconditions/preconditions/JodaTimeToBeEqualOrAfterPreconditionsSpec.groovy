@@ -1,7 +1,9 @@
 package com.github.choonchernlim.betterPreconditions.preconditions
 
-import com.choonchernlim.betterPreconditions.exception.*
-import com.github.choonchernlim.betterPreconditions.exception.*
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualOrAfterPreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrAfterPreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.joda.time.LocalTime
@@ -10,32 +12,15 @@ import spock.lang.Unroll
 
 import static JodaTimePreconditions.expect
 
-class JodaTimeLocalDatePreconditionsSpec extends Specification {
-
-    def "toBeNull - null should be ok"() {
-        when:
-        def actualValue = expect(null).toBeNull().check()
-
-        then:
-        actualValue == null
-    }
-
-    def "toBeNull - non-null should throw ObjectNotNullPreconditionException"() {
-        when:
-        expect(new LocalDate(2015, 1, 1)).toBeNull().check()
-
-        then:
-        def error = thrown(ObjectNotNullPreconditionException.class)
-        error.message == 'Joda Time [ 2015-01-01 ] must be null'
-    }
+class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
 
     @Unroll
-    def "toBeEqual - #type - #firstValue == #secondValue should be ok"() {
+    def "toBeEqualOrAfter - #type - #firstValue >= #secondValue should be ok"() {
         when:
-        def actualValue = expect(firstValue).toBeEqual(secondValue).check()
+        def actualValue = expect(firstValue).toBeEqualOrAfter(secondValue).check()
 
         then:
-        actualValue == secondValue
+        actualValue == firstValue
 
         where:
         type            | firstValue                          | secondValue
@@ -45,9 +30,24 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #type - null == #secondValue should throw ObjectNullPreconditionException"() {
+    def "toBeEqualOrAfter - #type - #firstValue > #secondValue should be ok"() {
         when:
-        expect(null).toBeEqual(secondValue).check()
+        def actualValue = expect(firstValue).toBeEqualOrAfter(secondValue).check()
+
+        then:
+        actualValue == firstValue
+
+        where:
+        type            | firstValue                          | secondValue
+        'LocalDate'     | new LocalDate(2015, 1, 2)           | new LocalDate(2015, 1, 1)
+        'LocalTime'     | new LocalTime(7, 46)                | new LocalTime(7, 45)
+        'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 5) | new LocalDateTime(2015, 1, 2, 3, 4)
+    }
+
+    @Unroll
+    def "toBeEqualOrAfter - #type - null >= #secondValue should throw ObjectNullPreconditionException"() {
+        when:
+        expect(null).toBeEqualOrAfter(secondValue).check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)
@@ -61,9 +61,9 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #type - #firstValue == null should throw ObjectNullPreconditionException"() {
+    def "toBeEqualOrAfter - #type - #firstValue >= null should throw ObjectNullPreconditionException"() {
         when:
-        expect(firstValue).toBeEqual(null).check()
+        expect(firstValue).toBeEqualOrAfter(null).check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)
@@ -77,9 +77,9 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #type - #firstValue == #secondValue - null expected label should throw StringBlankPreconditionException"() {
+    def "toBeEqualOrAfter - #type - #firstValue >= #secondValue - null expected label should throw StringBlankPreconditionException"() {
         when:
-        expect(firstValue).toBeEqual(secondValue, null).check()
+        expect(firstValue).toBeEqualOrAfter(secondValue, null).check()
 
         then:
         def error = thrown(StringBlankPreconditionException.class)
@@ -93,13 +93,13 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #type - #firstValue == #secondValue should throw JodaTimeNotEqualPreconditionException"() {
+    def "toBeEqualOrAfter - #type - #firstValue >= #secondValue should throw JodaTimeNotEqualOrAfterPreconditionException"() {
         when:
-        expect(firstValue).toBeEqual(secondValue).check()
+        expect(firstValue).toBeEqualOrAfter(secondValue).check()
 
         then:
-        def error = thrown(JodaTimeNotEqualPreconditionException.class)
-        error.message == "Joda Time [ ${firstValue} ] must be equal to Expected Joda Time [ ${secondValue} ]" as String
+        def error = thrown(JodaTimeNotEqualOrAfterPreconditionException.class)
+        error.message == "Joda Time [ ${firstValue} ] must be equal to or after Expected Joda Time [ ${secondValue} ]" as String
 
         where:
         type            | firstValue                          | secondValue
@@ -109,13 +109,13 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #type - #firstValue == #secondValue should throw JodaTimeNotEqualPreconditionException - with label"() {
+    def "toBeEqualOrAfter - #type - #firstValue >= #secondValue should throw JodaTimeNotEqualOrAfterPreconditionException - with label"() {
         when:
-        expect(firstValue, 'Start Value').toBeEqual(secondValue, 'End Value').check()
+        expect(firstValue, 'Start Value').toBeEqualOrAfter(secondValue, 'End Value').check()
 
         then:
-        def error = thrown(JodaTimeNotEqualPreconditionException.class)
-        error.message == "Start Value [ ${firstValue} ] must be equal to End Value [ ${secondValue} ]" as String
+        def error = thrown(JodaTimeNotEqualOrAfterPreconditionException.class)
+        error.message == "Start Value [ ${firstValue} ] must be equal to or after End Value [ ${secondValue} ]" as String
 
         where:
         type            | firstValue                          | secondValue
@@ -125,9 +125,9 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - #type - #firstValue != #secondValue should be ok"() {
+    def "not.toBeEqualOrAfter - #type - #firstValue < #secondValue should be ok"() {
         when:
-        def actualValue = expect(firstValue).not().toBeEqual(secondValue).check()
+        def actualValue = expect(firstValue).not().toBeEqualOrAfter(secondValue).check()
 
         then:
         actualValue == firstValue
@@ -140,13 +140,13 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - #type - #firstValue != #secondValue should throw JodaTimeEqualPreconditionException"() {
+    def "not.toBeEqualOrAfter - #type - #firstValue >= #secondValue should throw JodaTimeEqualOrAfterPreconditionException"() {
         when:
-        expect(firstValue).not().toBeEqual(secondValue).check()
+        expect(firstValue).not().toBeEqualOrAfter(secondValue).check()
 
         then:
-        def error = thrown(JodaTimeEqualPreconditionException.class)
-        error.message == "Joda Time [ ${firstValue} ] must not be equal to Expected Joda Time [ ${secondValue} ]" as String
+        def error = thrown(JodaTimeEqualOrAfterPreconditionException.class)
+        error.message == "Joda Time [ ${firstValue} ] must not be equal to or after Expected Joda Time [ ${secondValue} ]" as String
 
         where:
         type            | firstValue                          | secondValue
@@ -156,13 +156,13 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - #type - #firstValue != #secondValue should throw JodaTimeEqualPreconditionException - with label"() {
+    def "not.toBeEqualOrAfter - #type - #firstValue >= #secondValue should throw JodaTimeEqualOrAfterPreconditionException - with label"() {
         when:
-        expect(firstValue, 'Start Value').not().toBeEqual(secondValue, 'End Value').check()
+        expect(firstValue, 'Start Value').not().toBeEqualOrAfter(secondValue, 'End Value').check()
 
         then:
-        def error = thrown(JodaTimeEqualPreconditionException.class)
-        error.message == "Start Value [ ${firstValue} ] must not be equal to End Value [ ${secondValue} ]" as String
+        def error = thrown(JodaTimeEqualOrAfterPreconditionException.class)
+        error.message == "Start Value [ ${firstValue} ] must not be equal to or after End Value [ ${secondValue} ]" as String
 
         where:
         type            | firstValue                          | secondValue
@@ -172,9 +172,9 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - comparing two different types - #firstValue == #secondValue should throw ClassCastException"() {
+    def "toBeEqualOrAfter - comparing two different types - #firstValue >= #secondValue should throw ClassCastException"() {
         when:
-        expect(firstValue).toBeEqual(secondValue).check()
+        expect(firstValue).toBeEqualOrAfter(secondValue).check()
 
         then:
         thrown(ClassCastException.class)
