@@ -171,4 +171,18 @@ class JodaTimeLocalDatePreconditionsSpec extends Specification {
         'LocalDateTime' | new LocalDateTime(2015, 1, 2, 3, 4) | new LocalDateTime(2015, 1, 2, 3, 4)
     }
 
+    @Unroll
+    def "toBeEqual - comparing two different types - #firstValue == #secondValue should throw ClassCastException"() {
+        when:
+        expect(firstValue).toBeEqual(secondValue).check()
+
+        then:
+        thrown(ClassCastException.class)
+
+        where:
+        firstValue                          | secondValue
+        new LocalDate(2015, 1, 1)           | new LocalDateTime(2015, 1, 2, 3, 4)
+        new LocalTime(7, 45)                | new LocalDate(2015, 1, 1)
+        new LocalDateTime(2015, 1, 2, 3, 4) | new LocalTime(7, 45)
+    }
 }
