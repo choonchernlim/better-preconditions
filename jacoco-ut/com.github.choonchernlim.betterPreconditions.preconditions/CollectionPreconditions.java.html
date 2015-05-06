@@ -44,35 +44,24 @@ public class CollectionPreconditions extends BetterPreconditions&lt;CollectionPr
 
     /**
      * Ensures collection is empty.
-     * &lt;pre&gt;
-     * {@code
-     * expect(null).toBeEmpty().check();                           // throws ObjectNullPreconditionException
-     * expect(Lists.newArrayList(1, 2)).toBeEmpty().check();       // throws CollectionNotEmptyPreconditionException
-     * expect(Lists.newArrayList()).toBeEmpty().check();           // ok
-     *
-     * expect(null).not().toBeEmpty().check();                     // throws ObjectNullPreconditionException
-     * expect(Lists.newArrayList()).not().toBeEmpty().check();     // throws CollectionEmptyPreconditionException
-     * expect(Lists.newArrayList(1, 2)).not().toBeEmpty().check(); // ok
-     * }
-     * &lt;/pre&gt;
      *
      * @return Current instance
      */
     public CollectionPreconditions toBeEmpty() {
-<span class="fc" id="L62">        return customMatcher(new Matcher&lt;Collection&gt;() {</span>
+<span class="fc" id="L51">        return customMatcher(new Matcher&lt;Collection&gt;() {</span>
             @Override
             public boolean match(final Collection value, final String label) {
-<span class="fc" id="L65">                return expect(value, label).not().toBeNull().check().isEmpty();</span>
+<span class="fc" id="L54">                return expect(value, label).not().toBeNull().check().isEmpty();</span>
             }
 
             @Override
             public PreconditionException getException(final Collection value, final String label) {
-<span class="fc" id="L70">                return new CollectionNotEmptyPreconditionException(value, label);</span>
+<span class="fc" id="L59">                return new CollectionNotEmptyPreconditionException(value, label);</span>
             }
 
             @Override
             public PreconditionException getNegatedException(Collection value, String label) {
-<span class="fc" id="L75">                return new CollectionEmptyPreconditionException(value, label);</span>
+<span class="fc" id="L64">                return new CollectionEmptyPreconditionException(value, label);</span>
             }
         });
     }

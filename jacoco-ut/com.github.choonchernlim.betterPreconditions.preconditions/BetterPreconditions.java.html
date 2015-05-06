@@ -69,38 +69,29 @@ public abstract class BetterPreconditions&lt;C, V&gt; {
 
     /**
      * Ensures the object is null.
-     * &lt;pre&gt;
-     * {@code
-     * expect(null).toBeNull().check();          // ok
-     * expect(&quot;Hello&quot;).toBeNull().check();       // throws ObjectNotNullPreconditionException
-     *
-     * expect(null).not().toBeNull().check();    // throws ObjectNullPreconditionException
-     * expect(&quot;Hello&quot;).not().toBeNull().check(); // ok
-     * }
-     * &lt;/pre&gt;
      *
      * @return Current instance
      */
     @SuppressWarnings(&quot;unchecked&quot;)
     public final C toBeNull() {
-<span class="fc" id="L86">        customMatcher(new Matcher&lt;V&gt;() {</span>
+<span class="fc" id="L77">        customMatcher(new Matcher&lt;V&gt;() {</span>
             @Override
             public boolean match(final V value, final String label) {
-<span class="fc bfc" id="L89" title="All 2 branches covered.">                return value == null;</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">                return value == null;</span>
             }
 
             @Override
             public PreconditionException getException(final V value, final String label) {
-<span class="fc" id="L94">                return new ObjectNotNullPreconditionException(value, label);</span>
+<span class="fc" id="L85">                return new ObjectNotNullPreconditionException(value, label);</span>
             }
 
             @Override
             public PreconditionException getNegatedException(final V value, final String label) {
-<span class="fc" id="L99">                return new ObjectNullPreconditionException(value, label);</span>
+<span class="fc" id="L90">                return new ObjectNullPreconditionException(value, label);</span>
             }
         });
 
-<span class="fc" id="L103">        return (C) this;</span>
+<span class="fc" id="L94">        return (C) this;</span>
     }
 
     /**
@@ -111,23 +102,23 @@ public abstract class BetterPreconditions&lt;C, V&gt; {
      */
     @SuppressWarnings(&quot;unchecked&quot;)
     protected final C customMatcher(final Matcher&lt;V&gt; matcher) {
-<span class="fc" id="L114">        assertions.add(new Assertion&lt;V&gt;(matcher, isNegated, value, label));</span>
+<span class="fc" id="L105">        assertions.add(new Assertion&lt;V&gt;(matcher, isNegated, value, label));</span>
 
         // after creating a new assertion, reset the negation
-<span class="fc" id="L117">        this.isNegated = false;</span>
+<span class="fc" id="L108">        this.isNegated = false;</span>
 
-<span class="fc" id="L119">        return (C) this;</span>
+<span class="fc" id="L110">        return (C) this;</span>
     }
 
     /**
      * Returns value if all assertions pass.
      */
     protected final V check() {
-<span class="fc bfc" id="L126" title="All 2 branches covered.">        for (Assertion assertion : assertions) {</span>
-<span class="fc" id="L127">            assertion.run();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        for (Assertion assertion : assertions) {</span>
+<span class="fc" id="L118">            assertion.run();</span>
         }
 
-<span class="fc" id="L130">        return value;</span>
+<span class="fc" id="L121">        return value;</span>
     }
 
     /**
@@ -138,8 +129,8 @@ public abstract class BetterPreconditions&lt;C, V&gt; {
      * @param defaultLabel Default label
      */
     protected final void expectValueLabelToExist(final Object value, final String label, final String defaultLabel) {
-<span class="fc" id="L141">        expect(label, defaultLabel).not().toBeBlank().check();</span>
-<span class="fc" id="L142">        ObjectPreconditions.expect(value, label).not().toBeNull().check();</span>
-<span class="fc" id="L143">    }</span>
+<span class="fc" id="L132">        expect(label, defaultLabel).not().toBeBlank().check();</span>
+<span class="fc" id="L133">        ObjectPreconditions.expect(value, label).not().toBeNull().check();</span>
+<span class="fc" id="L134">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

@@ -43,37 +43,24 @@ public class StringPreconditions extends BetterPreconditions&lt;StringPreconditi
 
     /**
      * Ensures the string is blank.
-     * &lt;pre&gt;
-     * {@code
-     * expect(null).toBeBlank().check();          // ok
-     * expect(&quot;&quot;).toBeBlank().check();            // ok
-     * expect(&quot;   &quot;).toBeBlank().check();         // ok
-     * expect(&quot;Hello&quot;).toBeBlank().check();       // throws StringNotBlankPreconditionException
-     *
-     * expect(null).not().toBeBlank().check();    // throws StringBlankPreconditionException
-     * expect(&quot;&quot;).not().toBeBlank().check();      // throws StringBlankPreconditionException
-     * expect(&quot;   &quot;).not().toBeBlank().check();   // throws StringBlankPreconditionException
-     * expect(&quot;Hello&quot;).not().toBeBlank().check(); // ok
-     * }
-     * &lt;/pre&gt;
      *
      * @return Current instance
      */
     public StringPreconditions toBeBlank() {
-<span class="fc" id="L63">        return customMatcher(new Matcher&lt;String&gt;() {</span>
+<span class="fc" id="L50">        return customMatcher(new Matcher&lt;String&gt;() {</span>
             @Override
             public boolean match(final String value, final String label) {
-<span class="fc" id="L66">                return nullToEmpty(value).trim().isEmpty();</span>
+<span class="fc" id="L53">                return nullToEmpty(value).trim().isEmpty();</span>
             }
 
             @Override
             public PreconditionException getException(final String value, final String label) {
-<span class="fc" id="L71">                return new StringNotBlankPreconditionException(value, label);</span>
+<span class="fc" id="L58">                return new StringNotBlankPreconditionException(value, label);</span>
             }
 
             @Override
             public PreconditionException getNegatedException(final String value, final String label) {
-<span class="fc" id="L76">                return new StringBlankPreconditionException(value, label);</span>
+<span class="fc" id="L63">                return new StringBlankPreconditionException(value, label);</span>
             }
         });
     }

@@ -42,35 +42,24 @@ public class BooleanPreconditions extends BetterPreconditions&lt;BooleanPrecondi
 
     /**
      * Ensures boolean is true.
-     * &lt;pre&gt;
-     * {@code
-     * expect(null).toBeTrue().check();        // throws ObjectNullPreconditionException
-     * expect(false).toBeTrue().check();       // throws BooleanFalsePreconditionException
-     * expect(true).toBeTrue().check();        // ok
-     *
-     * expect(null).not().toBeTrue().check();  // throws ObjectNullPreconditionException
-     * expect(true).not().toBeTrue().check();  // throws BooleanTruePreconditionException
-     * expect(false).not().toBeTrue().check(); // ok
-     * }
-     * &lt;/pre&gt;
      *
      * @return Current instance
      */
     public BooleanPreconditions toBeTrue() {
-<span class="fc" id="L60">        return customMatcher(new Matcher&lt;Boolean&gt;() {</span>
+<span class="fc" id="L49">        return customMatcher(new Matcher&lt;Boolean&gt;() {</span>
             @Override
             public boolean match(final Boolean value, final String label) {
-<span class="fc" id="L63">                return expect(value, label).not().toBeNull().check();</span>
+<span class="fc" id="L52">                return expect(value, label).not().toBeNull().check();</span>
             }
 
             @Override
             public PreconditionException getException(final Boolean value, final String label) {
-<span class="fc" id="L68">                return new BooleanFalsePreconditionException(value, label);</span>
+<span class="fc" id="L57">                return new BooleanFalsePreconditionException(value, label);</span>
             }
 
             @Override
             public PreconditionException getNegatedException(final Boolean value, final String label) {
-<span class="fc" id="L73">                return new BooleanTruePreconditionException(value, label);</span>
+<span class="fc" id="L62">                return new BooleanTruePreconditionException(value, label);</span>
             }
         });
     }
