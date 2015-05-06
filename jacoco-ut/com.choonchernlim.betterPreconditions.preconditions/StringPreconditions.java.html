@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StringPreconditions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Better Preconditions</a> &gt; <a href="index.source.html" class="el_package">com.choonchernlim.betterPreconditions.preconditions</a> &gt; <span class="el_source">StringPreconditions.java</span></div><h1>StringPreconditions.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package com.choonchernlim.betterPreconditions.preconditions;</span>
+
+import com.choonchernlim.betterPreconditions.core.Matcher;
+import com.choonchernlim.betterPreconditions.exception.PreconditionException;
+import com.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException;
+import com.choonchernlim.betterPreconditions.exception.StringNotBlankPreconditionException;
+import static com.google.common.base.Strings.nullToEmpty;
+
+/**
+ * String related preconditions.
+ */
+public class StringPreconditions extends BetterPreconditions&lt;StringPreconditions, String&gt; {
+    /**
+     * Private constructor.
+     *
+     * @param value Value
+     * @param label Label
+     */
+    private StringPreconditions(final String value, final String label) {
+<span class="fc" id="L20">        super(value, label);</span>
+<span class="fc" id="L21">    }</span>
+
+    /**
+     * Returns new instance with default label.
+     *
+     * @param value Value
+     * @return New instance
+     */
+    public static StringPreconditions expect(final String value) {
+<span class="fc" id="L30">        return expect(value, &quot;String&quot;);</span>
+    }
+
+    /**
+     * Returns new instance.
+     *
+     * @param value Value
+     * @param label Label
+     * @return New instance
+     */
+    public static StringPreconditions expect(final String value, final String label) {
+<span class="fc" id="L41">        return new StringPreconditions(value, label);</span>
+    }
+
+    /**
+     * Ensures the string is blank.
+     * &lt;pre&gt;
+     * {@code
+     * expect(null).toBeBlank().check();          // ok
+     * expect(&quot;&quot;).toBeBlank().check();            // ok
+     * expect(&quot;   &quot;).toBeBlank().check();         // ok
+     * expect(&quot;Hello&quot;).toBeBlank().check();       // throws StringNotBlankPreconditionException
+     *
+     * expect(null).not().toBeBlank().check();    // throws StringBlankPreconditionException
+     * expect(&quot;&quot;).not().toBeBlank().check();      // throws StringBlankPreconditionException
+     * expect(&quot;   &quot;).not().toBeBlank().check();   // throws StringBlankPreconditionException
+     * expect(&quot;Hello&quot;).not().toBeBlank().check(); // ok
+     * }
+     * &lt;/pre&gt;
+     *
+     * @return Current instance
+     */
+    public StringPreconditions toBeBlank() {
+<span class="fc" id="L63">        return customMatcher(new Matcher&lt;String&gt;() {</span>
+            @Override
+            public boolean match(final String value, final String label) {
+<span class="fc" id="L66">                return nullToEmpty(value).trim().isEmpty();</span>
+            }
+
+            @Override
+            public PreconditionException getException(final String value, final String label) {
+<span class="fc" id="L71">                return new StringNotBlankPreconditionException(value, label);</span>
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final String value, final String label) {
+<span class="fc" id="L76">                return new StringBlankPreconditionException(value, label);</span>
+            }
+        });
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JodaTimePreconditions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Better Preconditions</a> &gt; <a href="index.source.html" class="el_package">com.choonchernlim.betterPreconditions.preconditions</a> &gt; <span class="el_source">JodaTimePreconditions.java</span></div><h1>JodaTimePreconditions.java</h1><pre class="source lang-java linenums"><span class="nc" id="L1">package com.choonchernlim.betterPreconditions.preconditions;</span>
+
+import com.choonchernlim.betterPreconditions.core.Matcher;
+import com.choonchernlim.betterPreconditions.exception.JodaTimeEqualPreconditionException;
+import com.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualPreconditionException;
+import com.choonchernlim.betterPreconditions.exception.PreconditionException;
+import org.joda.time.base.BaseLocal;
+
+public class JodaTimePreconditions extends BetterPreconditions&lt;JodaTimePreconditions, BaseLocal&gt; {
+    /**
+     * Private constructor.
+     *
+     * @param value Value
+     * @param label Label
+     */
+    private JodaTimePreconditions(final BaseLocal value, final String label) {
+<span class="nc" id="L17">        super(value, label);</span>
+<span class="nc" id="L18">    }</span>
+
+    /**
+     * Returns new instance with default label.
+     *
+     * @param value Value
+     * @return New instance
+     */
+    public static JodaTimePreconditions expect(final BaseLocal value) {
+<span class="nc" id="L27">        return expect(value, &quot;Joda Time&quot;);</span>
+    }
+
+    /**
+     * Returns new instance.
+     *
+     * @param value Value
+     * @param label Label
+     * @return New instance
+     */
+    public static JodaTimePreconditions expect(final BaseLocal value, final String label) {
+<span class="nc" id="L38">        return new JodaTimePreconditions(value, label);</span>
+    }
+
+    /**
+     * Ensures given base local is equal to expected value.
+     *
+     * @see JodaTimePreconditions#toBeEqual(BaseLocal, String)
+     */
+    public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue) {
+<span class="nc" id="L47">        return toBeEqual(expectedValue, &quot;Expected Joda Time&quot;);</span>
+    }
+
+    /**
+     * Ensures given base local is equal to expected value.
+     * &lt;pre&gt;
+     * {@code
+     * TODO TBD!
+     * expect(null).toBeEmpty().check();                           // throws ObjectNullPreconditionException
+     * expect(Lists.newArrayList(1, 2)).toBeEmpty().check();       // throws BaseLocalNotEmptyPreconditionException
+     * expect(Lists.newArrayList()).toBeEmpty().check();           // ok
+     *
+     * expect(null).not().toBeEmpty().check();                     // throws ObjectNullPreconditionException
+     * expect(Lists.newArrayList()).not().toBeEmpty().check();     // throws BaseLocalEmptyPreconditionException
+     * expect(Lists.newArrayList(1, 2)).not().toBeEmpty().check(); // ok
+     * }
+     * &lt;/pre&gt;
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue, final String expectedLabel) {
+<span class="nc" id="L70">        expectValueLabelToExist(expectedValue, expectedLabel, &quot;Expected Joda Time Label&quot;);</span>
+
+<span class="nc" id="L72">        return customMatcher(new Matcher&lt;BaseLocal&gt;() {</span>
+            @Override
+            public boolean match(final BaseLocal givenValue, final String givenLabel) {
+<span class="nc" id="L75">                return expect(givenValue, givenLabel).not().toBeNull().check().isEqual(expectedValue);</span>
+            }
+
+            @Override
+            public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
+<span class="nc" id="L80">                return new JodaTimeNotEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);</span>
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
+<span class="nc" id="L85">                return new JodaTimeEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);</span>
+            }
+        });
+    }
+
+
+//    public static void mustBeEqual(final LocalDate startDate,
+//                                   final LocalDate endDate,
+//                                   final String startDateVariableName,
+//                                   final String endDateVariableName) {
+//        // TODO
+//    }
+//
+//    public static void mustBeEqualOrAfter(final LocalDate startDate,
+//                                          final LocalDate endDate,
+//                                          final String startDateVariableName,
+//                                          final String endDateVariableName) {
+//        // TODO
+//    }
+//
+//    public static void mustBeAfter(final LocalDate startDate,
+//                                   final LocalDate endDate,
+//                                   final String startDateVariableName,
+//                                   final String endDateVariableName) {
+//        // TODO
+//    }
+//
+//    public static void mustBeEqualOrBefore(final LocalDate startDate,
+//                                           final LocalDate endDate,
+//                                           final String startDateVariableName,
+//                                           final String endDateVariableName) {
+//        // TODO
+//    }
+//
+//    public static void mustBeBefore(final LocalDate startDate,
+//                                    final LocalDate endDate,
+//                                    final String startDateVariableName,
+//                                    final String endDateVariableName) {
+//        // TODO
+//    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>
