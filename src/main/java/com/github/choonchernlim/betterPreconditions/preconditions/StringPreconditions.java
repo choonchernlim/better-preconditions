@@ -1,7 +1,8 @@
 package com.github.choonchernlim.betterPreconditions.preconditions;
 
 import com.github.choonchernlim.betterPreconditions.core.Matcher;
-import com.github.choonchernlim.betterPreconditions.exception.PreconditionException;
+import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
+import com.github.choonchernlim.betterPreconditions.core.Preconditions;
 import com.github.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.StringNotBlankPreconditionException;
 import static com.google.common.base.Strings.nullToEmpty;
@@ -9,36 +10,15 @@ import static com.google.common.base.Strings.nullToEmpty;
 /**
  * String related preconditions.
  */
-public class StringPreconditions extends BetterPreconditions<StringPreconditions, String> {
+public class StringPreconditions extends Preconditions<StringPreconditions, String> {
     /**
-     * Private constructor.
+     * Package constructor.
      *
      * @param value Value
      * @param label Label
      */
-    private StringPreconditions(final String value, final String label) {
+    StringPreconditions(final String value, final String label) {
         super(value, label);
-    }
-
-    /**
-     * Returns new instance with default label.
-     *
-     * @param value Value
-     * @return New instance
-     */
-    public static StringPreconditions expect(final String value) {
-        return expect(value, "String");
-    }
-
-    /**
-     * Returns new instance.
-     *
-     * @param value Value
-     * @param label Label
-     * @return New instance
-     */
-    public static StringPreconditions expect(final String value, final String label) {
-        return new StringPreconditions(value, label);
     }
 
     /**

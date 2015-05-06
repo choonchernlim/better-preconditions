@@ -6,7 +6,7 @@ import com.github.choonchernlim.betterPreconditions.exception.StringBlankPrecond
 import org.joda.time.LocalDate
 import spock.lang.Specification
 
-import static ObjectPreconditions.expect
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
 class ObjectPreconditionsSpec extends Specification {
 
@@ -21,7 +21,7 @@ class ObjectPreconditionsSpec extends Specification {
 
     def "toBeNull - null should be ok"() {
         when:
-        def actualValue = expect(null).toBeNull().check()
+        def actualValue = expect(null as Object).toBeNull().check()
 
         then:
         actualValue == null
@@ -33,7 +33,7 @@ class ObjectPreconditionsSpec extends Specification {
 
         then:
         def error = thrown(ObjectNotNullPreconditionException.class)
-        error.message == 'Object [ 2015-01-01 ] must be null'
+        error.message == 'Joda Time [ 2015-01-01 ] must be null'
     }
 
     def "toBeNull - 2015-01-01 should throw ObjectNotNullPreconditionException with label"() {
@@ -55,7 +55,7 @@ class ObjectPreconditionsSpec extends Specification {
 
     def "not.toBeNull - null should throw ObjectNullPreconditionException"() {
         when:
-        expect(null).not().toBeNull().check()
+        expect(null as Object).not().toBeNull().check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)
@@ -64,7 +64,7 @@ class ObjectPreconditionsSpec extends Specification {
 
     def "not.toBeNull - null should throw ObjectNullPreconditionException with label"() {
         when:
-        expect(null, 'Surgery date').not().toBeNull().check()
+        expect(null as Object, 'Surgery date').not().toBeNull().check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)

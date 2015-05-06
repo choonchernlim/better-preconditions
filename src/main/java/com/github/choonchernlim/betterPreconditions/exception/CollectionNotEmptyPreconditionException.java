@@ -1,5 +1,7 @@
 package com.github.choonchernlim.betterPreconditions.exception;
 
+import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
+
 import java.util.Collection;
 
 /**

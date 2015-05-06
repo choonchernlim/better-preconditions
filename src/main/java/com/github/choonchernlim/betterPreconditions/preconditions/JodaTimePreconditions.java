@@ -1,46 +1,27 @@
 package com.github.choonchernlim.betterPreconditions.preconditions;
 
 import com.github.choonchernlim.betterPreconditions.core.Matcher;
+import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
+import com.github.choonchernlim.betterPreconditions.core.Preconditions;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualOrAfterPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrAfterPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualPreconditionException;
-import com.github.choonchernlim.betterPreconditions.exception.PreconditionException;
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect;
 import org.joda.time.base.BaseLocal;
 
-public class JodaTimePreconditions extends BetterPreconditions<JodaTimePreconditions, BaseLocal> {
+public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, BaseLocal> {
 
     private static final String DEFAULT_EXPECTED_LABEL = "Expected Joda Time";
 
     /**
-     * Private constructor.
+     * Package constructor.
      *
      * @param value Value
      * @param label Label
      */
-    private JodaTimePreconditions(final BaseLocal value, final String label) {
+    JodaTimePreconditions(final BaseLocal value, final String label) {
         super(value, label);
-    }
-
-    /**
-     * Returns new instance with default label.
-     *
-     * @param value Value
-     * @return New instance
-     */
-    public static JodaTimePreconditions expect(final BaseLocal value) {
-        return expect(value, "Joda Time");
-    }
-
-    /**
-     * Returns new instance.
-     *
-     * @param value Value
-     * @param label Label
-     * @return New instance
-     */
-    public static JodaTimePreconditions expect(final BaseLocal value, final String label) {
-        return new JodaTimePreconditions(value, label);
     }
 
     /**

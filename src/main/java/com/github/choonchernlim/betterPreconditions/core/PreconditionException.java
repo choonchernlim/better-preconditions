@@ -1,4 +1,4 @@
-package com.github.choonchernlim.betterPreconditions.exception;
+package com.github.choonchernlim.betterPreconditions.core;
 
 /**
  * Abstract class for all precondition exceptions.
@@ -10,7 +10,7 @@ public class PreconditionException extends RuntimeException {
      *
      * @param error Error message
      */
-    public PreconditionException(String error) {
+    public PreconditionException(final String error) {
         super(error);
     }
 }

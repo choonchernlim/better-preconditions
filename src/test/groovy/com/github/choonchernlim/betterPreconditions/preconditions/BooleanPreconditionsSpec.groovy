@@ -6,13 +6,13 @@ import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreco
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
 import spock.lang.Specification
 
-import static BooleanPreconditions.expect
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
 class BooleanPreconditionsSpec extends Specification {
 
     def "toBeNull - null should be ok"() {
         when:
-        def actualValue = expect(null).toBeNull().check()
+        def actualValue = expect(null as Boolean).toBeNull().check()
 
         then:
         actualValue == null
@@ -46,7 +46,7 @@ class BooleanPreconditionsSpec extends Specification {
 
     def "toBeTrue - null should throw ObjectNullPreconditionException"() {
         when:
-        expect(null).toBeTrue().check()
+        expect(null as Boolean).toBeTrue().check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)
@@ -63,7 +63,7 @@ class BooleanPreconditionsSpec extends Specification {
 
     def "not.toBeTrue - null should throw ObjectNullPreconditionException"() {
         when:
-        expect(null).not().toBeTrue().check()
+        expect(null as Boolean).not().toBeTrue().check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)
@@ -81,7 +81,7 @@ class BooleanPreconditionsSpec extends Specification {
 
     def "not.toBeNull.not.toBeTrue - null should throw ObjectNullPreconditionException"() {
         when:
-        expect(null, 'Flag').
+        expect(null as Boolean, 'Flag').
                 not().toBeNull().
                 not().toBeTrue().
                 check()

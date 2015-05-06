@@ -7,10 +7,11 @@ import com.github.choonchernlim.betterPreconditions.exception.StringBlankPrecond
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.joda.time.LocalTime
+import org.joda.time.base.BaseLocal
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static JodaTimePreconditions.expect
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
 class JodaTimeToBeEqualPreconditionsSpec extends Specification {
 
@@ -32,7 +33,7 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
     @Unroll
     def "toBeEqual - null == #secondValue should throw ObjectNullPreconditionException"() {
         when:
-        expect(null).toBeEqual(secondValue).check()
+        expect(null as BaseLocal).toBeEqual(secondValue).check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)

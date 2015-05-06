@@ -7,10 +7,11 @@ import com.github.choonchernlim.betterPreconditions.exception.StringBlankPrecond
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.joda.time.LocalTime
+import org.joda.time.base.BaseLocal
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static JodaTimePreconditions.expect
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
 class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
 
@@ -47,7 +48,7 @@ class JodaTimeToBeEqualOrAfterPreconditionsSpec extends Specification {
     @Unroll
     def "toBeEqualOrAfter - null >= #secondValue should throw ObjectNullPreconditionException"() {
         when:
-        expect(null).toBeEqualOrAfter(secondValue).check()
+        expect(null as BaseLocal).toBeEqualOrAfter(secondValue).check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)

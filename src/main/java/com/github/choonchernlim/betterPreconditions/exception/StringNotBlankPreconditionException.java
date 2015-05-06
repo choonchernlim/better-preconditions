@@ -1,5 +1,7 @@
 package com.github.choonchernlim.betterPreconditions.exception;
 
+import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
+
 /**
  * This exception is thrown if the value is blank.
  */

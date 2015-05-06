@@ -6,13 +6,13 @@ import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreco
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
 import spock.lang.Specification
 
-import static CollectionPreconditions.expect
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
 class CollectionPreconditionsSpec extends Specification {
 
     def "toBeNull - null should be ok"() {
         when:
-        def actualValue = expect(null).toBeNull().check()
+        def actualValue = expect(null as Collection).toBeNull().check()
 
         then:
         actualValue == null
@@ -37,7 +37,7 @@ class CollectionPreconditionsSpec extends Specification {
 
     def "toBeEmpty - null should throw ObjectNotNullPreconditionException"() {
         when:
-        expect(null).toBeEmpty().check()
+        expect(null as Collection).toBeEmpty().check()
 
         then:
         def error = thrown(ObjectNullPreconditionException.class)
@@ -72,7 +72,7 @@ class CollectionPreconditionsSpec extends Specification {
 
     def "not.toBeNull.not.toBeEmpty - null should throw ObjectNullPreconditionException"() {
         when:
-        expect(null, 'Cars').
+        expect(null as Collection, 'Cars').
                 not().toBeNull().
                 not().toBeEmpty().
                 check()

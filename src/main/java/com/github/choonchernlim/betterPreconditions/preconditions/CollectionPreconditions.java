@@ -1,45 +1,26 @@
 package com.github.choonchernlim.betterPreconditions.preconditions;
 
 import com.github.choonchernlim.betterPreconditions.core.Matcher;
+import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
+import com.github.choonchernlim.betterPreconditions.core.Preconditions;
 import com.github.choonchernlim.betterPreconditions.exception.CollectionEmptyPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.CollectionNotEmptyPreconditionException;
-import com.github.choonchernlim.betterPreconditions.exception.PreconditionException;
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect;
 
 import java.util.Collection;
 
 /**
  * Collection related preconditions.
  */
-public class CollectionPreconditions extends BetterPreconditions<CollectionPreconditions, Collection> {
+public class CollectionPreconditions extends Preconditions<CollectionPreconditions, Collection> {
     /**
-     * Private constructor.
+     * Package constructor.
      *
      * @param value Value
      * @param label Label
      */
-    private CollectionPreconditions(final Collection value, final String label) {
+    CollectionPreconditions(final Collection value, final String label) {
         super(value, label);
-    }
-
-    /**
-     * Returns new instance with default label.
-     *
-     * @param value Value
-     * @return New instance
-     */
-    public static CollectionPreconditions expect(final Collection value) {
-        return expect(value, "Collection");
-    }
-
-    /**
-     * Returns new instance.
-     *
-     * @param value Value
-     * @param label Label
-     * @return New instance
-     */
-    public static CollectionPreconditions expect(final Collection value, final String label) {
-        return new CollectionPreconditions(value, label);
     }
 
     /**

@@ -7,7 +7,7 @@ import com.github.choonchernlim.betterPreconditions.exception.StringNotBlankPrec
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static StringPreconditions.expect
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
 class StringPreconditionsSpec extends Specification {
 
@@ -37,7 +37,15 @@ class StringPreconditionsSpec extends Specification {
         actualValue == value
 
         where:
-        value << [null, '', ' ']
+        value << ['', ' ']
+    }
+
+    def "toBeBlank - null should be ok"() {
+        when:
+        def actualValue = expect(null as String).toBeBlank().check()
+
+        then:
+        actualValue == null
     }
 
     def "toBeBlank - 'Hello' should throw StringNotBlankPreconditionException"() {
@@ -76,7 +84,16 @@ class StringPreconditionsSpec extends Specification {
         error.message == "String [ ${value} ] must not be blank" as String
 
         where:
-        value << [null, '', ' ']
+        value << ['', ' ']
+    }
+
+    def "not.toBeBlank - null should throw StringBlankPreconditionException"() {
+        when:
+        expect(null as String,).not().toBeBlank().check()
+
+        then:
+        def error = thrown(StringBlankPreconditionException.class)
+        error.message == 'String [ null ] must not be blank'
     }
 
     @Unroll
@@ -89,12 +106,21 @@ class StringPreconditionsSpec extends Specification {
         error.message == "Greeting [ ${value} ] must not be blank" as String
 
         where:
-        value << [null, '', ' ']
+        value << ['', ' ']
+    }
+
+    def "not.toBeBlank - null should throw StringBlankPreconditionException with label"() {
+        when:
+        expect(null as String, 'Greeting').not().toBeBlank().check()
+
+        then:
+        def error = thrown(StringBlankPreconditionException.class)
+        error.message == 'Greeting [ null ] must not be blank'
     }
 
     def "not.toBeNull.not.toBeBlank - null should throw ObjectNullPreconditionException"() {
         when:
-        expect(null).
+        expect(null as String).
                 not().toBeNull().
                 not().toBeBlank().
                 check()

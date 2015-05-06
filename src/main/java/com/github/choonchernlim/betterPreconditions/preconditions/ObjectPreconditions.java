@@ -1,37 +1,18 @@
 package com.github.choonchernlim.betterPreconditions.preconditions;
 
+import com.github.choonchernlim.betterPreconditions.core.Preconditions;
+
 /**
  * Object related preconditions.
  */
-public class ObjectPreconditions extends BetterPreconditions<ObjectPreconditions, Object> {
+public class ObjectPreconditions extends Preconditions<ObjectPreconditions, Object> {
     /**
-     * Private constructor.
+     * Package constructor.
      *
      * @param value Value
      * @param label Label
      */
-    private ObjectPreconditions(final Object value, final String label) {
+    ObjectPreconditions(final Object value, final String label) {
         super(value, label);
-    }
-
-    /**
-     * Returns new instance with default label.
-     *
-     * @param value Value
-     * @return New instance
-     */
-    public static ObjectPreconditions expect(final Object value) {
-        return expect(value, "Object");
-    }
-
-    /**
-     * Returns new instance.
-     *
-     * @param value Value
-     * @param label Label
-     * @return New instance
-     */
-    public static ObjectPreconditions expect(final Object value, final String label) {
-        return new ObjectPreconditions(value, label);
     }
 }

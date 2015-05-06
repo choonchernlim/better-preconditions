@@ -1,12 +1,9 @@
-package com.github.choonchernlim.betterPreconditions.preconditions;
+package com.github.choonchernlim.betterPreconditions.core;
 
-import com.github.choonchernlim.betterPreconditions.core.Assertion;
-import com.github.choonchernlim.betterPreconditions.core.Matcher;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException;
-import com.github.choonchernlim.betterPreconditions.exception.PreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException;
-import static com.github.choonchernlim.betterPreconditions.preconditions.StringPreconditions.expect;
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect;
 import static com.google.common.base.Strings.nullToEmpty;
 import com.google.common.collect.Lists;
 
@@ -15,7 +12,7 @@ import java.util.List;
 /**
  * Abstract class for all preconditions.
  */
-public abstract class BetterPreconditions<C, V> {
+public abstract class Preconditions<C, V> {
 
     /**
      * Value to be checked.
@@ -43,7 +40,7 @@ public abstract class BetterPreconditions<C, V> {
      * @param value Value
      * @param label Label
      */
-    protected BetterPreconditions(final V value, final String label) {
+    protected Preconditions(final V value, final String label) {
         // label is not empty... cannot use `expect(label).not().toBeBlank().check()` to prevent
         // infinite recursion calls.
         if (nullToEmpty(label).trim().isEmpty()) {
@@ -101,7 +98,7 @@ public abstract class BetterPreconditions<C, V> {
      * @return Current instance
      */
     @SuppressWarnings("unchecked")
-    protected final C customMatcher(final Matcher<V> matcher) {
+    public final C customMatcher(final Matcher<V> matcher) {
         assertions.add(new Assertion<V>(matcher, isNegated, value, label));
 
         // after creating a new assertion, reset the negation
@@ -113,7 +110,7 @@ public abstract class BetterPreconditions<C, V> {
     /**
      * Returns value if all assertions pass.
      */
-    protected final V check() {
+    public final V check() {
         for (Assertion assertion : assertions) {
             assertion.run();
         }
@@ -130,6 +127,6 @@ public abstract class BetterPreconditions<C, V> {
      */
     protected final void expectValueLabelToExist(final Object value, final String label, final String defaultLabel) {
         expect(label, defaultLabel).not().toBeBlank().check();
-        ObjectPreconditions.expect(value, label).not().toBeNull().check();
+        expect(value, label).not().toBeNull().check();
     }
 }

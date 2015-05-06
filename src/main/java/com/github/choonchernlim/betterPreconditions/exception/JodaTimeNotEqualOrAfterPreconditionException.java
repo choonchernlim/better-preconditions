@@ -1,5 +1,6 @@
 package com.github.choonchernlim.betterPreconditions.exception;
 
+import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
 import org.joda.time.base.BaseLocal;
 
 /**

@@ -1,7 +1,5 @@
 package com.github.choonchernlim.betterPreconditions.core;
 
-import com.github.choonchernlim.betterPreconditions.exception.PreconditionException;
-
 /**
  * Precondition matcher.
  *

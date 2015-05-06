@@ -1,43 +1,24 @@
 package com.github.choonchernlim.betterPreconditions.preconditions;
 
 import com.github.choonchernlim.betterPreconditions.core.Matcher;
+import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
+import com.github.choonchernlim.betterPreconditions.core.Preconditions;
 import com.github.choonchernlim.betterPreconditions.exception.BooleanFalsePreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.BooleanTruePreconditionException;
-import com.github.choonchernlim.betterPreconditions.exception.PreconditionException;
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect;
 
 /**
  * Boolean related preconditions.
  */
-public class BooleanPreconditions extends BetterPreconditions<BooleanPreconditions, Boolean> {
+public class BooleanPreconditions extends Preconditions<BooleanPreconditions, Boolean> {
     /**
-     * Private constructor.
+     * Package constructor.
      *
      * @param value Value
      * @param label Label
      */
-    private BooleanPreconditions(final Boolean value, final String label) {
+    BooleanPreconditions(final Boolean value, final String label) {
         super(value, label);
-    }
-
-    /**
-     * Returns new instance with default label.
-     *
-     * @param value Value
-     * @return New instance
-     */
-    public static BooleanPreconditions expect(final Boolean value) {
-        return expect(value, "Boolean");
-    }
-
-    /**
-     * Returns new instance.
-     *
-     * @param value Value
-     * @param label Label
-     * @return New instance
-     */
-    public static BooleanPreconditions expect(final Boolean value, final String label) {
-        return new BooleanPreconditions(value, label);
     }
 
     /**

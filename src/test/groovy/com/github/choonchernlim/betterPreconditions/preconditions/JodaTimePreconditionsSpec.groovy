@@ -2,15 +2,16 @@ package com.github.choonchernlim.betterPreconditions.preconditions
 
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException
 import org.joda.time.LocalDate
+import org.joda.time.base.BaseLocal
 import spock.lang.Specification
 
-import static JodaTimePreconditions.expect
+import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
 class JodaTimePreconditionsSpec extends Specification {
 
     def "toBeNull - null should be ok"() {
         when:
-        def actualValue = expect(null).toBeNull().check()
+        def actualValue = expect(null as BaseLocal).toBeNull().check()
 
         then:
         actualValue == null
