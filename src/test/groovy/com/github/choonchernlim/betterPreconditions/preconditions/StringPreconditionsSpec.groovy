@@ -1,9 +1,6 @@
 package com.github.choonchernlim.betterPreconditions.preconditions
 
-import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.StringNotBlankPreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.*
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -11,9 +8,44 @@ import static com.github.choonchernlim.betterPreconditions.preconditions.Precond
 
 class StringPreconditionsSpec extends Specification {
 
-    def "toBeNull - 'Hello' should be ok"() {
+    def "toBeEqual - 'Hello' != 'Hey' should throw ObjectNotEqualPreconditionException"() {
         when:
-        def actualValue = expect('Hello').not().toBeNull().check()
+        expect('Hello').toBeEqual('Hey').check()
+
+        then:
+        def error = thrown(ObjectNotEqualPreconditionException.class)
+        error.message == 'String [ Hello ] must be equal to Expected Value [ Hey ]'
+    }
+
+    def "toBeEqual - 'Hello' == 'Hello' should be ok"() {
+        when:
+        def actualValue = expect('Hello').toBeEqual('Hello').check()
+
+        then:
+        actualValue == 'Hello'
+    }
+
+    def "not.toBeEqual - 'Hello' != 'Hello' should throw ObjectEqualPreconditionException"() {
+        when:
+        expect('Hello').not().toBeEqual('Hello').check()
+
+        then:
+        def error = thrown(ObjectEqualPreconditionException.class)
+        error.message == 'String [ Hello ] must not be equal to Expected Value [ Hello ]'
+    }
+
+    def "not.toBeEqual - 'Hello' != 'Hello' should throw ObjectEqualPreconditionException with label"() {
+        when:
+        expect('Hello', 'Polite Greeting').not().toBeEqual('Hello', 'Rude Greeting').check()
+
+        then:
+        def error = thrown(ObjectEqualPreconditionException.class)
+        error.message == 'Polite Greeting [ Hello ] must not be equal to Rude Greeting [ Hello ]'
+    }
+
+    def "not.toBeEqual - 'Hello' == 'Hey' should be ok"() {
+        when:
+        def actualValue = expect('Hello').not().toBeEqual('Hey').check()
 
         then:
         actualValue == 'Hello'
@@ -26,6 +58,14 @@ class StringPreconditionsSpec extends Specification {
         then:
         def error = thrown(ObjectNotNullPreconditionException.class)
         error.message == 'String [ Hello ] must be null'
+    }
+
+    def "not.toBeNull - 'Hello' should be ok"() {
+        when:
+        def actualValue = expect('Hello').not().toBeNull().check()
+
+        then:
+        actualValue == 'Hello'
     }
 
     @Unroll

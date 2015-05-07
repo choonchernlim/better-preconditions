@@ -1,14 +1,54 @@
 package com.github.choonchernlim.betterPreconditions.preconditions
 
-import com.github.choonchernlim.betterPreconditions.exception.BooleanFalsePreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.BooleanTruePreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.*
 import spock.lang.Specification
 
 import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
 class BooleanPreconditionsSpec extends Specification {
+
+    def "toBeEqual - true != false should throw ObjectNotEqualPreconditionException"() {
+        when:
+        expect(true).toBeEqual(false).check()
+
+        then:
+        def error = thrown(ObjectNotEqualPreconditionException.class)
+        error.message == 'Boolean [ true ] must be equal to Expected Value [ false ]'
+    }
+
+    def "toBeEqual - true == true should be ok"() {
+        when:
+        def actualValue = expect(true).toBeEqual(true).check()
+
+        then:
+        actualValue
+    }
+
+    def "not.toBeEqual - true != true should throw ObjectEqualPreconditionException"() {
+        when:
+        expect(true).not().toBeEqual(true).check()
+
+        then:
+        def error = thrown(ObjectEqualPreconditionException.class)
+        error.message == 'Boolean [ true ] must not be equal to Expected Value [ true ]'
+    }
+
+    def "not.toBeEqual - true != true should throw ObjectEqualPreconditionException with label"() {
+        when:
+        expect(true, 'Blue Flag').not().toBeEqual(true, 'Red Flag').check()
+
+        then:
+        def error = thrown(ObjectEqualPreconditionException.class)
+        error.message == 'Blue Flag [ true ] must not be equal to Red Flag [ true ]'
+    }
+
+    def "not.toBeEqual - true == false should be ok"() {
+        when:
+        def actualValue = expect(true).not().toBeEqual(false).check()
+
+        then:
+        actualValue
+    }
 
     def "toBeNull - null should be ok"() {
         when:
