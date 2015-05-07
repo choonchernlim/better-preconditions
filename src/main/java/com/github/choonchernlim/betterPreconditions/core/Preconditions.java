@@ -1,5 +1,7 @@
 package com.github.choonchernlim.betterPreconditions.core;
 
+import com.github.choonchernlim.betterPreconditions.exception.ObjectEqualPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.ObjectNotEqualPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException;
@@ -85,6 +87,46 @@ public abstract class Preconditions<C, V> {
             @Override
             public PreconditionException getNegatedException(final V value, final String label) {
                 return new ObjectNullPreconditionException(value, label);
+            }
+        });
+
+        return (C) this;
+    }
+
+    /**
+     * Ensures given base local is equal to expected value.
+     *
+     * @see Preconditions#toBeEqual(Object)
+     */
+    public C toBeEqual(final V expectedValue) {
+        return toBeEqual(expectedValue, "Expected Value");
+    }
+
+    /**
+     * Ensures given value is equal to expected value.
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    @SuppressWarnings("unchecked")
+    public C toBeEqual(final V expectedValue, final String expectedLabel) {
+        expectValueLabelToExist(expectedValue, expectedLabel, "Expected Label");
+
+        customMatcher(new Matcher<V>() {
+            @Override
+            public boolean match(final V givenValue, final String givenLabel) {
+                return expect(givenValue, givenLabel).not().toBeNull().check().equals(expectedValue);
+            }
+
+            @Override
+            public PreconditionException getException(final V givenValue, final String givenLabel) {
+                return new ObjectNotEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final V givenValue, final String givenLabel) {
+                return new ObjectEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
             }
         });
 

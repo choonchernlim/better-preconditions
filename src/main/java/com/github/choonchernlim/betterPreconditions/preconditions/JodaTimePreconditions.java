@@ -4,9 +4,9 @@ import com.github.choonchernlim.betterPreconditions.core.Matcher;
 import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
 import com.github.choonchernlim.betterPreconditions.core.Preconditions;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualOrAfterPreconditionException;
-import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrAfterPreconditionException;
-import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.ObjectEqualPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.ObjectNotEqualPreconditionException;
 import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect;
 import org.joda.time.base.BaseLocal;
 
@@ -25,21 +25,24 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
     }
 
     /**
-     * Ensures given base local is equal to expected value.
+     * Ensures given base local is equal to expected value. Override default implementation to return proper label.
      *
      * @see JodaTimePreconditions#toBeEqual(BaseLocal, String)
      */
+    @Override
     public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue) {
         return toBeEqual(expectedValue, DEFAULT_EXPECTED_LABEL);
     }
 
     /**
-     * Ensures given base local is equal to expected value.
+     * Ensures given base local is equal to expected value. Override default implementation and uses <code>isEquals()</code>
+     * because Joda Time's <code>equals()</code> takes account of chronology, which is too strict.
      *
      * @param expectedValue Second value
      * @param expectedLabel Second label
      * @return Current instance
      */
+    @Override
     public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue, final String expectedLabel) {
         expectValueLabelToExist(expectedValue, expectedLabel);
 
@@ -51,12 +54,12 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
 
             @Override
             public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
-                return new JodaTimeNotEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
+                return new ObjectNotEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
             }
 
             @Override
             public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
-                return new JodaTimeEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
+                return new ObjectEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
             }
         });
     }

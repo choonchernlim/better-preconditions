@@ -1,7 +1,7 @@
 package com.github.choonchernlim.betterPreconditions.preconditions
 
-import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualPreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.ObjectEqualPreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.ObjectNotEqualPreconditionException
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
 import com.github.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException
 import org.joda.time.LocalDate
@@ -77,12 +77,12 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #firstValue != #secondValue should throw JodaTimeNotEqualPreconditionException"() {
+    def "toBeEqual - #firstValue != #secondValue should throw ObjectNotEqualPreconditionException"() {
         when:
         expect(firstValue).toBeEqual(secondValue).check()
 
         then:
-        def error = thrown(JodaTimeNotEqualPreconditionException.class)
+        def error = thrown(ObjectNotEqualPreconditionException.class)
         error.message == "Joda Time [ ${firstValue} ] must be equal to Expected Joda Time [ ${secondValue} ]" as String
 
         where:
@@ -93,12 +93,12 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #firstValue != #secondValue should throw JodaTimeNotEqualPreconditionException - with label"() {
+    def "toBeEqual - #firstValue != #secondValue should throw ObjectNotEqualPreconditionException - with label"() {
         when:
         expect(firstValue, 'Start Value').toBeEqual(secondValue, 'End Value').check()
 
         then:
-        def error = thrown(JodaTimeNotEqualPreconditionException.class)
+        def error = thrown(ObjectNotEqualPreconditionException.class)
         error.message == "Start Value [ ${firstValue} ] must be equal to End Value [ ${secondValue} ]" as String
 
         where:
@@ -124,12 +124,12 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - #firstValue == #secondValue should throw JodaTimeEqualPreconditionException"() {
+    def "not.toBeEqual - #firstValue == #secondValue should throw ObjectEqualPreconditionException"() {
         when:
         expect(firstValue).not().toBeEqual(secondValue).check()
 
         then:
-        def error = thrown(JodaTimeEqualPreconditionException.class)
+        def error = thrown(ObjectEqualPreconditionException.class)
         error.message == "Joda Time [ ${firstValue} ] must not be equal to Expected Joda Time [ ${secondValue} ]" as String
 
         where:
@@ -140,12 +140,12 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - #firstValue == #secondValue should throw JodaTimeEqualPreconditionException - with label"() {
+    def "not.toBeEqual - #firstValue == #secondValue should throw ObjectEqualPreconditionException - with label"() {
         when:
         expect(firstValue, 'Start Value').not().toBeEqual(secondValue, 'End Value').check()
 
         then:
-        def error = thrown(JodaTimeEqualPreconditionException.class)
+        def error = thrown(ObjectEqualPreconditionException.class)
         error.message == "Start Value [ ${firstValue} ] must not be equal to End Value [ ${secondValue} ]" as String
 
         where:
