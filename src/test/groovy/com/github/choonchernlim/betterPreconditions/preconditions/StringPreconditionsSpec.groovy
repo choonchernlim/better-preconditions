@@ -8,7 +8,7 @@ import static com.github.choonchernlim.betterPreconditions.preconditions.Precond
 
 class StringPreconditionsSpec extends Specification {
 
-    def "toBeEqual - 'Hello' != 'Hey' should throw ObjectNotEqualPreconditionException"() {
+    def "toBeEqual - 'Hello' == 'Hey' should throw ObjectNotEqualPreconditionException"() {
         when:
         expect('Hello').toBeEqual('Hey').check()
 
@@ -43,7 +43,7 @@ class StringPreconditionsSpec extends Specification {
         error.message == 'Polite Greeting [ Hello ] must not be equal to Rude Greeting [ Hello ]'
     }
 
-    def "not.toBeEqual - 'Hello' == 'Hey' should be ok"() {
+    def "not.toBeEqual - 'Hello' != 'Hey' should be ok"() {
         when:
         def actualValue = expect('Hello').not().toBeEqual('Hey').check()
 
@@ -51,7 +51,7 @@ class StringPreconditionsSpec extends Specification {
         actualValue == 'Hello'
     }
 
-    def "toBeNull - 'Hello' should throw ObjectNotNullPreconditionException"() {
+    def "toBeNull - 'Hello' == null should throw ObjectNotNullPreconditionException"() {
         when:
         expect('Hello').toBeNull().check()
 
@@ -60,7 +60,7 @@ class StringPreconditionsSpec extends Specification {
         error.message == 'String [ Hello ] must be null'
     }
 
-    def "not.toBeNull - 'Hello' should be ok"() {
+    def "not.toBeNull - 'Hello' != null should be ok"() {
         when:
         def actualValue = expect('Hello').not().toBeNull().check()
 

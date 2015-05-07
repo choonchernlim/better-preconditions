@@ -77,7 +77,7 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #firstValue != #secondValue should throw ObjectNotEqualPreconditionException"() {
+    def "toBeEqual - #firstValue == #secondValue should throw ObjectNotEqualPreconditionException"() {
         when:
         expect(firstValue).toBeEqual(secondValue).check()
 
@@ -93,7 +93,7 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #firstValue != #secondValue should throw ObjectNotEqualPreconditionException - with label"() {
+    def "toBeEqual - #firstValue == #secondValue should throw ObjectNotEqualPreconditionException - with label"() {
         when:
         expect(firstValue, 'Start Value').toBeEqual(secondValue, 'End Value').check()
 
@@ -124,7 +124,7 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - #firstValue == #secondValue should throw ObjectEqualPreconditionException"() {
+    def "not.toBeEqual - #firstValue != #secondValue should throw ObjectEqualPreconditionException"() {
         when:
         expect(firstValue).not().toBeEqual(secondValue).check()
 
@@ -140,7 +140,7 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - #firstValue == #secondValue should throw ObjectEqualPreconditionException - with label"() {
+    def "not.toBeEqual - #firstValue != #secondValue should throw ObjectEqualPreconditionException - with label"() {
         when:
         expect(firstValue, 'Start Value').not().toBeEqual(secondValue, 'End Value').check()
 

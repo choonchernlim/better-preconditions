@@ -2,52 +2,84 @@ package com.github.choonchernlim.betterPreconditions.preconditions
 
 import com.github.choonchernlim.betterPreconditions.exception.*
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
 class BooleanPreconditionsSpec extends Specification {
 
-    def "toBeEqual - true != false should throw ObjectNotEqualPreconditionException"() {
+    @Unroll
+    def "toBeEqual - #firstValue == #secondValue should throw ObjectNotEqualPreconditionException"() {
         when:
-        expect(true).toBeEqual(false).check()
+        expect(firstValue).toBeEqual(secondValue).check()
 
         then:
         def error = thrown(ObjectNotEqualPreconditionException.class)
-        error.message == 'Boolean [ true ] must be equal to Expected Value [ false ]'
+        error.message == "Boolean [ ${firstValue} ] must be equal to Expected Value [ ${secondValue} ]" as String
+
+
+        where:
+        firstValue | secondValue
+        true       | false
+        false      | true
     }
 
-    def "toBeEqual - true == true should be ok"() {
+    @Unroll
+    def "toBeEqual - #firstValue == #secondValue should be ok"() {
         when:
-        def actualValue = expect(true).toBeEqual(true).check()
+        def actualValue = expect(firstValue).toBeEqual(secondValue).check()
 
         then:
-        actualValue
+        actualValue == firstValue
+
+        where:
+        firstValue | secondValue
+        true       | true
+        false      | false
     }
 
-    def "not.toBeEqual - true != true should throw ObjectEqualPreconditionException"() {
+    @Unroll
+    def "not.toBeEqual - #firstValue != #secondValue should throw ObjectEqualPreconditionException"() {
         when:
-        expect(true).not().toBeEqual(true).check()
+        expect(firstValue).not().toBeEqual(secondValue).check()
 
         then:
         def error = thrown(ObjectEqualPreconditionException.class)
-        error.message == 'Boolean [ true ] must not be equal to Expected Value [ true ]'
+        error.message == "Boolean [ ${firstValue} ] must not be equal to Expected Value [ ${secondValue} ]" as String
+
+        where:
+        firstValue | secondValue
+        true       | true
+        false      | false
     }
 
-    def "not.toBeEqual - true != true should throw ObjectEqualPreconditionException with label"() {
+    @Unroll
+    def "not.toBeEqual - #firstValue != #secondValue should throw ObjectEqualPreconditionException with label"() {
         when:
-        expect(true, 'Blue Flag').not().toBeEqual(true, 'Red Flag').check()
+        expect(firstValue, 'Blue Flag').not().toBeEqual(secondValue, 'Red Flag').check()
 
         then:
         def error = thrown(ObjectEqualPreconditionException.class)
-        error.message == 'Blue Flag [ true ] must not be equal to Red Flag [ true ]'
+        error.message == "Blue Flag [ ${firstValue} ] must not be equal to Red Flag [ ${secondValue} ]" as String
+
+        where:
+        firstValue | secondValue
+        true       | true
+        false      | false
     }
 
-    def "not.toBeEqual - true == false should be ok"() {
+    @Unroll
+    def "not.toBeEqual - #firstValue != #secondValue should be ok"() {
         when:
-        def actualValue = expect(true).not().toBeEqual(false).check()
+        def actualValue = expect(firstValue).not().toBeEqual(secondValue).check()
 
         then:
-        actualValue
+        actualValue == firstValue
+
+        where:
+        firstValue | secondValue
+        true       | false
+        false      | true
     }
 
     def "toBeNull - null should be ok"() {
@@ -58,16 +90,20 @@ class BooleanPreconditionsSpec extends Specification {
         actualValue == null
     }
 
-    def "toBeNull - false should throw ObjectNotNullPreconditionException"() {
+    @Unroll
+    def "toBeNull - #value should throw ObjectNotNullPreconditionException"() {
         when:
-        expect(false).toBeNull().check()
+        expect(value).toBeNull().check()
 
         then:
         def error = thrown(ObjectNotNullPreconditionException.class)
-        error.message == 'Boolean [ false ] must be null'
+        error.message == "Boolean [ ${value} ] must be null" as String
+
+        where:
+        value << [true, false]
     }
 
-    def "toBeTrue - true should be ok"() {
+    def "toBeTrue - true == true should be ok"() {
         when:
         def actualValue = expect(true).toBeTrue().check()
 
@@ -75,7 +111,7 @@ class BooleanPreconditionsSpec extends Specification {
         actualValue
     }
 
-    def "toBeTrue - false should throw BooleanFalsePreconditionException"() {
+    def "toBeTrue - false == true should throw BooleanFalsePreconditionException"() {
         when:
         expect(false).toBeTrue().check()
 
@@ -84,7 +120,7 @@ class BooleanPreconditionsSpec extends Specification {
         error.message == "Boolean [ false ] must be true" as String
     }
 
-    def "toBeTrue - null should throw ObjectNullPreconditionException"() {
+    def "toBeTrue - null == true should throw ObjectNullPreconditionException"() {
         when:
         expect(null as Boolean).toBeTrue().check()
 
@@ -93,7 +129,7 @@ class BooleanPreconditionsSpec extends Specification {
         error.message == "Boolean [ null ] must not be null" as String
     }
 
-    def "not.toBeTrue - false should be ok"() {
+    def "not.toBeTrue - false != true should be ok"() {
         when:
         def actualValue = expect(false).not().toBeTrue().check()
 
@@ -101,7 +137,7 @@ class BooleanPreconditionsSpec extends Specification {
         !actualValue
     }
 
-    def "not.toBeTrue - null should throw ObjectNullPreconditionException"() {
+    def "not.toBeTrue - null != true should throw ObjectNullPreconditionException"() {
         when:
         expect(null as Boolean).not().toBeTrue().check()
 
@@ -110,7 +146,7 @@ class BooleanPreconditionsSpec extends Specification {
         error.message == "Boolean [ null ] must not be null" as String
     }
 
-    def "not.toBeTrue - true should throw BooleanTruePreconditionException"() {
+    def "not.toBeTrue - true != true should throw BooleanTruePreconditionException"() {
         when:
         expect(true).not().toBeTrue().check()
 

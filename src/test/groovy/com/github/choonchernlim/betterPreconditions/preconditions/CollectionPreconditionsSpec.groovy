@@ -7,7 +7,7 @@ import static com.github.choonchernlim.betterPreconditions.preconditions.Precond
 
 class CollectionPreconditionsSpec extends Specification {
 
-    def "toBeEqual - [1] != [2] should throw ObjectNotEqualPreconditionException"() {
+    def "toBeEqual - [1] == [2] should throw ObjectNotEqualPreconditionException"() {
         when:
         expect([1]).toBeEqual([2]).check()
 
@@ -42,7 +42,7 @@ class CollectionPreconditionsSpec extends Specification {
         error.message == 'Apples [ [1] ] must not be equal to Oranges [ [1] ]'
     }
 
-    def "not.toBeEqual - [1] == [2] should be ok"() {
+    def "not.toBeEqual - [1] != [2] should be ok"() {
         when:
         def actualValue = expect([1]).not().toBeEqual([2]).check()
 
