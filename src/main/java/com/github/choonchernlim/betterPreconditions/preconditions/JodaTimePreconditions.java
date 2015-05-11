@@ -5,8 +5,10 @@ import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
 import com.github.choonchernlim.betterPreconditions.core.Preconditions;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeAfterPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualOrAfterPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualOrBeforePreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotAfterPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrAfterPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrBeforePreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectEqualPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotEqualPreconditionException;
 import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect;
@@ -152,6 +154,51 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
                                                               givenLabel,
                                                               expectedValue,
                                                               expectedLabel);
+            }
+        });
+    }
+
+    /**
+     * Ensures given base local is equal to or before expected value.
+     *
+     * @see JodaTimePreconditions#toBeEqualOrBefore(BaseLocal, String)
+     */
+    public JodaTimePreconditions toBeEqualOrBefore(final BaseLocal expectedValue) {
+        return toBeEqualOrBefore(expectedValue, "Expected Joda Time");
+    }
+
+    /**
+     * Ensures given base local is equal to or before expected value.
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    public JodaTimePreconditions toBeEqualOrBefore(final BaseLocal expectedValue, final String expectedLabel) {
+        expectValueLabelToExist(expectedValue, expectedLabel);
+
+        return customMatcher(new Matcher<BaseLocal>() {
+            @Override
+            public boolean match(final BaseLocal givenValue, final String givenLabel) {
+                expect(givenValue, givenLabel).not().toBeNull().check();
+
+                return givenValue.isEqual(expectedValue) || givenValue.isBefore(expectedValue);
+            }
+
+            @Override
+            public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
+                return new JodaTimeNotEqualOrBeforePreconditionException(givenValue,
+                                                                         givenLabel,
+                                                                         expectedValue,
+                                                                         expectedLabel);
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
+                return new JodaTimeEqualOrBeforePreconditionException(givenValue,
+                                                                      givenLabel,
+                                                                      expectedValue,
+                                                                      expectedLabel);
             }
         });
     }
