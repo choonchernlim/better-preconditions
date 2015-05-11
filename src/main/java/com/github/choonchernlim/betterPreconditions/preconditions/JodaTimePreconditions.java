@@ -3,7 +3,9 @@ package com.github.choonchernlim.betterPreconditions.preconditions;
 import com.github.choonchernlim.betterPreconditions.core.Matcher;
 import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
 import com.github.choonchernlim.betterPreconditions.core.Preconditions;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeAfterPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualOrAfterPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotAfterPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrAfterPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectEqualPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotEqualPreconditionException;
@@ -109,24 +111,56 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
         });
     }
 
+    /**
+     * Ensures given base local is after expected value.
+     *
+     * @see JodaTimePreconditions#toBeAfter(BaseLocal)
+     */
+    public JodaTimePreconditions toBeAfter(final BaseLocal expectedValue) {
+        return toBeAfter(expectedValue, "Expected Joda Time");
+    }
+
+    /**
+     * Ensures given base local is after expected value.
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    public JodaTimePreconditions toBeAfter(final BaseLocal expectedValue, final String expectedLabel) {
+        expectValueLabelToExist(expectedValue, expectedLabel);
+
+        return customMatcher(new Matcher<BaseLocal>() {
+            @Override
+            public boolean match(final BaseLocal givenValue, final String givenLabel) {
+                expect(givenValue, givenLabel).not().toBeNull().check();
+
+                return givenValue.isAfter(expectedValue);
+            }
+
+            @Override
+            public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
+                return new JodaTimeNotAfterPreconditionException(givenValue,
+                                                                 givenLabel,
+                                                                 expectedValue,
+                                                                 expectedLabel);
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
+                return new JodaTimeAfterPreconditionException(givenValue,
+                                                              givenLabel,
+                                                              expectedValue,
+                                                              expectedLabel);
+            }
+        });
+    }
+
     private void expectValueLabelToExist(BaseLocal expectedValue, String expectedLabel) {
         expectValueLabelToExist(expectedValue, expectedLabel, "Expected Joda Time Label");
     }
 
 
-//    public static void mustBeEqualOrAfter(final LocalDate startDate,
-//                                          final LocalDate endDate,
-//                                          final String startDateVariableName,
-//                                          final String endDateVariableName) {
-//        // TODO
-//    }
-//
-//    public static void mustBeAfter(final LocalDate startDate,
-//                                   final LocalDate endDate,
-//                                   final String startDateVariableName,
-//                                   final String endDateVariableName) {
-//        // TODO
-//    }
 //
 //    public static void mustBeEqualOrBefore(final LocalDate startDate,
 //                                           final LocalDate endDate,
