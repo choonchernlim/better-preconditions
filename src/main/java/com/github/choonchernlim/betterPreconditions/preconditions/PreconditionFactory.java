@@ -8,6 +8,10 @@ import java.util.Collection;
  * Returns new Precondition instances.
  */
 public class PreconditionFactory {
+
+    private PreconditionFactory() {
+    }
+
     /**
      * Returns new BooleanPreconditions instance with default label.
      *
