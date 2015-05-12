@@ -14,12 +14,12 @@ import static com.github.choonchernlim.betterPreconditions.preconditions.Precond
 class NumberToBeEqualOrGreaterThanPreconditionsSpec extends Specification {
 
     @Unroll
-    def "toBeEqualOrGreaterThan - #firstValue.class >= #secondValue.class should be ok"() {
+    def "toBeEqualOrGreaterThan - #firstValue.class (#firstValue) >= #secondValue.class (#secondValue) should be ok"() {
         when:
         def actualValue = expect(firstValue).toBeEqualOrGreaterThan(secondValue).check()
 
         then:
-        actualValue >= firstValue
+        actualValue == firstValue
 
         where:
         firstValue           | secondValue
@@ -46,7 +46,7 @@ class NumberToBeEqualOrGreaterThanPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqualOrGreaterThan - #firstValue.class != #secondValue.class should throw NumberNotEqualOrGreaterThanPreconditionException"() {
+    def "toBeEqualOrGreaterThan - #firstValue.class (#firstValue) != #secondValue.class (#secondValue) should throw NumberNotEqualOrGreaterThanPreconditionException"() {
         when:
         expect(firstValue).toBeEqualOrGreaterThan(secondValue).check()
 
@@ -69,7 +69,7 @@ class NumberToBeEqualOrGreaterThanPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqualOrGreaterThan - different types - #firstValue.class >= #secondValue.class should throw ObjectNotSameTypePreconditionException"() {
+    def "toBeEqualOrGreaterThan - different types - #firstValue.class (#firstValue) >= #secondValue.class (#secondValue) should throw ObjectNotSameTypePreconditionException"() {
         when:
         expect(firstValue).toBeEqualOrGreaterThan(secondValue).check()
 
@@ -91,12 +91,12 @@ class NumberToBeEqualOrGreaterThanPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqualOrGreaterThan - #firstValue.class !>= #secondValue.class should be ok"() {
+    def "not.toBeEqualOrGreaterThan - #firstValue.class (#firstValue) !>= #secondValue.class (#secondValue) should be ok"() {
         when:
         def actualValue = expect(firstValue).not().toBeEqualOrGreaterThan(secondValue).check()
 
         then:
-        actualValue >= firstValue
+        actualValue == firstValue
 
         where:
         firstValue           | secondValue
@@ -113,7 +113,7 @@ class NumberToBeEqualOrGreaterThanPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqualOrGreaterThan - different types - #firstValue.class !>= #secondValue.class should throw ObjectNotSameTypePreconditionE"() {
+    def "not.toBeEqualOrGreaterThan - different types - #firstValue.class (#firstValue) !>= #secondValue.class (#secondValue) should throw ObjectNotSameTypePrecondition"() {
         when:
         expect(firstValue).not().toBeEqualOrGreaterThan(secondValue).check()
 
@@ -132,10 +132,19 @@ class NumberToBeEqualOrGreaterThanPreconditionsSpec extends Specification {
         1          | new BigDecimal(1)
         1          | new AtomicInteger(1)
         1          | new AtomicLong(1)
+        0 | 1d
+        0 | 1f
+        0 | 1L
+        0 | new Short((short) 1)
+        0 | new Byte((byte) 1)
+        0 | new BigInteger(1)
+        0 | new BigDecimal(1)
+        0 | new AtomicInteger(1)
+        0 | new AtomicLong(1)
     }
 
     @Unroll
-    def "not.toBeEqualOrGreaterThan - #firstValue.class !>= #secondValue.class should throw NumberEqualOrGreaterThanPreconditionException"() {
+    def "not.toBeEqualOrGreaterThan - #firstValue.class (#firstValue) !>= #secondValue.class (#secondValue) should throw NumberEqualOrGreaterThanPreconditionException"() {
         when:
         expect(firstValue).not().toBeEqualOrGreaterThan(secondValue).check()
 

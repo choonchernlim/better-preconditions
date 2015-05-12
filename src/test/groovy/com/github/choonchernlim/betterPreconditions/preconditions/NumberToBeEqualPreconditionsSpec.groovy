@@ -14,7 +14,7 @@ import static com.github.choonchernlim.betterPreconditions.preconditions.Precond
 class NumberToBeEqualPreconditionsSpec extends Specification {
 
     @Unroll
-    def "toBeEqual - #firstValue.class == #secondValue.class should be ok"() {
+    def "toBeEqual - #firstValue.class (#firstValue) == #secondValue.class (#secondValue) should be ok"() {
         when:
         def actualValue = expect(firstValue).toBeEqual(secondValue).check()
 
@@ -36,7 +36,7 @@ class NumberToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - #firstValue.class != #secondValue.class should throw NumberNotEqualPreconditionException"() {
+    def "toBeEqual - #firstValue.class (#firstValue) != #secondValue.class (#secondValue) should throw NumberNotEqualPreconditionException"() {
         when:
         expect(firstValue).toBeEqual(secondValue).check()
 
@@ -59,7 +59,7 @@ class NumberToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqual - different types - #firstValue.class == #secondValue.class should throw ObjectNotSameTypePreconditionException"() {
+    def "toBeEqual - different types - #firstValue.class (#firstValue) == #secondValue.class (#secondValue) should throw ObjectNotSameTypePreconditionException"() {
         when:
         expect(firstValue).toBeEqual(secondValue).check()
 
@@ -81,7 +81,7 @@ class NumberToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - #firstValue.class != #secondValue.class should be ok"() {
+    def "not.toBeEqual - #firstValue.class (#firstValue) != #secondValue.class (#secondValue) should be ok"() {
         when:
         def actualValue = expect(firstValue).not().toBeEqual(secondValue).check()
 
@@ -103,7 +103,7 @@ class NumberToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - different types - #firstValue.class != #secondValue.class should throw ObjectNotSameTypePreconditionException"() {
+    def "not.toBeEqual - different types - #firstValue.class (#firstValue) != #secondValue.class (#secondValue) should throw ObjectNotSameTypePreconditionException"() {
         when:
         expect(firstValue).not().toBeEqual(secondValue).check()
 
@@ -125,7 +125,7 @@ class NumberToBeEqualPreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeEqual - #firstValue.class != #secondValue.class should throw NumberEqualPreconditionException"() {
+    def "not.toBeEqual - #firstValue.class (#firstValue) != #secondValue.class (#secondValue) should throw NumberEqualPreconditionException"() {
         when:
         expect(firstValue).not().toBeEqual(secondValue).check()
 

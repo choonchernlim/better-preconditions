@@ -13,7 +13,7 @@ import static com.github.choonchernlim.betterPreconditions.preconditions.Precond
 class NumberToBeSameTypePreconditionsSpec extends Specification {
 
     @Unroll
-    def "toBeSameType - #firstValue.class == #secondValue.class should be ok"() {
+    def "toBeSameType - #firstValue.class and #secondValue.class should be ok"() {
         when:
         def actualValue = expect(firstValue).toBeSameType(secondValue).check()
 
@@ -35,7 +35,7 @@ class NumberToBeSameTypePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeSameType - #firstValue.class == #secondValue.class should throw ObjectNotSameTypePreconditionException"() {
+    def "toBeSameType - #firstValue.class and #secondValue.class should throw ObjectNotSameTypePreconditionException"() {
         when:
         expect(firstValue).toBeSameType(secondValue).check()
 
@@ -57,7 +57,7 @@ class NumberToBeSameTypePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeSameType - #firstValue.class == #secondValue.class should be ok"() {
+    def "not.toBeSameType - #firstValue.class and #secondValue.class should be ok"() {
         when:
         def actualValue = expect(firstValue).not().toBeSameType(secondValue).check()
 
@@ -78,7 +78,7 @@ class NumberToBeSameTypePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "not.toBeSameType - #firstValue.class == #secondValue.class should throw ObjectSameTypePreconditionException"() {
+    def "not.toBeSameType - #firstValue.class and #secondValue.class should throw ObjectSameTypePreconditionException"() {
         when:
         expect(firstValue).not().toBeSameType(secondValue).check()
 
