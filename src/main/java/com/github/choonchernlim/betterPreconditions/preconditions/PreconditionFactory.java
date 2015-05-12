@@ -116,4 +116,25 @@ public class PreconditionFactory {
     public static StringPreconditions expect(final String value, final String label) {
         return new StringPreconditions(value, label);
     }
+
+    /**
+     * Returns new NumberPreconditions instance with default label.
+     *
+     * @param value Value
+     * @return New instance
+     */
+    public static NumberPreconditions expect(final Number value) {
+        return expect(value, "Number");
+    }
+
+    /**
+     * Returns new NumberPreconditions instance.
+     *
+     * @param value Value
+     * @param label Label
+     * @return New instance
+     */
+    public static NumberPreconditions expect(final Number value, final String label) {
+        return new NumberPreconditions(value, label);
+    }
 }

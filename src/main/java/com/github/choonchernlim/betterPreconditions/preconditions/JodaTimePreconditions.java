@@ -78,7 +78,7 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
      * @see JodaTimePreconditions#toBeEqualOrAfter(BaseLocal, String)
      */
     public JodaTimePreconditions toBeEqualOrAfter(final BaseLocal expectedValue) {
-        return toBeEqualOrAfter(expectedValue, "Expected Joda Time");
+        return toBeEqualOrAfter(expectedValue, DEFAULT_EXPECTED_LABEL);
     }
 
     /**
@@ -123,7 +123,7 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
      * @see JodaTimePreconditions#toBeAfter(BaseLocal)
      */
     public JodaTimePreconditions toBeAfter(final BaseLocal expectedValue) {
-        return toBeAfter(expectedValue, "Expected Joda Time");
+        return toBeAfter(expectedValue, DEFAULT_EXPECTED_LABEL);
     }
 
     /**
@@ -168,7 +168,7 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
      * @see JodaTimePreconditions#toBeEqualOrBefore(BaseLocal, String)
      */
     public JodaTimePreconditions toBeEqualOrBefore(final BaseLocal expectedValue) {
-        return toBeEqualOrBefore(expectedValue, "Expected Joda Time");
+        return toBeEqualOrBefore(expectedValue, DEFAULT_EXPECTED_LABEL);
     }
 
     /**
@@ -213,7 +213,7 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
      * @see JodaTimePreconditions#toBeBefore(BaseLocal)
      */
     public JodaTimePreconditions toBeBefore(final BaseLocal expectedValue) {
-        return toBeBefore(expectedValue, "Expected Joda Time");
+        return toBeBefore(expectedValue, DEFAULT_EXPECTED_LABEL);
     }
 
     /**
