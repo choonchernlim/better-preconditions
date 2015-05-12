@@ -15,7 +15,9 @@ Better Preconditions is a set of readable and testable Java preconditions.
 
 ## Why?
 
-### Guava Preconditions Approach
+Let's compare between Guava Preconditions and Better Preconditions.
+
+### Guava Preconditions
 
 ```java
 public void compute(final String name, final Integer age, final LocalDate registrationDate) {
@@ -43,7 +45,7 @@ public void compute(final String name, final Integer age, final LocalDate regist
 * Typically, most preconditions would throw either `IllegalArgumentException` or `IllegalArgumentException`, which makes the API a little confusing to unit test.
 * If a method has a lot of preconditions, it becomes very unreadable. 
 
-### Better Preconditions Approach
+### Better Preconditions
 
 ```java
 public void compute(final String name, final Integer age, final LocalDate registrationDate) {
