@@ -8,7 +8,7 @@ import spock.lang.Specification
 
 import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
-class ObjectPreconditionsSpec extends Specification {
+class ObjectToBeNullPreconditionsSpec extends Specification {
 
     def "toBeNull - null label should throw StringBlankPreconditionException"() {
         when:

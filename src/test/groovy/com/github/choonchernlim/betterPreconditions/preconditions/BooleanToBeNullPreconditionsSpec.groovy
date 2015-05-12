@@ -2,26 +2,31 @@ package com.github.choonchernlim.betterPreconditions.preconditions
 
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect
 
-class NumberPreconditionsSpec extends Specification {
+class BooleanToBeNullPreconditionsSpec extends Specification {
 
     def "toBeNull - null should be ok"() {
         when:
-        def actualValue = expect(null as Number).toBeNull().check()
+        def actualValue = expect(null as Boolean).toBeNull().check()
 
         then:
         actualValue == null
     }
 
-    def "toBeNull - non-null should throw ObjectNotNullPreconditionException"() {
+    @Unroll
+    def "toBeNull - #value should throw ObjectNotNullPreconditionException"() {
         when:
-        expect(1).toBeNull().check()
+        expect(value).toBeNull().check()
 
         then:
         def error = thrown(ObjectNotNullPreconditionException.class)
-        error.message == 'Number [ 1 ] must be null'
+        error.message == "Boolean [ ${value} ] must be null" as String
+
+        where:
+        value << [true, false]
     }
 
 }
