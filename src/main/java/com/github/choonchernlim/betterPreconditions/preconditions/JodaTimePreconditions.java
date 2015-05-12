@@ -55,7 +55,11 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
         return customMatcher(new Matcher<BaseLocal>() {
             @Override
             public boolean match(final BaseLocal givenValue, final String givenLabel) {
-                return expect(givenValue, givenLabel).not().toBeNull().check().isEqual(expectedValue);
+                return expect(givenValue, givenLabel)
+                        .not().toBeNull()
+                        .toBeSameType(expectedValue, expectedLabel)
+                        .check()
+                        .isEqual(expectedValue);
             }
 
             @Override
