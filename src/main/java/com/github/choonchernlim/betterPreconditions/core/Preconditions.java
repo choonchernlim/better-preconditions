@@ -3,7 +3,9 @@ package com.github.choonchernlim.betterPreconditions.core;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectEqualPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotEqualPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.ObjectNotSameTypePreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.ObjectSameTypePreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException;
 import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect;
 import static com.google.common.base.Strings.nullToEmpty;
@@ -96,7 +98,7 @@ public abstract class Preconditions<C, V> {
     /**
      * Ensures given base local is equal to expected value.
      *
-     * @see Preconditions#toBeEqual(Object)
+     * @see Preconditions#toBeEqual(Object, String)
      */
     public C toBeEqual(final V expectedValue) {
         return toBeEqual(expectedValue, "Expected Value");
@@ -127,6 +129,47 @@ public abstract class Preconditions<C, V> {
             @Override
             public PreconditionException getNegatedException(final V givenValue, final String givenLabel) {
                 return new ObjectEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
+            }
+        });
+
+        return (C) this;
+    }
+
+    /**
+     * Ensures given base local is equal to expected value.
+     *
+     * @see Preconditions#toBeSameType(Object, String)
+     */
+    public C toBeSameType(final V expectedValue) {
+        return toBeSameType(expectedValue, "Expected Value");
+    }
+
+    /**
+     * Ensures given value has same class type as expected value.
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    @SuppressWarnings("unchecked")
+    public C toBeSameType(final V expectedValue, final String expectedLabel) {
+        expectValueLabelToExist(expectedValue, expectedLabel, "Expected Label");
+
+        customMatcher(new Matcher<V>() {
+            @Override
+            public boolean match(final V givenValue, final String givenLabel) {
+                return expect(givenValue, givenLabel).not().toBeNull().check().getClass()
+                        .equals(expectedValue.getClass());
+            }
+
+            @Override
+            public PreconditionException getException(final V givenValue, final String givenLabel) {
+                return new ObjectNotSameTypePreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final V givenValue, final String givenLabel) {
+                return new ObjectSameTypePreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);
             }
         });
 
