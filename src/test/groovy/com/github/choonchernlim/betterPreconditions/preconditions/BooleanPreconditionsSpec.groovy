@@ -1,11 +1,6 @@
 package com.github.choonchernlim.betterPreconditions.preconditions
 
-import com.github.choonchernlim.betterPreconditions.exception.ObjectEqualPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.ObjectNotEqualPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.ObjectNotNullPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.booleanPreconditionException.BooleanFalsePreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.booleanPreconditionException.BooleanTruePreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.*
 import spock.lang.Specification
 import spock.lang.Unroll
 

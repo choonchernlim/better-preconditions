@@ -3,8 +3,8 @@ package com.github.choonchernlim.betterPreconditions.preconditions;
 import com.github.choonchernlim.betterPreconditions.core.Matcher;
 import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
 import com.github.choonchernlim.betterPreconditions.core.Preconditions;
-import com.github.choonchernlim.betterPreconditions.exception.booleanPreconditionException.BooleanFalsePreconditionException;
-import com.github.choonchernlim.betterPreconditions.exception.booleanPreconditionException.BooleanTruePreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.BooleanFalsePreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.BooleanTruePreconditionException;
 import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect;
 
 /**
