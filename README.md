@@ -63,7 +63,7 @@ public void compute(final String name, final Integer age, final LocalDate regist
 
     // if null, throw ObjectNullPreconditionException
     // if earlier than today, throw JodaTimeNotEqualOrAfterPreconditionException
-    expect(registrationDate, "Restriction Date")
+    expect(registrationDate, "Registration Date")
             .not().toBeNull()
             .toBeEqualOrAfter(LocalDate.now(), "Today's Date")
             .check();
