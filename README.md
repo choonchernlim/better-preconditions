@@ -72,6 +72,6 @@ public void compute(final String name, final Integer age, final LocalDate regist
 <dependency>
   <groupId>com.github.choonchernlim</groupId>
   <artifactId>better-preconditions</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.0-SNAPSHOT</version>
 </dependency>
 ```
