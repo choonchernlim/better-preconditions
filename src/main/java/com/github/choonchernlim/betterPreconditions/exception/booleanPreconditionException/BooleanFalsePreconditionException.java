@@ -1,4 +1,4 @@
-package com.github.choonchernlim.betterPreconditions.exception;
+package com.github.choonchernlim.betterPreconditions.exception.booleanPreconditionException;
 
 import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
 
