@@ -3,6 +3,16 @@
 Inspired by Guava Preconditions and Jasmine (a behavior-driven development framework for testing JavaScript code), 
 Better Preconditions is a set of readable and testable Java preconditions.
 
+## Maven Dependency
+
+```xml
+<dependency>
+  <groupId>com.github.choonchernlim</groupId>
+  <artifactId>better-preconditions</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+</dependency>
+```
+
 ## Why?
 
 ### Guava Preconditions Approach
@@ -66,12 +76,3 @@ public void compute(final String name, final Integer age, final LocalDate regist
     `Age [ 39 ] must be equal to or greater than Lower Age Limit [ 50 ]`.
 * Method chaining makes the code very readable. 
 
-## Maven Dependency
-
-```xml
-<dependency>
-  <groupId>com.github.choonchernlim</groupId>
-  <artifactId>better-preconditions</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
-</dependency>
-```
