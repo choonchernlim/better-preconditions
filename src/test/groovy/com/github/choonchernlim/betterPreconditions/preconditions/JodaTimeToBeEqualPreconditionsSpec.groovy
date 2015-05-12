@@ -159,7 +159,7 @@ class JodaTimeToBeEqualPreconditionsSpec extends Specification {
 
         then:
         def error = thrown(ObjectNotSameTypePreconditionException.class)
-        error.message == "Joda Time [ ${firstValue} ] must be same type as Expected Joda Time [ ${secondValue} ]" as String
+        error.message == "Expected Joda Time [ ${secondValue} ] must be same type as Joda Time [ ${firstValue} ]" as String
 
         where:
         firstValue                          | secondValue

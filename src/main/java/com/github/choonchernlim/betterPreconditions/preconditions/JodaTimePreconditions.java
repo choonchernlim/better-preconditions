@@ -13,12 +13,12 @@ import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOr
 import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrBeforePreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectEqualPreconditionException;
 import com.github.choonchernlim.betterPreconditions.exception.ObjectNotEqualPreconditionException;
-import static com.github.choonchernlim.betterPreconditions.preconditions.PreconditionFactory.expect;
 import org.joda.time.base.BaseLocal;
 
 public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, BaseLocal> {
 
     private static final String DEFAULT_EXPECTED_LABEL = "Expected Joda Time";
+    private static final String DEFAULT_VALUE_LABEL = DEFAULT_EXPECTED_LABEL + " Label";
 
     /**
      * Package constructor.
@@ -50,16 +50,14 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
      */
     @Override
     public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue, final String expectedLabel) {
-        expectValueLabelToExist(expectedValue, expectedLabel);
+        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);
 
         return customMatcher(new Matcher<BaseLocal>() {
             @Override
             public boolean match(final BaseLocal givenValue, final String givenLabel) {
-                return expect(givenValue, givenLabel)
-                        .not().toBeNull()
-                        .toBeSameType(expectedValue, expectedLabel)
-                        .check()
-                        .isEqual(expectedValue);
+                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);
+
+                return givenValue.isEqual(expectedValue);
             }
 
             @Override
@@ -91,12 +89,12 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
      * @return Current instance
      */
     public JodaTimePreconditions toBeEqualOrAfter(final BaseLocal expectedValue, final String expectedLabel) {
-        expectValueLabelToExist(expectedValue, expectedLabel);
+        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);
 
         return customMatcher(new Matcher<BaseLocal>() {
             @Override
             public boolean match(final BaseLocal givenValue, final String givenLabel) {
-                expect(givenValue, givenLabel).not().toBeNull().check();
+                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);
 
                 return givenValue.isEqual(expectedValue) || givenValue.isAfter(expectedValue);
             }
@@ -136,12 +134,12 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
      * @return Current instance
      */
     public JodaTimePreconditions toBeAfter(final BaseLocal expectedValue, final String expectedLabel) {
-        expectValueLabelToExist(expectedValue, expectedLabel);
+        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);
 
         return customMatcher(new Matcher<BaseLocal>() {
             @Override
             public boolean match(final BaseLocal givenValue, final String givenLabel) {
-                expect(givenValue, givenLabel).not().toBeNull().check();
+                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);
 
                 return givenValue.isAfter(expectedValue);
             }
@@ -181,12 +179,12 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
      * @return Current instance
      */
     public JodaTimePreconditions toBeEqualOrBefore(final BaseLocal expectedValue, final String expectedLabel) {
-        expectValueLabelToExist(expectedValue, expectedLabel);
+        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);
 
         return customMatcher(new Matcher<BaseLocal>() {
             @Override
             public boolean match(final BaseLocal givenValue, final String givenLabel) {
-                expect(givenValue, givenLabel).not().toBeNull().check();
+                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);
 
                 return givenValue.isEqual(expectedValue) || givenValue.isBefore(expectedValue);
             }
@@ -226,12 +224,12 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
      * @return Current instance
      */
     public JodaTimePreconditions toBeBefore(final BaseLocal expectedValue, final String expectedLabel) {
-        expectValueLabelToExist(expectedValue, expectedLabel);
+        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);
 
         return customMatcher(new Matcher<BaseLocal>() {
             @Override
             public boolean match(final BaseLocal givenValue, final String givenLabel) {
-                expect(givenValue, givenLabel).not().toBeNull().check();
+                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);
 
                 return givenValue.isBefore(expectedValue);
             }
@@ -252,10 +250,6 @@ public class JodaTimePreconditions extends Preconditions<JodaTimePreconditions, 
                                                                expectedLabel);
             }
         });
-    }
-
-    private void expectValueLabelToExist(BaseLocal expectedValue, String expectedLabel) {
-        expectValueLabelToExist(expectedValue, expectedLabel, "Expected Joda Time Label");
     }
 
 

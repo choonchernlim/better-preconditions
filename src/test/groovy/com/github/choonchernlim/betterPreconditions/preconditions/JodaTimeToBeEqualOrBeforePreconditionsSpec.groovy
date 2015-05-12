@@ -1,9 +1,6 @@
 package com.github.choonchernlim.betterPreconditions.preconditions
 
-import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualOrBeforePreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrBeforePreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.ObjectNullPreconditionException
-import com.github.choonchernlim.betterPreconditions.exception.StringBlankPreconditionException
+import com.github.choonchernlim.betterPreconditions.exception.*
 import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
 import org.joda.time.LocalTime
@@ -159,12 +156,13 @@ class JodaTimeToBeEqualOrBeforePreconditionsSpec extends Specification {
     }
 
     @Unroll
-    def "toBeEqualOrBefore - comparing two different types - #firstValue and #secondValue should throw ClassCastException"() {
+    def "toBeEqualOrBefore - different types - #firstValue and #secondValue should throw ObjectNotSameTypePreconditionException"() {
         when:
         expect(firstValue).toBeEqualOrBefore(secondValue).check()
 
         then:
-        thrown(ClassCastException.class)
+        def error = thrown(ObjectNotSameTypePreconditionException.class)
+        error.message == "Expected Joda Time [ ${secondValue} ] must be same type as Joda Time [ ${firstValue} ]" as String
 
         where:
         firstValue                          | secondValue

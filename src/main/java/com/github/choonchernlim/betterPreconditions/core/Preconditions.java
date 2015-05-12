@@ -158,8 +158,9 @@ public abstract class Preconditions<C, V> {
         customMatcher(new Matcher<V>() {
             @Override
             public boolean match(final V givenValue, final String givenLabel) {
-                return expect(givenValue, givenLabel).not().toBeNull().check().getClass()
-                        .equals(expectedValue.getClass());
+                return expect(givenValue, givenLabel)
+                        .not().toBeNull().check()
+                        .getClass().equals(expectedValue.getClass());
             }
 
             @Override
@@ -213,5 +214,24 @@ public abstract class Preconditions<C, V> {
     protected final void expectValueLabelToExist(final Object value, final String label, final String defaultLabel) {
         expect(label, defaultLabel).not().toBeBlank().check();
         expect(value, label).not().toBeNull().check();
+    }
+
+    /**
+     * Ensures value not null and same type.
+     *
+     * @param givenValue    Given label
+     * @param givenLabel    Given label
+     * @param expectedValue Expected value
+     * @param expectedLabel Expected label
+     */
+    protected final void expectNotNullAndSameType(final V givenValue,
+                                                  final String givenLabel,
+                                                  final V expectedValue,
+                                                  final String expectedLabel) {
+
+        expect(expectedValue, expectedLabel)
+                .not().toBeNull()
+                .toBeSameType(givenValue, givenLabel)
+                .check();
     }
 }
