@@ -78,3 +78,73 @@ public void compute(final String name, final Integer age, final LocalDate regist
     `Age [ 39 ] must be equal to or greater than Lower Age Limit [ 50 ]`.
 * Method chaining makes the code very readable. 
 
+## Feature Highlights
+
+* Every matcher can be negated with `not()`:-
+
+```java
+expect(name, "Name").not().toBeBlank().check();
+```
+
+* Labels are optional (although they would provide more helpful error messages):-
+
+```java
+// this works
+expect(endDate, "End Date").toBeAfter(startDate, "Start Date").check();
+
+// this works too
+expect(endDate).toBeAfter(startDate).check();
+```
+
+* Preconditions can be chained:-
+
+```java
+// age cannot be null and must be between 50 and 100, but not 55
+expect(age, "Age")
+    .not().toBeNull()
+    .toBeEqualOrGreaterThan(50)
+    .toBeEqualOrLessThan(100)
+    .not().toBeEqual(55)
+    .check();
+```
+
+* Each precondition throws a specific exception, which allows the preconditions to be easily unit tested:-
+
+```java
+// if null, throw ObjectNullPreconditionException
+// if less than 50, throw NumberNotEqualOrGreaterThanPreconditionException
+// if more than 100, throw NumberNotEqualOrLessThanPreconditionException
+expect(age, "Age")
+    .not().toBeNull() 
+    .toBeEqualOrGreaterThan(50, "Lower Age Limit") 
+    .toBeEqualOrLessThan(100, "Upper Age Limit")
+    .check();
+```
+
+* Highly extensible. You can provide your own custom matcher if needed:-
+
+```java
+// name must not be blank and must start with "Cluster MEOW"
+expect(name, "Name")
+    .not().toBeBlank()
+    .customMatcher(new Matcher<String>() {
+        @Override
+        public boolean match(String value, String label) {
+            return name.startsWith("Cluster MEOW");
+        }
+
+        @Override
+        public PreconditionException getException(String value, String label) {
+            // if customMatcher(..) fails, throw this exception
+            return new PreconditionException("Name must start be 'Cluster Meow'");
+        }
+
+        @Override
+        public PreconditionException getNegatedException(String value, String label) {
+            // if not().customMatcher(..) fails, throw this exception
+            return new PreconditionException("Name must not start be 'Cluster Meow'");
+        }
+    })
+    .check();
+```
+
