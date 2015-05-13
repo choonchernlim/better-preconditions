@@ -1,7 +1,7 @@
 # Better Preconditions [![Build Status](https://travis-ci.org/choonchernlim/better-preconditions.svg?branch=master)](https://travis-ci.org/choonchernlim/better-preconditions)
 
 Inspired by Guava Preconditions and Jasmine (a behavior-driven development framework for testing JavaScript code), 
-Better Preconditions is a set of readable and testable Java preconditions.
+Better Preconditions is a set of fluent, readable and testable Java preconditions.
 
 ## Maven Dependency
 
@@ -49,6 +49,19 @@ expect(age, "Age")
 // if null, throw ObjectNullPreconditionException
 // if less than 50, throw NumberNotEqualOrGreaterThanPreconditionException
 // if more than 100, throw NumberNotEqualOrLessThanPreconditionException
+expect(age, "Age")
+    .not().toBeNull() 
+    .toBeEqualOrGreaterThan(50, "Lower Age Limit") 
+    .toBeEqualOrLessThan(100, "Upper Age Limit")
+    .check();
+```
+
+* Each thrown exception contains helpful error message for debugging purpose:-
+
+```java
+// if null, error message is "Age [ null ] must not be null"
+// if less than 50, error message is "Age [ X ] must be equal to or greater than Lower Age Limit [ 50 ]"
+// if more than 100, error message is "Age [ X ] must be equal to or less than Upper Age Limit [ 100 ]"
 expect(age, "Age")
     .not().toBeNull() 
     .toBeEqualOrGreaterThan(50, "Lower Age Limit") 
