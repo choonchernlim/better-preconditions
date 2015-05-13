@@ -5,11 +5,11 @@
 
     <groupId>com.github.choonchernlim</groupId>
     <artifactId>better-preconditions</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>jar</packaging>
 
     <name>Better Preconditions</name>
-    <description>APIs for creating a more readable and testable preconditions</description>
+    <description>Java APIs for creating more readable and testable preconditions</description>
     <url>https://github.com/choonchernlim/better-preconditions</url>
 
     <licenses>
