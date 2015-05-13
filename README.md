@@ -150,10 +150,11 @@ public void compute(final String name, final Integer age, final LocalDate regist
 
 ## Better Preconditions API
 
-Tips:
+### Getting Started
 
-* Always begin with `expect(var)` and end with `check()`
-* Every precondition can be negated with `not()` prefix
+* Always begin with `expect(var)` and end with `check()`.
+* Every precondition can be negated with `not()` prefix.
+* When chaining preconditions, the order of the preconditions is very important.
 
 ### Object
 
