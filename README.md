@@ -148,5 +148,52 @@ public void compute(final String name, final Integer age, final LocalDate regist
     `Age [ 39 ] must be equal to or greater than Lower Age Limit [ 50 ]`.
 * Method chaining makes the code very readable. 
 
+## Better Preconditions API
+
+### Object
+
+These preconditions apply to all variable types.
+
+* `toBeEqual(expectedValue)` : Ensures given value is equal to `expectedValue`
+* `toBeNull() ` : Ensures given value is `null`
+* `toBeSameType(expectedValue)` : Ensures given value has same class type as `expectedValue`
+
+### Boolean
+
+* `toBeTrue()` : Ensures given value is `true`
+
+### Collection
+
+* `toBeEmpty()` : Ensures given collection is empty
+
+### Joda Time
+
+These preconditions can be used on all `BaseLocal` subclasses: `LocalDate`, `LocalDateTime` and `LocalTime`.
+
+* `toBeAfter(expectedValue)` : Ensures given base local is after `expectedValue`
+* `toBeBefore(expectedValue)` : Ensures given base local is before `expectedValue`
+* `toBeEqualOrAfter(expectedValue)` : Ensures given base local is equal to or after `expectedValue`
+* `toBeEqualOrBefore(expectedValue)` : Ensures given base local is equal to or before `expectedValue`
+          
+### Number
+          
+These preconditions can be used on all `Number` subclasses: `AtomicInteger`, `AtomicLong`, `BigDecimal`, `BigInteger`, `Byte`, `Double`, `Float`, `Integer`, `Long`, `Short`.
+              
+* `toBeEqualOrGreaterThan(expectedValue)` : Ensures given number is equal to or greater than `expectedValue`
+* `toBeEqualOrLessThan(expectedValue)` : Ensures given number is equal to or less than `expectedValue`
+* `toBeGreaterThan(expectedValue)` : Ensures given number is greater than `expectedValue`
+* `toBeLessThan(expectedValue)` : Ensures given number is less than `expectedValue`
+                  
+### String
+
+* `toBeBlank()` : Ensures given string is blank
+
+## Helpful Links
+
+* [API Documentation](http://choonchernlim.github.io/better-preconditions/apidocs/index.html)
+* [Test Cases](http://choonchernlim.github.io/better-preconditions/surefire-report.html) 
+* [Test Coverage](http://choonchernlim.github.io/better-preconditions/cobertura/index.html)
+
+
 
 

@@ -96,7 +96,7 @@ public abstract class Preconditions<C, V> {
     }
 
     /**
-     * Ensures given base local is equal to expected value.
+     * Ensures given value is equal to expected value.
      *
      * @see Preconditions#toBeEqual(Object, String)
      */
@@ -136,7 +136,7 @@ public abstract class Preconditions<C, V> {
     }
 
     /**
-     * Ensures given base local is equal to expected value.
+     * Ensures given value is equal to expected value.
      *
      * @see Preconditions#toBeSameType(Object, String)
      */

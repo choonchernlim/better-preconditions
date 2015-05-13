@@ -29,7 +29,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is equal to expected value.
+     * Ensures given number is equal to expected value.
      *
      * @see NumberPreconditions#toBeEqual(Number, String)
      */
@@ -39,7 +39,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is equal to expected value.
+     * Ensures given number is equal to expected value.
      *
      * @param expectedValue Second value
      * @param expectedLabel Second label
@@ -70,7 +70,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is equal to or greater than expected value.
+     * Ensures given number is equal to or greater than expected value.
      *
      * @see NumberPreconditions#toBeEqualOrGreaterThan(Number, String)
      */
@@ -79,7 +79,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is equal to or greater than expected value.
+     * Ensures given number is equal to or greater than expected value.
      *
      * @param expectedValue Second value
      * @param expectedLabel Second label
@@ -115,7 +115,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is greater than expected value.
+     * Ensures given number is greater than expected value.
      *
      * @see NumberPreconditions#toBeGreaterThan(Number, String)
      */
@@ -124,7 +124,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is greater than expected value.
+     * Ensures given number is greater than expected value.
      *
      * @param expectedValue Second value
      * @param expectedLabel Second label
@@ -160,7 +160,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is equal to or less than expected value.
+     * Ensures given number is equal to or less than expected value.
      *
      * @see NumberPreconditions#toBeEqualOrLessThan(Number, String)
      */
@@ -169,7 +169,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is equal to or less than expected value.
+     * Ensures given number is equal to or less than expected value.
      *
      * @param expectedValue Second value
      * @param expectedLabel Second label
@@ -205,7 +205,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is less than expected value.
+     * Ensures given number is less than expected value.
      *
      * @see NumberPreconditions#toBeLessThan(Number, String)
      */
@@ -214,7 +214,7 @@ public class NumberPreconditions extends Preconditions<NumberPreconditions, Numb
     }
 
     /**
-     * Ensures given base local is less than expected value.
+     * Ensures given number is less than expected value.
      *
      * @param expectedValue Second value
      * @param expectedLabel Second label
