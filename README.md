@@ -1,7 +1,6 @@
 # Better Preconditions [![Build Status](https://travis-ci.org/choonchernlim/better-preconditions.svg?branch=master)](https://travis-ci.org/choonchernlim/better-preconditions)
 
-Inspired by Guava Preconditions and Jasmine (a behavior-driven development framework for testing JavaScript code), 
-Better Preconditions is a set of fluent, readable and testable Java preconditions.
+Inspired by Guava Preconditions and Jasmine, Better Preconditions is a set of Java APIs for creating fluent, readable and testable Java preconditions.
 
 ## Maven Dependency
 
