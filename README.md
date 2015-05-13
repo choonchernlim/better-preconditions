@@ -156,7 +156,7 @@ public void compute(final String name, final Integer age, final LocalDate regist
 ```
 
 * Short and succinct. Type only what's needed.
-* If one of the precondition, a specific exception is thrown, which makes the API much easier to unit test.
+* If one of the preconditions fails, a specific exception is thrown, which makes the API much easier to unit test.
 * Error message includes value(s), for example, if the age is less than 50, the following error message is produced: 
     `Age [ 39 ] must be equal to or greater than Lower Age Limit [ 50 ]`.
 * Method chaining makes the code very readable. 
