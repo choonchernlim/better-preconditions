@@ -15,7 +15,7 @@ Better Preconditions is a set of readable and testable Java preconditions.
 
 ## Feature Highlights
 
-* Every matcher can be negated with `not()`:-
+* Every precondition can be negated with `not()`:-
 
 ```java
 expect(name, "Name").not().toBeBlank().check();
@@ -150,43 +150,45 @@ public void compute(final String name, final Integer age, final LocalDate regist
 
 ## Better Preconditions API
 
+Please note every precondition can be negated with `not()` prefix.
+
 ### Object
 
 These preconditions apply to all variable types.
 
-* `toBeEqual(expectedValue)` : Ensures given value is equal to `expectedValue`
-* `toBeNull() ` : Ensures given value is `null`
-* `toBeSameType(expectedValue)` : Ensures given value has same class type as `expectedValue`
+* `toBeEqual(expectedValue)`
+* `toBeNull() `
+* `toBeSameType(expectedValue)`
 
 ### Boolean
 
-* `toBeTrue()` : Ensures given value is `true`
+* `toBeTrue()`
 
 ### Collection
 
-* `toBeEmpty()` : Ensures given collection is empty
+* `toBeEmpty()`
 
 ### Joda Time
 
 These preconditions can be used on all `BaseLocal` subclasses: `LocalDate`, `LocalDateTime` and `LocalTime`.
 
-* `toBeAfter(expectedValue)` : Ensures given base local is after `expectedValue`
-* `toBeBefore(expectedValue)` : Ensures given base local is before `expectedValue`
-* `toBeEqualOrAfter(expectedValue)` : Ensures given base local is equal to or after `expectedValue`
-* `toBeEqualOrBefore(expectedValue)` : Ensures given base local is equal to or before `expectedValue`
+* `toBeAfter(expectedValue)`
+* `toBeBefore(expectedValue)`
+* `toBeEqualOrAfter(expectedValue)`
+* `toBeEqualOrBefore(expectedValue)`
           
 ### Number
           
 These preconditions can be used on all `Number` subclasses: `AtomicInteger`, `AtomicLong`, `BigDecimal`, `BigInteger`, `Byte`, `Double`, `Float`, `Integer`, `Long`, `Short`.
               
-* `toBeEqualOrGreaterThan(expectedValue)` : Ensures given number is equal to or greater than `expectedValue`
-* `toBeEqualOrLessThan(expectedValue)` : Ensures given number is equal to or less than `expectedValue`
-* `toBeGreaterThan(expectedValue)` : Ensures given number is greater than `expectedValue`
-* `toBeLessThan(expectedValue)` : Ensures given number is less than `expectedValue`
+* `toBeEqualOrGreaterThan(expectedValue)`
+* `toBeEqualOrLessThan(expectedValue)`
+* `toBeGreaterThan(expectedValue)`
+* `toBeLessThan(expectedValue)`
                   
 ### String
 
-* `toBeBlank()` : Ensures given string is blank
+* `toBeBlank()`
 
 ## Helpful Links
 
