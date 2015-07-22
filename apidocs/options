@@ -1,0 +1,24 @@
+-classpath
+'/Users/limc/.m2/repository/com/google/guava/guava/18.0/guava-18.0.jar:/Users/limc/.m2/repository/joda-time/joda-time/2.3/joda-time-2.3.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/limc/Documents/development/workspace/intellij/better-preconditions/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2015. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/limc/Documents/development/workspace/intellij/better-preconditions/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Better Preconditions 0.1.1-SNAPSHOT API'
+-linkoffline
+'http://docs.oracle.com/javase/6/docs/api' '/Users/limc/Documents/development/workspace/intellij/better-preconditions/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'Better Preconditions 0.1.1-SNAPSHOT API'

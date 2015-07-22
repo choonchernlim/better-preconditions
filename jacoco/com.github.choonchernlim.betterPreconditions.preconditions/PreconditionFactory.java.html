@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PreconditionFactory.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Better Preconditions</a> &gt; <a href="index.source.html" class="el_package">com.github.choonchernlim.betterPreconditions.preconditions</a> &gt; <span class="el_source">PreconditionFactory.java</span></div><h1>PreconditionFactory.java</h1><pre class="source lang-java linenums">package com.github.choonchernlim.betterPreconditions.preconditions;
+
+import org.joda.time.base.BaseLocal;
+
+import java.util.Collection;
+
+/**
+ * Returns new Precondition instances.
+ */
+public class PreconditionFactory {
+
+<span class="nc" id="L12">    private PreconditionFactory() {</span>
+<span class="nc" id="L13">    }</span>
+
+    /**
+     * Returns new BooleanPreconditions instance with default label.
+     *
+     * @param value Value
+     * @return New instance
+     */
+    public static BooleanPreconditions expect(final Boolean value) {
+<span class="fc" id="L22">        return expect(value, &quot;Boolean&quot;);</span>
+    }
+
+    /**
+     * Returns new BooleanPreconditions instance.
+     *
+     * @param value Value
+     * @param label Label
+     * @return New instance
+     */
+    public static BooleanPreconditions expect(final Boolean value, final String label) {
+<span class="fc" id="L33">        return new BooleanPreconditions(value, label);</span>
+    }
+
+    /**
+     * Returns new CollectionPreconditions instance with default label.
+     *
+     * @param value Value
+     * @return New instance
+     */
+    public static CollectionPreconditions expect(final Collection value) {
+<span class="fc" id="L43">        return expect(value, &quot;Collection&quot;);</span>
+    }
+
+    /**
+     * Returns new CollectionPreconditions instance.
+     *
+     * @param value Value
+     * @param label Label
+     * @return New instance
+     */
+    public static CollectionPreconditions expect(final Collection value, final String label) {
+<span class="fc" id="L54">        return new CollectionPreconditions(value, label);</span>
+    }
+
+    /**
+     * Returns new JodaTimePreconditions instance with default label.
+     *
+     * @param value Value
+     * @return New instance
+     */
+    public static JodaTimePreconditions expect(final BaseLocal value) {
+<span class="fc" id="L64">        return expect(value, &quot;Joda Time&quot;);</span>
+    }
+
+    /**
+     * Returns new JodaTimePreconditions instance.
+     *
+     * @param value Value
+     * @param label Label
+     * @return New instance
+     */
+    public static JodaTimePreconditions expect(final BaseLocal value, final String label) {
+<span class="fc" id="L75">        return new JodaTimePreconditions(value, label);</span>
+    }
+
+    /**
+     * Returns new ObjectPreconditions instance with default label.
+     *
+     * @param value Value
+     * @return New instance
+     */
+    public static ObjectPreconditions expect(final Object value) {
+<span class="fc" id="L85">        return expect(value, &quot;Object&quot;);</span>
+    }
+
+    /**
+     * Returns new ObjectPreconditions instance.
+     *
+     * @param value Value
+     * @param label Label
+     * @return New instance
+     */
+    public static ObjectPreconditions expect(final Object value, final String label) {
+<span class="fc" id="L96">        return new ObjectPreconditions(value, label);</span>
+    }
+
+    /**
+     * Returns new StringPreconditions instance with default label.
+     *
+     * @param value Value
+     * @return New instance
+     */
+    public static StringPreconditions expect(final String value) {
+<span class="fc" id="L106">        return expect(value, &quot;String&quot;);</span>
+    }
+
+    /**
+     * Returns new StringPreconditions instance.
+     *
+     * @param value Value
+     * @param label Label
+     * @return New instance
+     */
+    public static StringPreconditions expect(final String value, final String label) {
+<span class="fc" id="L117">        return new StringPreconditions(value, label);</span>
+    }
+
+    /**
+     * Returns new NumberPreconditions instance with default label.
+     *
+     * @param value Value
+     * @return New instance
+     */
+    public static NumberPreconditions expect(final Number value) {
+<span class="fc" id="L127">        return expect(value, &quot;Number&quot;);</span>
+    }
+
+    /**
+     * Returns new NumberPreconditions instance.
+     *
+     * @param value Value
+     * @param label Label
+     * @return New instance
+     */
+    public static NumberPreconditions expect(final Number value, final String label) {
+<span class="fc" id="L138">        return new NumberPreconditions(value, label);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

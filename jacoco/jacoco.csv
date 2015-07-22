@@ -1,0 +1,58 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Better Preconditions,com.github.choonchernlim.betterPreconditions.core,Preconditions,0,150,0,4,0,34,0,13,0,11
+Better Preconditions,com.github.choonchernlim.betterPreconditions.core,Matcher,0,3,0,0,0,1,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.core,PreconditionException,0,4,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.core,Assertion,0,51,0,6,0,12,0,5,0,2
+Better Preconditions,com.github.choonchernlim.betterPreconditions.core,Preconditions.new Matcher() {...},0,44,0,0,0,5,0,4,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.core,Preconditions.new Matcher() {...},0,24,0,2,0,5,0,5,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.core,Preconditions.new Matcher() {...},0,46,0,0,0,7,0,4,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,JodaTimePreconditions,0,105,0,0,0,17,0,11,0,11
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,ObjectPreconditions,0,5,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,CollectionPreconditions,0,13,0,0,0,3,0,2,0,2
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,NumberPreconditions,0,200,0,18,0,38,0,21,0,12
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,BooleanPreconditions,0,13,0,0,0,3,0,2,0,2
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,StringPreconditions.new Matcher() {...},0,23,0,0,0,5,0,4,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,PreconditionFactory,3,60,0,0,2,12,1,12,1,12
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,StringPreconditions,0,13,0,0,0,3,0,2,0,2
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,JodaTimePreconditions.new Matcher() {...},0,46,0,0,0,12,0,4,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,JodaTimePreconditions.new Matcher() {...},0,55,0,4,0,12,0,6,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,JodaTimePreconditions.new Matcher() {...},0,46,0,0,0,6,0,4,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,JodaTimePreconditions.new Matcher() {...},0,46,0,0,0,12,0,4,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,JodaTimePreconditions.new Matcher() {...},0,55,0,4,0,12,0,6,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,NumberPreconditions.new Matcher() {...},0,52,0,2,0,12,0,5,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,NumberPreconditions.new Matcher() {...},0,52,0,2,0,12,0,5,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,NumberPreconditions.new Matcher() {...},0,52,0,2,0,12,0,5,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,NumberPreconditions.new Matcher() {...},0,52,0,2,0,12,0,5,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,BooleanPreconditions.new Matcher() {...},0,29,0,0,0,5,0,4,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,NumberPreconditions.new Matcher() {...},0,52,0,2,0,6,0,5,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.preconditions,CollectionPreconditions.new Matcher() {...},0,29,0,0,0,5,0,4,0,4
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,CollectionEmptyPreconditionException,0,17,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,JodaTimeNotEqualOrBeforePreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberNotEqualOrGreaterThanPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberNotEqualOrLessThanPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberEqualOrGreaterThanPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,JodaTimeNotEqualOrAfterPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberLessThanPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,ObjectNullPreconditionException,0,15,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberNotLessThanPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberEqualOrLessThanPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,JodaTimeNotAfterPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,JodaTimeNotBeforePreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,JodaTimeEqualOrAfterPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,ObjectSameTypePreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,StringNotBlankPreconditionException,0,15,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,ObjectNotEqualPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,BooleanTruePreconditionException,0,15,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,JodaTimeAfterPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,ObjectNotSameTypePreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,BooleanFalsePreconditionException,0,15,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,JodaTimeEqualOrBeforePreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberEqualPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,CollectionNotEmptyPreconditionException,0,17,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberNotEqualPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,JodaTimeBeforePreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,ObjectEqualPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberNotGreaterThanPreconditionException,0,23,0,0,0,6,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,ObjectNotNullPreconditionException,0,15,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,StringBlankPreconditionException,0,15,0,0,0,2,0,1,0,1
+Better Preconditions,com.github.choonchernlim.betterPreconditions.exception,NumberGreaterThanPreconditionException,0,23,0,0,0,6,0,1,0,1

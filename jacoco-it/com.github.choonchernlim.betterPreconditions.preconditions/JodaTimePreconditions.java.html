@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JodaTimePreconditions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Better Preconditions</a> &gt; <a href="index.source.html" class="el_package">com.github.choonchernlim.betterPreconditions.preconditions</a> &gt; <span class="el_source">JodaTimePreconditions.java</span></div><h1>JodaTimePreconditions.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package com.github.choonchernlim.betterPreconditions.preconditions;</span>
+
+import com.github.choonchernlim.betterPreconditions.core.Matcher;
+import com.github.choonchernlim.betterPreconditions.core.PreconditionException;
+import com.github.choonchernlim.betterPreconditions.core.Preconditions;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeAfterPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeBeforePreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualOrAfterPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeEqualOrBeforePreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotAfterPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotBeforePreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrAfterPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.JodaTimeNotEqualOrBeforePreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.ObjectEqualPreconditionException;
+import com.github.choonchernlim.betterPreconditions.exception.ObjectNotEqualPreconditionException;
+import org.joda.time.base.BaseLocal;
+
+public class JodaTimePreconditions extends Preconditions&lt;JodaTimePreconditions, BaseLocal&gt; {
+
+    private static final String DEFAULT_EXPECTED_LABEL = &quot;Expected Joda Time&quot;;
+    private static final String DEFAULT_VALUE_LABEL = DEFAULT_EXPECTED_LABEL + &quot; Label&quot;;
+
+    /**
+     * Package constructor.
+     *
+     * @param value Value
+     * @param label Label
+     */
+    JodaTimePreconditions(final BaseLocal value, final String label) {
+<span class="fc" id="L30">        super(value, label);</span>
+<span class="fc" id="L31">    }</span>
+
+    /**
+     * Ensures given base local is equal to expected value. Override default implementation to return proper label.
+     *
+     * @see JodaTimePreconditions#toBeEqual(BaseLocal, String)
+     */
+    @Override
+    public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue) {
+<span class="fc" id="L40">        return toBeEqual(expectedValue, DEFAULT_EXPECTED_LABEL);</span>
+    }
+
+    /**
+     * Ensures given base local is equal to expected value. Override default implementation and uses &lt;code&gt;isEquals()&lt;/code&gt;
+     * because Joda Time's &lt;code&gt;equals()&lt;/code&gt; takes account of chronology, which is too strict.
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    @Override
+    public JodaTimePreconditions toBeEqual(final BaseLocal expectedValue, final String expectedLabel) {
+<span class="fc" id="L53">        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);</span>
+
+<span class="fc" id="L55">        return customMatcher(new Matcher&lt;BaseLocal&gt;() {</span>
+            @Override
+            public boolean match(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L58">                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);</span>
+
+<span class="fc" id="L60">                return givenValue.isEqual(expectedValue);</span>
+            }
+
+            @Override
+            public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L65">                return new ObjectNotEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);</span>
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L70">                return new ObjectEqualPreconditionException(givenValue, givenLabel, expectedValue, expectedLabel);</span>
+            }
+        });
+    }
+
+    /**
+     * Ensures given base local is equal to or after expected value.
+     *
+     * @see JodaTimePreconditions#toBeEqualOrAfter(BaseLocal, String)
+     */
+    public JodaTimePreconditions toBeEqualOrAfter(final BaseLocal expectedValue) {
+<span class="fc" id="L81">        return toBeEqualOrAfter(expectedValue, DEFAULT_EXPECTED_LABEL);</span>
+    }
+
+    /**
+     * Ensures given base local is equal to or after expected value.
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    public JodaTimePreconditions toBeEqualOrAfter(final BaseLocal expectedValue, final String expectedLabel) {
+<span class="fc" id="L92">        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);</span>
+
+<span class="fc" id="L94">        return customMatcher(new Matcher&lt;BaseLocal&gt;() {</span>
+            @Override
+            public boolean match(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L97">                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);</span>
+
+<span class="fc bfc" id="L99" title="All 4 branches covered.">                return givenValue.isEqual(expectedValue) || givenValue.isAfter(expectedValue);</span>
+            }
+
+            @Override
+            public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L104">                return new JodaTimeNotEqualOrAfterPreconditionException(givenValue,</span>
+<span class="fc" id="L105">                                                                        givenLabel,</span>
+<span class="fc" id="L106">                                                                        expectedValue,</span>
+<span class="fc" id="L107">                                                                        expectedLabel);</span>
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L112">                return new JodaTimeEqualOrAfterPreconditionException(givenValue,</span>
+<span class="fc" id="L113">                                                                     givenLabel,</span>
+<span class="fc" id="L114">                                                                     expectedValue,</span>
+<span class="fc" id="L115">                                                                     expectedLabel);</span>
+            }
+        });
+    }
+
+    /**
+     * Ensures given base local is after expected value.
+     *
+     * @see JodaTimePreconditions#toBeAfter(BaseLocal)
+     */
+    public JodaTimePreconditions toBeAfter(final BaseLocal expectedValue) {
+<span class="fc" id="L126">        return toBeAfter(expectedValue, DEFAULT_EXPECTED_LABEL);</span>
+    }
+
+    /**
+     * Ensures given base local is after expected value.
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    public JodaTimePreconditions toBeAfter(final BaseLocal expectedValue, final String expectedLabel) {
+<span class="fc" id="L137">        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);</span>
+
+<span class="fc" id="L139">        return customMatcher(new Matcher&lt;BaseLocal&gt;() {</span>
+            @Override
+            public boolean match(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L142">                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);</span>
+
+<span class="fc" id="L144">                return givenValue.isAfter(expectedValue);</span>
+            }
+
+            @Override
+            public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L149">                return new JodaTimeNotAfterPreconditionException(givenValue,</span>
+<span class="fc" id="L150">                                                                 givenLabel,</span>
+<span class="fc" id="L151">                                                                 expectedValue,</span>
+<span class="fc" id="L152">                                                                 expectedLabel);</span>
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L157">                return new JodaTimeAfterPreconditionException(givenValue,</span>
+<span class="fc" id="L158">                                                              givenLabel,</span>
+<span class="fc" id="L159">                                                              expectedValue,</span>
+<span class="fc" id="L160">                                                              expectedLabel);</span>
+            }
+        });
+    }
+
+    /**
+     * Ensures given base local is equal to or before expected value.
+     *
+     * @see JodaTimePreconditions#toBeEqualOrBefore(BaseLocal, String)
+     */
+    public JodaTimePreconditions toBeEqualOrBefore(final BaseLocal expectedValue) {
+<span class="fc" id="L171">        return toBeEqualOrBefore(expectedValue, DEFAULT_EXPECTED_LABEL);</span>
+    }
+
+    /**
+     * Ensures given base local is equal to or before expected value.
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    public JodaTimePreconditions toBeEqualOrBefore(final BaseLocal expectedValue, final String expectedLabel) {
+<span class="fc" id="L182">        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);</span>
+
+<span class="fc" id="L184">        return customMatcher(new Matcher&lt;BaseLocal&gt;() {</span>
+            @Override
+            public boolean match(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L187">                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);</span>
+
+<span class="fc bfc" id="L189" title="All 4 branches covered.">                return givenValue.isEqual(expectedValue) || givenValue.isBefore(expectedValue);</span>
+            }
+
+            @Override
+            public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L194">                return new JodaTimeNotEqualOrBeforePreconditionException(givenValue,</span>
+<span class="fc" id="L195">                                                                         givenLabel,</span>
+<span class="fc" id="L196">                                                                         expectedValue,</span>
+<span class="fc" id="L197">                                                                         expectedLabel);</span>
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L202">                return new JodaTimeEqualOrBeforePreconditionException(givenValue,</span>
+<span class="fc" id="L203">                                                                      givenLabel,</span>
+<span class="fc" id="L204">                                                                      expectedValue,</span>
+<span class="fc" id="L205">                                                                      expectedLabel);</span>
+            }
+        });
+    }
+
+    /**
+     * Ensures given base local is before expected value.
+     *
+     * @see JodaTimePreconditions#toBeBefore(BaseLocal)
+     */
+    public JodaTimePreconditions toBeBefore(final BaseLocal expectedValue) {
+<span class="fc" id="L216">        return toBeBefore(expectedValue, DEFAULT_EXPECTED_LABEL);</span>
+    }
+
+    /**
+     * Ensures given base local is before expected value.
+     *
+     * @param expectedValue Second value
+     * @param expectedLabel Second label
+     * @return Current instance
+     */
+    public JodaTimePreconditions toBeBefore(final BaseLocal expectedValue, final String expectedLabel) {
+<span class="fc" id="L227">        expectValueLabelToExist(expectedValue, expectedLabel, DEFAULT_VALUE_LABEL);</span>
+
+<span class="fc" id="L229">        return customMatcher(new Matcher&lt;BaseLocal&gt;() {</span>
+            @Override
+            public boolean match(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L232">                expectNotNullAndSameType(givenValue, givenLabel, expectedValue, expectedLabel);</span>
+
+<span class="fc" id="L234">                return givenValue.isBefore(expectedValue);</span>
+            }
+
+            @Override
+            public PreconditionException getException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L239">                return new JodaTimeNotBeforePreconditionException(givenValue,</span>
+<span class="fc" id="L240">                                                                  givenLabel,</span>
+<span class="fc" id="L241">                                                                  expectedValue,</span>
+<span class="fc" id="L242">                                                                  expectedLabel);</span>
+            }
+
+            @Override
+            public PreconditionException getNegatedException(final BaseLocal givenValue, final String givenLabel) {
+<span class="fc" id="L247">                return new JodaTimeBeforePreconditionException(givenValue,</span>
+<span class="fc" id="L248">                                                               givenLabel,</span>
+<span class="fc" id="L249">                                                               expectedValue,</span>
+<span class="fc" id="L250">                                                               expectedLabel);</span>
+            }
+        });
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
