@@ -15,10 +15,10 @@
 -docencoding
 'UTF-8'
 -doctitle
-'Better Preconditions 0.1.1-SNAPSHOT API'
+'Better Preconditions 0.1.1 API'
 -linkoffline
 'http://docs.oracle.com/javase/6/docs/api' '/Users/limc/Documents/development/workspace/intellij/better-preconditions/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
-'Better Preconditions 0.1.1-SNAPSHOT API'
+'Better Preconditions 0.1.1 API'
