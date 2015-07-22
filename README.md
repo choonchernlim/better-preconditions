@@ -210,7 +210,7 @@ These preconditions can be used on all `Number` subclasses: `AtomicInteger`, `At
 
 * [API Documentation](http://choonchernlim.github.io/better-preconditions/apidocs/index.html)
 * [Test Cases](http://choonchernlim.github.io/better-preconditions/surefire-report.html) 
-* [Test Coverage](http://choonchernlim.github.io/better-preconditions/cobertura/index.html)
+* [Test Coverage](http://choonchernlim.github.io/better-preconditions/jacoco/index.html)
 
 
 
