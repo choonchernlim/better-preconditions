@@ -8,7 +8,7 @@ Inspired by Guava Preconditions and Jasmine, Better Preconditions is a set of Ja
 <dependency>
   <groupId>com.github.choonchernlim</groupId>
   <artifactId>better-preconditions</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
 </dependency>
 ```
 
