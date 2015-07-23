@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.github.choonchernlim</groupId>
         <artifactId>build-reports</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.1</version>
     </parent>
 
     <artifactId>better-preconditions</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.1</version>
     <packaging>jar</packaging>
 
     <name>Better Preconditions</name>
