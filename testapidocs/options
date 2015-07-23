@@ -15,7 +15,7 @@
 -docencoding
 'UTF-8'
 -doctitle
-'Better Preconditions 0.1.1 Test API'
+'Better Preconditions 0.1.1-SNAPSHOT Test API'
 -link
 '../apidocs'
 -linkoffline
@@ -23,4 +23,4 @@
 -use
 -version
 -windowtitle
-'Better Preconditions 0.1.1 Test API'
+'Better Preconditions 0.1.1-SNAPSHOT Test API'
